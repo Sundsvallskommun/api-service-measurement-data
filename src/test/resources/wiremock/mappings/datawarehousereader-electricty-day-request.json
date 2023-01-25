@@ -1,0 +1,189 @@
+{
+	"name": "datawarehousereader-electricty-day-request",
+	"request": {
+		"method": "GET",
+		"urlPath": "/api-datawarehousereader/measurements/ELECTRICITY/DAY"
+	},
+	"response": {
+		"status": 200,
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"jsonBody": {
+			"measurements": [
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 35.63,
+					"timestamp": "2022-05-31T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 45.47,
+					"timestamp": "2022-06-01T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 46.32,
+					"timestamp": "2022-06-02T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 27.02,
+					"timestamp": "2022-06-03T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 18.67,
+					"timestamp": "2022-06-04T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 24.76,
+					"timestamp": "2022-06-05T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 37.75,
+					"timestamp": "2022-06-06T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 42.82,
+					"timestamp": "2022-06-07T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 35.09,
+					"timestamp": "2022-06-08T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 37.46,
+					"timestamp": "2022-06-09T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 44.77,
+					"timestamp": "2022-06-10T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 23.51,
+					"timestamp": "2022-06-11T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 28.5,
+					"timestamp": "2022-06-12T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 37.87,
+					"timestamp": "2022-06-13T00:00:00+02:00",
+					"interpolation": 23
+				},
+				{
+					"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
+					"facilityId": "735999109250135015",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "DAY",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 34.63,
+					"timestamp": "2022-06-14T00:00:00+02:00",
+					"interpolation": 24
+				}
+			],
+			"_meta": {
+				"page": 1,
+				"limit": 100,
+				"count": 15,
+				"totalRecords": 15,
+				"totalPages": 1
+			}
+		}
+	}
+}

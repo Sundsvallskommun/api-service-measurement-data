@@ -1,0 +1,31 @@
+{
+	"name": "datawarehousereader-get-measurements",
+	"request": {
+		"method": "GET",
+		"urlPath": "/api-datawarehousereader/measurements/ELECTRICITY/DAY",
+		"queryParameters": {
+			"partyId": {
+				"equalTo": "BF7967EC-261A-4FF8-934A-8BF31B299169"
+			},
+			"facilityId": {
+				"equalTo": "735999109250135015"
+			},
+			"fromDateTime": {
+				"equalTo": "2022-05-01T11:55:00.558Z"
+			},
+			"toDateTime": {
+				"equalTo": "2022-06-30T11:55:00.558Z"
+			},
+			"limit": {
+				"equalTo": "1000"
+			}
+		}
+	},
+	"response": {
+		"status": 200,
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"bodyFileName": "test02_getElectricityDayEnterprise/responses/datawarehousereader-day-response.json"
+	}
+}

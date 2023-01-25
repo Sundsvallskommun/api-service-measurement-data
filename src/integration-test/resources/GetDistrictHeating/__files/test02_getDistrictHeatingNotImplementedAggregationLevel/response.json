@@ -1,0 +1,5 @@
+{
+	"title": "Bad Gateway",
+	"status": 502,
+	"detail": "datawarehousereader error: {detail=aggregation 'HOUR' and category 'DISTRICT_HEATING', status=501 Not Implemented, title=Not Implemented}"
+}

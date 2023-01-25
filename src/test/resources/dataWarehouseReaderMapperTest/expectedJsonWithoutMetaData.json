@@ -1,0 +1,83 @@
+{
+	"category": "DISTRICT_HEATING",
+	"facilityId": "facilityId",
+	"aggregateOn": "YEAR",
+	"measurementSeries": [
+		{
+			"unit": "unit",
+			"measurementType": "measurementType_2",
+			"metaData": null,
+			"measurementPoints": [
+				{
+					"value": 2,
+					"metaData": null
+				},
+				{
+					"value": 4,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "2"
+						}
+					]
+				},
+				{
+					"value": 6,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "4"
+						}
+					]
+				},
+				{
+					"value": 8,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "6"
+						}
+					]
+				}
+			]
+		},
+		{
+			"unit": "unit",
+			"measurementType": "measurementType_1",
+			"metaData": null,
+			"measurementPoints": [
+				{
+					"value": 1,
+					"metaData": null
+				},
+				{
+					"value": 2,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "1"
+						}
+					]
+				},
+				{
+					"value": 3,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "2"
+						}
+					]
+				},
+				{
+					"value": 4,
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "3"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,5 @@
+{
+	"title": "Not Found",
+	"status": 404,
+	"detail": "datawarehousereader error: {detail=PartyId 'B1EDEA3C-1083-4E1A-81FB-7D95E505E103' could not be found as a private customer or an enterprise customer, status=404 Not Found, title=Not Found}"
+}

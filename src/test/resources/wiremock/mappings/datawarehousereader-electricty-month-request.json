@@ -1,0 +1,112 @@
+{
+	"name": "datawarehousereader-get-electric-month-measurements",
+	"request": {
+		"method": "GET",
+		"urlPath": "/api-datawarehousereader/measurements/ELECTRICITY/MONTH"
+	},
+	"response": {
+		"status": 200,
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"jsonBody": {
+			"measurements": [
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 42.307,
+					"timestamp": "2019-05-28T00:00:00+02:00",
+					"interpolation": 0
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 410.968,
+					"timestamp": "2019-06-01T00:00:00+02:00",
+					"interpolation": 5
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 411.708,
+					"timestamp": "2019-06-01T00:00:00+02:00",
+					"interpolation": 0
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 382.316,
+					"timestamp": "2019-07-01T00:00:00+02:00",
+					"interpolation": 0
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 401.489,
+					"timestamp": "2019-08-01T00:00:00+02:00",
+					"interpolation": 4
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 519.59,
+					"timestamp": "2019-09-01T00:00:00+02:00",
+					"interpolation": 0
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 552.845,
+					"timestamp": "2019-10-01T00:00:00+02:00",
+					"interpolation": 0
+				},
+				{
+					"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
+					"facilityId": "735999109128517141",
+					"category": "ELECTRICITY",
+					"aggregatedOn": "MONTH",
+					"measurementType": "Energy",
+					"unit": "kWh",
+					"value": 435.763,
+					"timestamp": "2019-11-01T00:00:00+02:00",
+					"interpolation": 2
+				}
+			],
+			"_meta": {
+				"page": 1,
+				"limit": 100,
+				"count": 8,
+				"totalRecords": 8,
+				"totalPages": 1
+			}
+		}
+	}
+}
