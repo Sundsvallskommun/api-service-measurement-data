@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import generated.se.sundsvall.datawarehousereader.Aggregation;
 import generated.se.sundsvall.datawarehousereader.Category;
 import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import se.sundsvall.measurementdata.integration.datawarehousereader.configuration.DataWarehouseReaderConfiguration;
 
 @FeignClient(name = CLIENT_REGISTRATION_ID, url = "${integration.datawarehousereader.url}", configuration = DataWarehouseReaderConfiguration.class)
-@CircuitBreaker(name = CLIENT_REGISTRATION_ID)
 public interface DataWarehouseReaderClient {
 
 	@GetMapping(path = "measurements/{category}/{aggregateOn}", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
