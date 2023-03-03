@@ -1,10 +1,7 @@
 package se.sundsvall.measurementdata.service.mapper;
 
 import static java.util.Collections.emptyList;
-import static java.util.List.copyOf;
 import static java.util.Objects.isNull;
-import static java.util.Optional.of;
-import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
 import java.util.ArrayList;
@@ -74,7 +71,7 @@ public class DataWarehouseReaderMapper {
 		final var series = new HashMap<String, MeasurementSerie>();
 		Optional.ofNullable(response.getMeasurements()).orElse(emptyList()).stream().forEach(measurement -> handleMeasurement(series, measurement));
 
-		return copyOf(series.values());
+		return List.copyOf(series.values());
 	}
 
 	private static void handleMeasurement(Map<String, MeasurementSerie> series, Measurement measurement) {
@@ -100,11 +97,11 @@ public class DataWarehouseReaderMapper {
 	private static List<MetaData> toMetaDataList(Measurement measurement) {
 		List<MetaData> metaData = new ArrayList<>();
 
-		metaData.addAll(ofNullable(measurement.getMetaData()).orElse(emptyList()).stream()
+		metaData.addAll(Optional.ofNullable(measurement.getMetaData()).orElse(emptyList()).stream()
 			.map(DataWarehouseReaderMapper::toMetaData)
 			.toList());
 
-		of(measurement.getInterpolation())
+		Optional.of(measurement.getInterpolation())
 			.filter(value -> value > 0)
 			.ifPresent(value -> metaData.add(toMetaData(KEY_INTERPOLATION, String.valueOf(value))));
 
