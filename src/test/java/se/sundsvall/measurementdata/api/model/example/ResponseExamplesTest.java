@@ -7,7 +7,8 @@ import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.EL
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.WASTE_MANAGEMENT_RESPONSE_EXAMPLE;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,23 +27,16 @@ class ResponseExamplesTest {
 			.build();
 	}
 
-	@Test
-	void verifyDistrictHeatingExample() throws JsonProcessingException {
-		assertThat(mapper.readValue(DISTRICT_HEATING_RESPONSE_EXAMPLE, Data.class)).isInstanceOf(Data.class);
-	}
-
-	@Test
-	void verifyCommunicationExample() throws JsonProcessingException {
-		assertThat(mapper.readValue(COMMUNICATION_RESPONSE_EXAMPLE, Data.class)).isInstanceOf(Data.class);
-	}
-
-	@Test
-	void verifyElectricityExample() throws JsonProcessingException {
-		assertThat(mapper.readValue(ELECTRICITY_RESPONSE_EXAMPLE, Data.class)).isInstanceOf(Data.class);
-	}
-
-	@Test
-	void verifyWasteExample() throws JsonProcessingException {
-		assertThat(mapper.readValue(WASTE_MANAGEMENT_RESPONSE_EXAMPLE, Data.class)).isInstanceOf(Data.class);
+	@ParameterizedTest
+	@ValueSource(strings = {
+		DISTRICT_HEATING_RESPONSE_EXAMPLE,
+		COMMUNICATION_RESPONSE_EXAMPLE,
+		ELECTRICITY_RESPONSE_EXAMPLE,
+		WASTE_MANAGEMENT_RESPONSE_EXAMPLE
+	})
+	void verifyDistrictHeatingExample(String responseExample) throws JsonProcessingException {
+		assertThat(mapper.readValue(responseExample, Data.class))
+			.isNotNull()
+			.isInstanceOf(Data.class);
 	}
 }
