@@ -1,9 +1,5 @@
 # MeasurementData
 
-## Leverantör
-
-Sundsvalls kommun
-
 ## Status
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Sundsvallskommun_api-service-measurement-data&metric=alert_status)](https://sonarcloud.io/summary/overall?id=Sundsvallskommun_api-service-measurement-data)
@@ -15,4 +11,4 @@ Sundsvalls kommun
 
 
 ## 
-Copyright (c) 2021 Sundsvalls kommun
+Copyright (c) 2023 Sundsvalls kommun
