@@ -1,0 +1,51 @@
+#-------------------------------------------------------------------------------
+# OpenAPI/Swagger-UI
+#-------------------------------------------------------------------------------
+openapi:
+    name: ${spring.application.name}
+    title: ${spring.application.name}
+    version: '@project.version@'
+springdoc:
+    swagger-ui:
+        operationsSorter: method
+
+#-------------------------------------------------------------------------------
+# Spring
+#-------------------------------------------------------------------------------
+spring:
+    application:
+        name: api-measurement-data
+    security:
+        oauth2:
+            client:
+                registration:
+                    datawarehousereader:
+                        authorization-grant-type: client_credentials
+                        client-id: ${config.integration.datawarehousereader.client-id}
+                        client-secret: ${config.integration.datawarehousereader.client-secret}
+                        provider: datawarehousereader
+                provider:
+                    datawarehousereader:
+                        token-uri: ${config.integration.token-uri}
+
+#-------------------------------------------------------------------------------
+# Integration settings
+#-------------------------------------------------------------------------------
+integration:
+    datawarehousereader:
+        url: ${config.integration.datawarehousereader.url}
+        connectTimeout: ${config.integration.datawarehousereader.connectTimeout}
+        readTimeout: ${config.integration.datawarehousereader.readTimeout}
+
+resilience4j:
+    circuitbreaker:
+        instances:
+            datawarehousereader:
+                ignoreExceptions: se.sundsvall.dept44.exception.ClientProblem
+
+#-------------------------------------------------------------------------------
+# Log config
+#-------------------------------------------------------------------------------
+logging:
+    level:
+        root: INFO
