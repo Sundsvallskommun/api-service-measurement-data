@@ -1,0 +1,9 @@
+config:
+  integration:
+    token-uri: http://datawarehousereader-token.url
+    datawarehousereader:
+      url: http://datawarehousereader.url
+      client-id: the-datawarehousereader-client-id
+      client-secret: the-datawarehousereader-client-secret
+      connectTimeout: 5
+      readTimeout: 30
