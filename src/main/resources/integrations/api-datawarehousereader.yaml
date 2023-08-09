@@ -5,7 +5,7 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: '2.2'
+  version: "3.0"
 servers:
   - url: https://microservices.sundsvall.se/datawarehousereader
     description: Generated server url
@@ -45,18 +45,18 @@ paths:
           schema:
             $ref: '#/components/schemas/MeasurementParameters'
       responses:
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MeasurementResponse'
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         "400":
           description: Bad request
           content:
@@ -79,12 +79,6 @@ paths:
           schema:
             $ref: '#/components/schemas/InvoiceParameters'
       responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvoiceResponse'
         "500":
           description: Internal Server error
           content:
@@ -99,13 +93,27 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/Problem'
                   - $ref: '#/components/schemas/ConstraintViolationProblem'
-  /invoices/{invoiceNumber}/details:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponse'
+  /invoices/{organizationNumber}/{invoiceNumber}/details:
     get:
       tags:
         - Invoice
-      summary: Get invoice details for invoice matching provided invoice number
+      summary: Get invoice details for invoice matching issuer of provided organization
+        number and having invoice number matching provided invoice number
       operationId: getInvoiceDetails
       parameters:
+        - name: organizationNumber
+          in: path
+          description: Organization number of invoice issuer
+          required: true
+          schema:
+            type: string
+          example: 5565027223
         - name: invoiceNumber
           in: path
           description: Invoice number
@@ -115,18 +123,6 @@ paths:
             format: int64
           example: 805137494
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
@@ -137,6 +133,18 @@ paths:
                   $ref: '#/components/schemas/InvoiceDetail'
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        "400":
+          description: Bad request
           content:
             application/problem+json:
               schema:
@@ -196,12 +204,47 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/Problem'
+                  - $ref: '#/components/schemas/ConstraintViolationProblem'
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomerEngagementResponse'
+  /customer/details:
+    get:
+      tags:
+        - Customer
+      summary: Get detailed customer information
+      description: Resource returns all customer details matching provided search
+        parameters
+      operationId: getCustomerDetails
+      parameters:
+        - name: searchParams
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomerDetailsParameters'
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDetailsResponse'
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         "400":
           description: Bad request
           content:
@@ -240,18 +283,18 @@ paths:
           schema:
             $ref: '#/components/schemas/AgreementParameters'
       responses:
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgreementResponse'
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         "400":
           description: Bad request
           content:
@@ -283,6 +326,13 @@ components:
         - DAY
         - MONTH
         - YEAR
+    Direction:
+      type: string
+      description: The sort order direction
+      example: ASC
+      enum:
+        - ASC
+        - DESC
     MeasurementParameters:
       type: object
       properties:
@@ -301,6 +351,14 @@ components:
           format: int32
           example: 100
           default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
@@ -320,33 +378,6 @@ components:
             \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
           format: date-time
       description: Measurement request parameters model
-    Problem:
-      type: object
-      properties:
-        instance:
-          type: string
-          format: uri
-        type:
-          type: string
-          format: uri
-        parameters:
-          type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
-        title:
-          type: string
-        detail:
-          type: string
-    StatusType:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          format: int32
-        reasonPhrase:
-          type: string
     Measurement:
       type: object
       properties:
@@ -459,8 +490,47 @@ components:
           format: int32
           readOnly: true
           example: 23
+        sortBy:
+          type: array
+          description: The properties to sort by
+          readOnly: true
+          example: property
+          items:
+            type: string
+            description: The properties to sort by
+            readOnly: true
+            example: property
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
       description: Metadata model
       readOnly: true
+    Problem:
+      type: object
+      properties:
+        instance:
+          type: string
+          format: uri
+        type:
+          type: string
+          format: uri
+        parameters:
+          type: object
+          additionalProperties:
+            type: object
+        title:
+          type: string
+        detail:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusType'
+    StatusType:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+        reasonPhrase:
+          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -484,10 +554,10 @@ components:
               lineNumber:
                 type: integer
                 format: int32
-              nativeMethod:
-                type: boolean
               className:
                 type: string
+              nativeMethod:
+                type: boolean
         type:
           type: string
           format: uri
@@ -536,10 +606,10 @@ components:
                         lineNumber:
                           type: integer
                           format: int32
-                        nativeMethod:
-                          type: boolean
                         className:
                           type: string
+                        nativeMethod:
+                          type: boolean
                   message:
                     type: string
                   localizedMessage:
@@ -562,10 +632,10 @@ components:
                     lineNumber:
                       type: integer
                       format: int32
-                    nativeMethod:
-                      type: boolean
                     className:
                       type: string
+                    nativeMethod:
+                      type: boolean
               message:
                 type: string
               localizedMessage:
@@ -595,10 +665,10 @@ components:
               lineNumber:
                 type: integer
                 format: int32
-              nativeMethod:
-                type: boolean
               className:
                 type: string
+              nativeMethod:
+                type: boolean
         message:
           type: string
         instance:
@@ -611,12 +681,12 @@ components:
           type: object
           additionalProperties:
             type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
         title:
           type: string
         detail:
           type: string
+        status:
+          $ref: '#/components/schemas/StatusType'
         suppressed:
           type: array
           items:
@@ -643,10 +713,10 @@ components:
                         lineNumber:
                           type: integer
                           format: int32
-                        nativeMethod:
-                          type: boolean
                         className:
                           type: string
+                        nativeMethod:
+                          type: boolean
                   message:
                     type: string
                   localizedMessage:
@@ -669,10 +739,10 @@ components:
                     lineNumber:
                       type: integer
                       format: int32
-                    nativeMethod:
-                      type: boolean
                     className:
                       type: string
+                    nativeMethod:
+                      type: boolean
               message:
                 type: string
               localizedMessage:
@@ -712,6 +782,14 @@ components:
           format: int32
           example: 100
           default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
         customerNumber:
           type: array
           items:
@@ -774,8 +852,8 @@ components:
           example: stadsbacken
         organizationNumber:
           type: string
-          description: Organization number
-          example: 556502-7223
+          description: Organization number of invoice issuer
+          example: "5565027223"
         administration:
           type: string
           description: Adminstration
@@ -887,9 +965,9 @@ components:
           example: stadsbacken
         organizationNumber:
           type: string
-          description: Organization number
+          description: Organization number of invoice issuer
           readOnly: true
-          example: 556502-7223
+          example: "5565027223"
         administration:
           type: string
           description: Adminstration
@@ -1004,6 +1082,11 @@ components:
           description: Product name
           readOnly: true
           example: Elöverföring
+        organizationNumber:
+          type: string
+          description: Organization number of invoice issuer
+          readOnly: true
+          example: "5565027223"
       description: Invoice detail model
     InstalledBaseParameters:
       type: object
@@ -1023,6 +1106,14 @@ components:
           format: int32
           example: 100
           default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
         company:
           type: string
           description: Company
@@ -1055,6 +1146,10 @@ components:
           type: string
           description: City
           example: Sundsvall
+        propertyDesignation:
+          type: string
+          description: Property designation
+          example: Södermalm 1:27
       description: Installed base request parameters model
     InstalledBaseItem:
       type: object
@@ -1105,6 +1200,11 @@ components:
           description: City
           readOnly: true
           example: Sundsvall
+        propertyDesignation:
+          type: string
+          description: Property designation
+          readOnly: true
+          example: Södermalm 1:27
         dateFrom:
           type: string
           description: From date
@@ -1179,6 +1279,14 @@ components:
           format: int32
           example: 100
           default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
         partyId:
           type: array
           items:
@@ -1236,6 +1344,139 @@ components:
         _meta:
           $ref: '#/components/schemas/MetaData'
       description: Customer engagement response model
+    CustomerDetailsParameters:
+      type: object
+      properties:
+        page:
+          minimum: 1
+          type: integer
+          description: Page number
+          format: int32
+          example: 1
+          default: 1
+        limit:
+          maximum: 1000
+          minimum: 1
+          type: integer
+          description: Result size per page
+          format: int32
+          example: 100
+          default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
+        partyId:
+          type: array
+          items:
+            type: string
+            description: PartyId (e.g. a personId or an organizationId)
+            example: 81471222-5798-11e9-ae24-57fa13b361e1
+        fromDateTime:
+          type: string
+          description: "Date and time for when to search for changes from. Format\
+            \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+          format: date-time
+        toDateTime:
+          type: string
+          description: "Date and time for when to search for change to. Format is\
+            \ yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+          format: date-time
+      description: Customer details request parameters model
+    CustomerDetails:
+      type: object
+      properties:
+        partyId:
+          type: string
+          description: PartyId (e.g. a personId or an organizationId)
+          readOnly: true
+          example: 81471222-5798-11e9-ae24-57fa13b361e1
+        customerNumber:
+          type: string
+          description: Customer number
+          readOnly: true
+          example: "39195"
+        customerName:
+          type: string
+          description: Customer name
+          readOnly: true
+          example: Sven Svensson
+        street:
+          type: string
+          description: Street
+          readOnly: true
+          example: Storgatan 44
+        postalCode:
+          type: string
+          description: Postal code
+          readOnly: true
+          example: "85230"
+        city:
+          type: string
+          description: City
+          readOnly: true
+          example: Sundsvall
+        careOf:
+          type: string
+          description: Care of address
+          readOnly: true
+          example: Agatha Malm
+        phoneNumbers:
+          type: array
+          readOnly: true
+          items:
+            type: string
+            description: List of phoneNumbers
+            readOnly: true
+            example: 076-1234567
+        emails:
+          type: array
+          readOnly: true
+          items:
+            type: string
+            description: List of emailAddresses
+            readOnly: true
+            example: test@test.se
+        customerCategoryID:
+          type: integer
+          description: Customer category ID
+          format: int32
+          readOnly: true
+          example: 1
+        customerCategoryDescription:
+          type: string
+          description: Customer category description
+          readOnly: true
+          example: Privat
+        customerChangedFlg:
+          type: boolean
+          description: Indicates if customer details have changed since the search
+            date
+          readOnly: true
+          example: false
+        installedChangedFlg:
+          type: boolean
+          description: Indicates if placement and/or equipment details have changed
+            since the search date
+          readOnly: true
+          example: true
+      description: Customer details model
+      readOnly: true
+    CustomerDetailsResponse:
+      type: object
+      properties:
+        customerDetails:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/CustomerDetails'
+        _meta:
+          $ref: '#/components/schemas/MetaData'
+      description: Customer details response model
     AgreementParameters:
       type: object
       properties:
@@ -1254,6 +1495,14 @@ components:
           format: int32
           example: 100
           default: 100
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: '#/components/schemas/Direction'
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
