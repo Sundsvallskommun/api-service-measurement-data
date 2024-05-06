@@ -6,9 +6,6 @@ info:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "3.0"
-servers:
-  - url: https://microservices.sundsvall.se/datawarehousereader
-    description: Generated server url
 tags:
   - name: Measurement
     description: Measurement operations

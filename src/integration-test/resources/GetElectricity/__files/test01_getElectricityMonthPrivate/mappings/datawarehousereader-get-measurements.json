@@ -1,6 +1,11 @@
 {
 	"name": "datawarehousereader-get-measurements",
 	"request": {
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
 		"method": "GET",
 		"urlPath": "/api-datawarehousereader/measurements/ELECTRICITY/MONTH",
 		"queryParameters": {

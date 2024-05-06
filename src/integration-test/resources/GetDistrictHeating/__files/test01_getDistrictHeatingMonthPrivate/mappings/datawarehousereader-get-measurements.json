@@ -1,31 +1,36 @@
 {
-  "name": "datawarehousereader-get-measurements",
-  "request": {
-    "method": "GET",
-    "urlPath": "/api-datawarehousereader/measurements/DISTRICT_HEATING/MONTH",
-    "queryParameters": {
-      "partyId": {
-        "equalTo": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102"
-      },
-      "facilityId": {
-        "equalTo": "735999109113202014"
-      },
-      "fromDateTime": {
-        "equalTo": "2018-01-01T14:39:22.817Z"
-      },
-      "toDateTime": {
-        "equalTo": "2018-12-31T14:39:22.817Z"
-      },
-      "limit": {
-        "equalTo": "1000"
-      }
-    }
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-type": "application/json"
-    },
-    "bodyFileName": "test01_getDistrictHeatingMonthPrivate/responses/datawarehousereader-response.json"
-  }
+	"name": "datawarehousereader-get-measurements",
+	"request": {
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
+		"method": "GET",
+		"urlPath": "/api-datawarehousereader/measurements/DISTRICT_HEATING/MONTH",
+		"queryParameters": {
+			"partyId": {
+				"equalTo": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102"
+			},
+			"facilityId": {
+				"equalTo": "735999109113202014"
+			},
+			"fromDateTime": {
+				"equalTo": "2018-01-01T14:39:22.817Z"
+			},
+			"toDateTime": {
+				"equalTo": "2018-12-31T14:39:22.817Z"
+			},
+			"limit": {
+				"equalTo": "1000"
+			}
+		}
+	},
+	"response": {
+		"status": 200,
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"bodyFileName": "test01_getDistrictHeatingMonthPrivate/responses/datawarehousereader-response.json"
+	}
 }
