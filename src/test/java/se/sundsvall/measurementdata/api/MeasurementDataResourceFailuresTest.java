@@ -1,19 +1,15 @@
 package se.sundsvall.measurementdata.api;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.assertj.core.groups.Tuple.tuple;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.zalando.problem.Status.BAD_REQUEST;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,17 +17,17 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.zalando.problem.violations.ConstraintViolationProblem;
+import org.zalando.problem.violations.Violation;
 
 import se.sundsvall.measurementdata.Application;
 import se.sundsvall.measurementdata.api.model.Aggregation;
 import se.sundsvall.measurementdata.api.model.Category;
-import se.sundsvall.measurementdata.api.model.Data;
-import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.service.MeasurementDataService;
 
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
-class MeasurementDataResourceTest {
+class MeasurementDataResourceFailuresTest {
 
 	private static final String PATH = "/{municipalityId}/measurement-data";
 
@@ -41,22 +37,49 @@ class MeasurementDataResourceTest {
 	@MockBean
 	private MeasurementDataService serviceMock;
 
-	@Captor
-	private ArgumentCaptor<MeasurementDataSearchParameters> parametersCaptor;
-
 	@Test
-	void getMeasurementData() {
+	void getMeasurementDataMissingParameters() {
 
 		// Arrange
 		final var municipalityId = "2281";
+
+		// Act
+		final var response = webTestClient.get().uri(uriBuilder -> uriBuilder.path(PATH)
+			.build(municipalityId))
+			.exchange()
+			.expectStatus().isBadRequest()
+			.expectHeader().contentType(APPLICATION_PROBLEM_JSON_VALUE)
+			.expectBody(ConstraintViolationProblem.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response.getTitle()).isEqualTo("Constraint Violation");
+		assertThat(response.getStatus()).isEqualTo(BAD_REQUEST);
+		assertThat(response.getViolations())
+			.extracting(Violation::getField, Violation::getMessage)
+			.containsExactlyInAnyOrder(
+				tuple("aggregateOn", "must not be null"),
+				tuple("category", "must not be null"),
+				tuple("facilityId", "must not be blank"),
+				tuple("fromDate", "must not be null"),
+				tuple("partyId", "not a valid UUID"),
+				tuple("toDate", "must not be null"));
+
+		verifyNoInteractions(serviceMock);
+	}
+
+	@Test
+	void getMeasurementDataInvalidMunicipalityId() {
+
+		// Arrange
+		final var municipalityId = "invalid";
 		final var aggregation = Aggregation.HOUR;
 		final var category = Category.DISTRICT_HEATING;
 		final var facilityId = "112233";
 		final var fromDate = "2022-05-17T08:00:00.000Z";
 		final var toDate = "2022-06-18T09:00:00.000Z";
 		final var partyId = UUID.randomUUID().toString();
-
-		when(serviceMock.fetchMeasurementData(any(), any())).thenReturn(Data.create());
 
 		final MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 		parameters.add("partyId", partyId);
@@ -71,22 +94,20 @@ class MeasurementDataResourceTest {
 			.queryParams(parameters)
 			.build(municipalityId))
 			.exchange()
-			.expectStatus().isOk()
-			.expectHeader().contentType(APPLICATION_JSON_VALUE)
-			.expectBody(Data.class)
+			.expectStatus().isBadRequest()
+			.expectHeader().contentType(APPLICATION_PROBLEM_JSON_VALUE)
+			.expectBody(ConstraintViolationProblem.class)
 			.returnResult()
 			.getResponseBody();
 
 		// Assert
-		verify(serviceMock).fetchMeasurementData(eq(municipalityId), parametersCaptor.capture());
+		assertThat(response.getTitle()).isEqualTo("Constraint Violation");
+		assertThat(response.getStatus()).isEqualTo(BAD_REQUEST);
+		assertThat(response.getViolations())
+			.extracting(Violation::getField, Violation::getMessage)
+			.containsExactlyInAnyOrder(
+				tuple("getMeasurementData.municipalityId", "not a valid municipality ID"));
 
-		final MeasurementDataSearchParameters parameterValues = parametersCaptor.getValue();
-		assertThat(response).isNotNull().isEqualTo(Data.create());
-		assertThat(parameterValues.getAggregateOn()).isEqualTo(aggregation);
-		assertThat(parameterValues.getCategory()).isEqualTo(category);
-		assertThat(parameterValues.getFacilityId()).isEqualTo(facilityId);
-		assertThat(parameterValues.getFromDate()).isEqualTo(OffsetDateTime.parse(fromDate));
-		assertThat(parameterValues.getPartyId()).isEqualTo(partyId);
-		assertThat(parameterValues.getToDate()).isEqualTo(OffsetDateTime.parse(toDate));
+		verifyNoInteractions(serviceMock);
 	}
 }

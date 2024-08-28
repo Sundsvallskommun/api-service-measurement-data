@@ -25,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import generated.se.sundsvall.datawarehousereader.Aggregation;
 import generated.se.sundsvall.datawarehousereader.Category;
 import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
-import generated.se.sundsvall.datawarehousereader.MetaData;
+import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;
 
@@ -46,6 +46,9 @@ class MeasurementDataServiceTest {
 
 	@Test
 	void testExistingCustomer() {
+
+		// Arrange
+		final var municipalityId = "municipalityId";
 		final var aggregation = MONTH;
 		final var category = WASTE_MANAGEMENT;
 		final var facilityId = "facilityId";
@@ -61,12 +64,13 @@ class MeasurementDataServiceTest {
 			.withPartyId(partyId)
 			.withToDate(toDate);
 
-		when(dataWarehouseReaderClientMock.getMeasurementData(any(), any(), any(), any(), any(), any(), anyInt())).thenReturn(new MeasurementResponse().meta(new MetaData()));
+		when(dataWarehouseReaderClientMock.getMeasurementData(any(), any(), any(), any(), any(), any(), any(), anyInt())).thenReturn(new MeasurementResponse().meta(new PagingAndSortingMetaData()));
 
-		final var response = service.fetchMeasurementData(parameters);
+		// Act
+		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
-		verify(dataWarehouseReaderClientMock).getMeasurementData(eq(Category.WASTE_MANAGEMENT), eq(Aggregation.MONTH), eq(partyId), eq(facilityId), fromDateCaptor.capture(), toDateCaptor.capture(), eq(1000));
-
+		// Assert
+		verify(dataWarehouseReaderClientMock).getMeasurementData(eq(municipalityId), eq(Category.WASTE_MANAGEMENT), eq(Aggregation.MONTH), eq(partyId), eq(facilityId), fromDateCaptor.capture(), toDateCaptor.capture(), eq(1000));
 		assertThat(decode(fromDateCaptor.getValue(), defaultCharset())).isEqualTo(fromDate.toString());
 		assertThat(decode(toDateCaptor.getValue(), defaultCharset())).isEqualTo(toDate.toString());
 		assertThat(response.getAggregateOn()).isEqualTo(aggregation);

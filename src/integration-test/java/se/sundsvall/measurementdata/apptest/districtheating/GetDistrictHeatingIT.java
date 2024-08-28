@@ -14,11 +14,11 @@ import se.sundsvall.measurementdata.Application;
 @WireMockAppTestSuite(files = "classpath:/GetDistrictHeating/", classes = Application.class)
 class GetDistrictHeatingIT extends AbstractAppTest {
 
-	private static final String PATH = "/measurement-data";
+	private static final String PATH = "/2281/measurement-data";
 	private static final String RESPONSE_FILE = "response.json";
 
 	@Test
-	void test01_getDistrictHeatingMonthPrivate() throws Exception {
+	void test01_getDistrictHeatingMonthPrivate() {
 		setupCall()
 			.withServicePath(PATH +
 				"?page=1" +
@@ -36,7 +36,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test02_getDistrictHeatingNotImplementedAggregationLevel() throws Exception {
+	void test02_getDistrictHeatingNotImplementedAggregationLevel() {
 		setupCall()
 			.withServicePath(PATH +
 				"?page=1" +
@@ -54,7 +54,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test03_customerNotFound() throws Exception {
+	void test03_customerNotFound() {
 		setupCall()
 			.withServicePath(PATH +
 				"?page=1" +

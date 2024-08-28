@@ -17,8 +17,9 @@ import se.sundsvall.measurementdata.integration.datawarehousereader.configuratio
 @FeignClient(name = CLIENT_ID, url = "${integration.datawarehousereader.url}", configuration = DataWarehouseReaderConfiguration.class)
 public interface DataWarehouseReaderClient {
 
-	@GetMapping(path = "measurements/{category}/{aggregateOn}", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
+	@GetMapping(path = "/{municipalityId}/measurements/{category}/{aggregateOn}", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
 	MeasurementResponse getMeasurementData(
+		@PathVariable("municipalityId") String municipalityId,
 		@PathVariable("category") Category category,
 		@PathVariable("aggregateOn") Aggregation aggregateOn,
 		@RequestParam("partyId") String partyId,

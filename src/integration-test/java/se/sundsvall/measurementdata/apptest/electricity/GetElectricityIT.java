@@ -12,11 +12,11 @@ import se.sundsvall.measurementdata.Application;
 @WireMockAppTestSuite(files = "classpath:/GetElectricity/", classes = Application.class)
 class GetElectricityIT extends AbstractAppTest {
 
-	private static final String PATH = "/measurement-data";
+	private static final String PATH = "/2281/measurement-data";
 	private static final String RESPONSE_FILE = "response.json";
 
 	@Test
-	void test01_getElectricityMonthPrivate() throws Exception {
+	void test01_getElectricityMonthPrivate() {
 		setupCall()
 			.withServicePath(PATH +
 				"?page=1" +
@@ -34,7 +34,7 @@ class GetElectricityIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test02_getElectricityDayEnterprise() throws Exception {
+	void test02_getElectricityDayEnterprise() {
 		setupCall()
 			.withServicePath(PATH +
 				"?page=1" +

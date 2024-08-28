@@ -9,7 +9,6 @@ import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMap
 import java.time.OffsetDateTime;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
@@ -22,12 +21,16 @@ public class MeasurementDataService {
 
 	private static final int MEASUREMENT_DATA_RESPONSE_LIMIT = 1000;
 
-	@Autowired
-	private DataWarehouseReaderClient dataWarehouseReaderClient;
+	private final DataWarehouseReaderClient dataWarehouseReaderClient;
 
-	public Data fetchMeasurementData(final MeasurementDataSearchParameters parameters) {
+	public MeasurementDataService(DataWarehouseReaderClient dataWarehouseReaderClient) {
+		this.dataWarehouseReaderClient = dataWarehouseReaderClient;
+	}
+
+	public Data fetchMeasurementData(final String municipalityId, final MeasurementDataSearchParameters parameters) {
 
 		final MeasurementResponse response = dataWarehouseReaderClient.getMeasurementData(
+			municipalityId,
 			toCategory(parameters.getCategory()),
 			toAggregation(parameters.getAggregateOn()),
 			parameters.getPartyId(),

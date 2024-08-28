@@ -7,7 +7,7 @@
 			}
 		},
 		"method": "GET",
-		"urlPath": "/api-datawarehousereader/measurements/DISTRICT_HEATING/MONTH",
+		"urlPath": "/api-datawarehousereader/2281/measurements/DISTRICT_HEATING/MONTH",
 		"queryParameters": {
 			"partyId": {
 				"equalTo": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102"
