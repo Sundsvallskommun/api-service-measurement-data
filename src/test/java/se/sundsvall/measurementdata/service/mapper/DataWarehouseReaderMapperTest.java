@@ -22,7 +22,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import generated.se.sundsvall.datawarehousereader.Measurement;
 import generated.se.sundsvall.datawarehousereader.MeasurementMetaData;
 import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
-import generated.se.sundsvall.datawarehousereader.MetaData;
+import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import se.sundsvall.dept44.test.annotation.resource.Load;
 import se.sundsvall.dept44.test.extension.ResourceLoaderExtension;
 import se.sundsvall.measurementdata.api.model.Aggregation;
@@ -72,7 +72,7 @@ class DataWarehouseReaderMapperTest {
 	}
 
 	@Test
-	void testToDataWithMetaData(@Load(value = "dataWarehouseReaderMapperTest/expectedJsonWithMetaData.json", as = JSON) Data expectedResult) throws Exception {
+	void testToDataWithMetaData(@Load(value = "dataWarehouseReaderMapperTest/expectedJsonWithMetaData.json", as = JSON) Data expectedResult) {
 		final var data = toData(createParameters(), createDataWarehouseReaderResponse(2, 5, true));
 
 		assertThat(data).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(expectedResult);
@@ -85,7 +85,7 @@ class DataWarehouseReaderMapperTest {
 	}
 
 	@Test
-	void testToDataWithoutMetaData(@Load(value = "dataWarehouseReaderMapperTest/expectedJsonWithoutMetaData.json", as = JSON) Data expectedResult) throws Exception {
+	void testToDataWithoutMetaData(@Load(value = "dataWarehouseReaderMapperTest/expectedJsonWithoutMetaData.json", as = JSON) Data expectedResult) {
 		final var data = toData(createParameters(), createDataWarehouseReaderResponse(2, 4, false));
 
 		assertThat(data).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(expectedResult);
@@ -126,7 +126,7 @@ class DataWarehouseReaderMapperTest {
 	}
 
 	private static MeasurementResponse createDataWarehouseReaderResponse(int series, int serieMembers, boolean hasMetadata) {
-		MeasurementResponse response = new MeasurementResponse().meta(new MetaData().count(series * serieMembers));
+		final MeasurementResponse response = new MeasurementResponse().meta(new PagingAndSortingMetaData().count(series * serieMembers));
 		for (int serie = 0; serie < series; serie++) {
 			for (int serieMember = 0; serieMember < serieMembers; serieMember++) {
 				response.addMeasurementsItem(createMeasurement(serie, serieMember, hasMetadata));

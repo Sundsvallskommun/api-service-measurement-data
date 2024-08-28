@@ -7,7 +7,7 @@
 			}
 		},
 		"method": "GET",
-		"urlPath": "/api-datawarehousereader/measurements/ELECTRICITY/DAY",
+		"urlPath": "/api-datawarehousereader/2281/measurements/ELECTRICITY/DAY",
 		"queryParameters": {
 			"partyId": {
 				"equalTo": "BF7967EC-261A-4FF8-934A-8BF31B299169"

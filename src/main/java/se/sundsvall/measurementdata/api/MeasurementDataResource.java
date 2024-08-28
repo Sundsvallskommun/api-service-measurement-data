@@ -8,21 +8,23 @@ import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.DI
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.ELECTRICITY_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.WASTE_MANAGEMENT_RESPONSE_EXAMPLE;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.measurementdata.api.model.Data;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.service.MeasurementDataService;
@@ -32,10 +34,13 @@ import se.sundsvall.measurementdata.service.MeasurementDataService;
 @Tag(name = "Measurement", description = "Measurement operations")
 public class MeasurementDataResource {
 
-	@Autowired
-	private MeasurementDataService service;
+	private final MeasurementDataService measurementDataService;
 
-	@GetMapping(path = "measurement-data", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
+	public MeasurementDataResource(MeasurementDataService measurementDataService) {
+		this.measurementDataService = measurementDataService;
+	}
+
+	@GetMapping(path = "/{municipalityId}/measurement-data", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
 	@Operation(summary = "Get a persons measurement data points for different categories")
 	@ApiResponse(responseCode = "200",
 		description = "Successful Operation",
@@ -49,7 +54,10 @@ public class MeasurementDataResource {
 	@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = { Problem.class, ConstraintViolationProblem.class })))
 	@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "502", description = "Bad Gateway", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
-	public ResponseEntity<Data> getMeasurementData(@Valid final MeasurementDataSearchParameters parameters) {
-		return ok(service.fetchMeasurementData(parameters));
+	public ResponseEntity<Data> getMeasurementData(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		@Valid final MeasurementDataSearchParameters parameters) {
+
+		return ok(measurementDataService.fetchMeasurementData(municipalityId, parameters));
 	}
 }
