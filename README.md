@@ -9,6 +9,6 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Sundsvallskommun_api-service-measurement-data&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=Sundsvallskommun_api-service-measurement-data)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Sundsvallskommun_api-service-measurement-data&metric=bugs)](https://sonarcloud.io/summary/overall?id=Sundsvallskommun_api-service-measurement-data)
 
-
 ## 
+
 Copyright (c) 2023 Sundsvalls kommun

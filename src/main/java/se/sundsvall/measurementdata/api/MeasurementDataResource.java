@@ -40,7 +40,9 @@ public class MeasurementDataResource {
 		this.measurementDataService = measurementDataService;
 	}
 
-	@GetMapping(path = "/{municipalityId}/measurement-data", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
+	@GetMapping(path = "/{municipalityId}/measurement-data", produces = {
+		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
+	})
 	@Operation(summary = "Get a persons measurement data points for different categories")
 	@ApiResponse(responseCode = "200",
 		description = "Successful Operation",
@@ -50,8 +52,11 @@ public class MeasurementDataResource {
 				@ExampleObject(name = "DISTRICT_HEATING", value = DISTRICT_HEATING_RESPONSE_EXAMPLE),
 				@ExampleObject(name = "BROADBAND", value = COMMUNICATION_RESPONSE_EXAMPLE),
 				@ExampleObject(name = "ELECTRICITY", value = ELECTRICITY_RESPONSE_EXAMPLE),
-				@ExampleObject(name = "WASTE_MANAGEMENT", value = WASTE_MANAGEMENT_RESPONSE_EXAMPLE) }))
-	@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = { Problem.class, ConstraintViolationProblem.class })))
+				@ExampleObject(name = "WASTE_MANAGEMENT", value = WASTE_MANAGEMENT_RESPONSE_EXAMPLE)
+			}))
+	@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
+		Problem.class, ConstraintViolationProblem.class
+	})))
 	@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "502", description = "Bad Gateway", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	public ResponseEntity<Data> getMeasurementData(

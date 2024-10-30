@@ -21,44 +21,43 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class MeasurementSerieTest {
 
-    @BeforeAll
-    static void setup() {
-        registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
-    }
+	@BeforeAll
+	static void setup() {
+		registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
+	}
 
-    @Test
-    void testBean() {
-        assertThat(MeasurementSerie.class, allOf(
-                hasValidBeanConstructor(),
-                hasValidGettersAndSetters(),
-                hasValidBeanHashCode(),
-                hasValidBeanEquals(),
-                hasValidBeanToString()));
-    }
+	@Test
+	void testBean() {
+		assertThat(MeasurementSerie.class, allOf(
+			hasValidBeanConstructor(),
+			hasValidGettersAndSetters(),
+			hasValidBeanHashCode(),
+			hasValidBeanEquals(),
+			hasValidBeanToString()));
+	}
 
-    @Test
-    void testCreatePattern() {
-        final var unit = "unit";
-        final var measurementType = "measurementType";
-        final var metaData = new MetaData().withValue("value").withKey("key");
-        final var measurementPoint = new MeasurementPoint();
+	@Test
+	void testCreatePattern() {
+		final var unit = "unit";
+		final var measurementType = "measurementType";
+		final var metaData = new MetaData().withValue("value").withKey("key");
+		final var measurementPoint = new MeasurementPoint();
 
-        MeasurementSerie serie = MeasurementSerie.create()
-                .withUnit(unit)
-                .withMeasurementType(measurementType)
-                .withMetaData(Arrays.asList(metaData))
-                .withMeasurementPoints(Arrays.asList(measurementPoint));
+		MeasurementSerie serie = MeasurementSerie.create()
+			.withUnit(unit)
+			.withMeasurementType(measurementType)
+			.withMetaData(Arrays.asList(metaData))
+			.withMeasurementPoints(Arrays.asList(measurementPoint));
 
+		assertThat(serie.getUnit()).isEqualTo(unit);
+		assertThat(serie.getMeasurementType()).isEqualTo(measurementType);
+		assertThat(serie.getMetaData()).containsExactly(metaData);
+		assertThat(serie.getMeasurementPoints()).containsExactly(measurementPoint);
 
-        assertThat(serie.getUnit()).isEqualTo(unit);
-        assertThat(serie.getMeasurementType()).isEqualTo(measurementType);
-        assertThat(serie.getMetaData()).containsExactly(metaData);
-        assertThat(serie.getMeasurementPoints()).containsExactly(measurementPoint);
+	}
 
-    }
-
-    @Test
-    void testCreateWithNoValueSet() {
-        Assertions.assertThat(MeasurementSerie.create()).hasAllNullFieldsOrProperties();
-    }
+	@Test
+	void testCreateWithNoValueSet() {
+		Assertions.assertThat(MeasurementSerie.create()).hasAllNullFieldsOrProperties();
+	}
 }

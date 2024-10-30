@@ -1,141 +1,137 @@
 {
-	"category": "DISTRICT_HEATING",
 	"facilityId": "facilityId",
 	"aggregateOn": "YEAR",
+	"category": "DISTRICT_HEATING",
 	"measurementSeries": [
 		{
+			"metaData": null,
 			"unit": "unit",
 			"measurementType": "measurementType_2",
-			"metaData": null,
 			"measurementPoints": [
 				{
-					"value": 2,
-					"metaData": [
-						{
-							"key": "key",
-							"value": "value_2"
-						}
-					]
+					"metaData": [{
+						"value": "value_2",
+						"key": "key"
+					}],
+					"value": 2
 				},
 				{
-					"value": 4,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_4"
+							"value": "value_4",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "2"
+							"value": "2",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 4
 				},
 				{
-					"value": 6,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_6"
+							"value": "value_6",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "4"
+							"value": "4",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 6
 				},
 				{
-					"value": 8,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_8"
+							"value": "value_8",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "6"
+							"value": "6",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 8
 				},
 				{
-					"value": 10,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_10"
+							"value": "value_10",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "8"
+							"value": "8",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 10
 				}
 			]
 		},
 		{
+			"metaData": null,
 			"unit": "unit",
 			"measurementType": "measurementType_1",
-			"metaData": null,
 			"measurementPoints": [
 				{
-					"value": 1,
-					"metaData": [
-						{
-							"key": "key",
-							"value": "value_1"
-						}
-					]
+					"metaData": [{
+						"value": "value_1",
+						"key": "key"
+					}],
+					"value": 1
 				},
 				{
-					"value": 2,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_2"
+							"value": "value_2",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "1"
+							"value": "1",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 2
 				},
 				{
-					"value": 3,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_3"
+							"value": "value_3",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "2"
+							"value": "2",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 3
 				},
 				{
-					"value": 4,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_4"
+							"value": "value_4",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "3"
+							"value": "3",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 4
 				},
 				{
-					"value": 5,
 					"metaData": [
 						{
-							"key": "key",
-							"value": "value_5"
+							"value": "value_5",
+							"key": "key"
 						},
 						{
-							"key": "interpolation",
-							"value": "4"
+							"value": "4",
+							"key": "interpolation"
 						}
-					]
+					],
+					"value": 5
 				}
 			]
 		}
