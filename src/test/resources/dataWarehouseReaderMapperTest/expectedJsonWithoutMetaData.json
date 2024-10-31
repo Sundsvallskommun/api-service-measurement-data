@@ -1,81 +1,69 @@
 {
-	"category": "DISTRICT_HEATING",
 	"facilityId": "facilityId",
 	"aggregateOn": "YEAR",
+	"category": "DISTRICT_HEATING",
 	"measurementSeries": [
 		{
+			"metaData": null,
 			"unit": "unit",
 			"measurementType": "measurementType_2",
-			"metaData": null,
 			"measurementPoints": [
 				{
-					"value": 2,
-					"metaData": null
+					"metaData": null,
+					"value": 2
 				},
 				{
-					"value": 4,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "2"
-						}
-					]
+					"metaData": [{
+						"value": "2",
+						"key": "interpolation"
+					}],
+					"value": 4
 				},
 				{
-					"value": 6,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "4"
-						}
-					]
+					"metaData": [{
+						"value": "4",
+						"key": "interpolation"
+					}],
+					"value": 6
 				},
 				{
-					"value": 8,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "6"
-						}
-					]
+					"metaData": [{
+						"value": "6",
+						"key": "interpolation"
+					}],
+					"value": 8
 				}
 			]
 		},
 		{
+			"metaData": null,
 			"unit": "unit",
 			"measurementType": "measurementType_1",
-			"metaData": null,
 			"measurementPoints": [
 				{
-					"value": 1,
-					"metaData": null
+					"metaData": null,
+					"value": 1
 				},
 				{
-					"value": 2,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "1"
-						}
-					]
+					"metaData": [{
+						"value": "1",
+						"key": "interpolation"
+					}],
+					"value": 2
 				},
 				{
-					"value": 3,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "2"
-						}
-					]
+					"metaData": [{
+						"value": "2",
+						"key": "interpolation"
+					}],
+					"value": 3
 				},
 				{
-					"value": 4,
-					"metaData": [
-						{
-							"key": "interpolation",
-							"value": "3"
-						}
-					]
+					"metaData": [{
+						"value": "3",
+						"key": "interpolation"
+					}],
+					"value": 4
 				}
 			]
 		}

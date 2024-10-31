@@ -1,242 +1,242 @@
 {
-	"measurements": [
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1772.1,
-			"timestamp": "2018-02-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "2592018"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 2060.9,
-			"timestamp": "2018-03-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "2807316"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1961.68,
-			"timestamp": "2018-04-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "2947605"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1896.27,
-			"timestamp": "2018-05-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3066675"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1691.52,
-			"timestamp": "2018-06-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3229154"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1752.58,
-			"timestamp": "2018-07-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3372107"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1884.22,
-			"timestamp": "2018-08-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3538114"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1781.29,
-			"timestamp": "2018-09-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3671917"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 1853.54,
-			"timestamp": "2018-10-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "3875825"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 2116.19,
-			"timestamp": "2018-11-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "4148307"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		},
-		{
-			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
-			"facilityId": "735999109113202014",
-			"category": "DISTRICT_HEATING",
-			"aggregatedOn": "MONTH",
-			"measurementType": "Aktiv",
-			"unit": "kWh",
-			"value": 2111.47,
-			"timestamp": "2018-12-01T00:00:00+02:00",
-			"metaData": [
-				{
-					"key": "readingSequence",
-					"value": "4321552"
-				},
-				{
-					"key": "feedTypeId",
-					"value": "0"
-				}
-			],
-			"interpolation": 0
-		}
-	],
 	"_meta": {
-		"page": 1,
+		"totalRecords": 11,
 		"limit": 100,
 		"count": 11,
-		"totalRecords": 11,
-		"totalPages": 1
-	}
+		"totalPages": 1,
+		"page": 1
+	},
+	"measurements": [
+		{
+			"metaData": [
+				{
+					"value": "2592018",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1772.1,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-02-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "2807316",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 2060.9,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-03-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "2947605",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1961.68,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-04-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3066675",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1896.27,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-05-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3229154",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1691.52,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-06-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3372107",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1752.58,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-07-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3538114",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1884.22,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-08-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3671917",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1781.29,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-09-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "3875825",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 1853.54,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-10-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "4148307",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 2116.19,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-11-01T00:00:00+02:00"
+		},
+		{
+			"metaData": [
+				{
+					"value": "4321552",
+					"key": "readingSequence"
+				},
+				{
+					"value": "0",
+					"key": "feedTypeId"
+				}
+			],
+			"unit": "kWh",
+			"interpolation": 0,
+			"facilityId": "735999109113202014",
+			"measurementType": "Aktiv",
+			"partyId": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102",
+			"category": "DISTRICT_HEATING",
+			"value": 2111.47,
+			"aggregatedOn": "MONTH",
+			"timestamp": "2018-12-01T00:00:00+02:00"
+		}
+	]
 }

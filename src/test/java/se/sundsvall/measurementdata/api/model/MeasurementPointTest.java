@@ -22,39 +22,39 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class MeasurementPointTest {
 
-    @BeforeAll
-    static void setup() {
-        registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
-    }
+	@BeforeAll
+	static void setup() {
+		registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
+	}
 
-    @Test
-    void testBean() {
-        assertThat(MeasurementPoint.class, allOf(
-                hasValidBeanConstructor(),
-                hasValidGettersAndSetters(),
-                hasValidBeanHashCode(),
-                hasValidBeanEquals(),
-                hasValidBeanToString()));
-    }
+	@Test
+	void testBean() {
+		assertThat(MeasurementPoint.class, allOf(
+			hasValidBeanConstructor(),
+			hasValidGettersAndSetters(),
+			hasValidBeanHashCode(),
+			hasValidBeanEquals(),
+			hasValidBeanToString()));
+	}
 
-    @Test
-    void testCreatePattern() {
-        final var value = BigDecimal.valueOf(10.1d);
-        final var metaData = new MetaData().withValue("value").withKey("key");
-        final var timestamp = OffsetDateTime.of(2000, 1, 2, 3,4,5,6, now().getOffset());
+	@Test
+	void testCreatePattern() {
+		final var value = BigDecimal.valueOf(10.1d);
+		final var metaData = new MetaData().withValue("value").withKey("key");
+		final var timestamp = OffsetDateTime.of(2000, 1, 2, 3, 4, 5, 6, now().getOffset());
 
-        MeasurementPoint point = MeasurementPoint.create()
-                .withValue(value)
-                .withTimestamp(timestamp)
-                .withMetaData(Arrays.asList(metaData));
+		MeasurementPoint point = MeasurementPoint.create()
+			.withValue(value)
+			.withTimestamp(timestamp)
+			.withMetaData(Arrays.asList(metaData));
 
-        assertThat(point.getValue()).isEqualTo(value);
-        assertThat(point.getTimestamp()).isSameAs(timestamp);
-        assertThat(point.getMetaData()).containsExactly(metaData);
-    }
+		assertThat(point.getValue()).isEqualTo(value);
+		assertThat(point.getTimestamp()).isSameAs(timestamp);
+		assertThat(point.getMetaData()).containsExactly(metaData);
+	}
 
-    @Test
-    void testCreateWithNoValueSet() {
-        Assertions.assertThat(MeasurementPoint.create()).hasAllNullFieldsOrProperties();
-    }
+	@Test
+	void testCreateWithNoValueSet() {
+		Assertions.assertThat(MeasurementPoint.create()).hasAllNullFieldsOrProperties();
+	}
 }

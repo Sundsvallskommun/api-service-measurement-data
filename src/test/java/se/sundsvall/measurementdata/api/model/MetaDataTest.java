@@ -20,37 +20,37 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class MetaDataTest {
 
-    @BeforeAll
-    static void setup() {
-        registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
-    }
+	@BeforeAll
+	static void setup() {
+		registerValueGenerator(() -> now().plusDays(new Random().nextInt()), OffsetDateTime.class);
+	}
 
-    @Test
-    void testBean() {
-        assertThat(MetaData.class, allOf(
-                hasValidBeanConstructor(),
-                hasValidGettersAndSetters(),
-                hasValidBeanHashCode(),
-                hasValidBeanEquals(),
-                hasValidBeanToString()));
-    }
+	@Test
+	void testBean() {
+		assertThat(MetaData.class, allOf(
+			hasValidBeanConstructor(),
+			hasValidGettersAndSetters(),
+			hasValidBeanHashCode(),
+			hasValidBeanEquals(),
+			hasValidBeanToString()));
+	}
 
-    @Test
-    void testCreatePattern() {
-        final var key = "key";
-        final var value = "value";
+	@Test
+	void testCreatePattern() {
+		final var key = "key";
+		final var value = "value";
 
-        MetaData metaData = MetaData.create()
-                .withKey(key)
-                .withValue(value);
+		MetaData metaData = MetaData.create()
+			.withKey(key)
+			.withValue(value);
 
-        assertThat(metaData.getKey()).isEqualTo(key);
-        assertThat(metaData.getValue()).isEqualTo(value);
+		assertThat(metaData.getKey()).isEqualTo(key);
+		assertThat(metaData.getValue()).isEqualTo(value);
 
-    }
+	}
 
-    @Test
-    void testCreateWithNoValueSet() {
-        Assertions.assertThat(MetaData.create()).hasAllNullFieldsOrProperties();
-    }
+	@Test
+	void testCreateWithNoValueSet() {
+		Assertions.assertThat(MetaData.create()).hasAllNullFieldsOrProperties();
+	}
 }
