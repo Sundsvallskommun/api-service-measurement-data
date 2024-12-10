@@ -14,6 +14,10 @@ import static org.mockito.Mockito.when;
 import static se.sundsvall.measurementdata.api.model.Aggregation.MONTH;
 import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
 
+import generated.se.sundsvall.datawarehousereader.Aggregation;
+import generated.se.sundsvall.datawarehousereader.Category;
+import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
+import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,11 +25,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import generated.se.sundsvall.datawarehousereader.Aggregation;
-import generated.se.sundsvall.datawarehousereader.Category;
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
-import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;
 

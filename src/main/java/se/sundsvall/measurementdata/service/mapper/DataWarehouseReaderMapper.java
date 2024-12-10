@@ -4,18 +4,17 @@ import static java.util.Collections.emptyList;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
+import generated.se.sundsvall.datawarehousereader.Aggregation;
+import generated.se.sundsvall.datawarehousereader.Category;
+import generated.se.sundsvall.datawarehousereader.Measurement;
+import generated.se.sundsvall.datawarehousereader.MeasurementMetaData;
+import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-
-import generated.se.sundsvall.datawarehousereader.Aggregation;
-import generated.se.sundsvall.datawarehousereader.Category;
-import generated.se.sundsvall.datawarehousereader.Measurement;
-import generated.se.sundsvall.datawarehousereader.MeasurementMetaData;
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
 import se.sundsvall.measurementdata.api.model.Data;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.api.model.MeasurementPoint;

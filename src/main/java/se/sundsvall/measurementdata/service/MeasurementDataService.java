@@ -6,12 +6,10 @@ import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMap
 import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toCategory;
 import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
 
+import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
 import java.time.OffsetDateTime;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
 import se.sundsvall.measurementdata.api.model.Data;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;

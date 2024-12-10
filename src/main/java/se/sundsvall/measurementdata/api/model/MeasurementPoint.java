@@ -3,15 +3,13 @@ package se.sundsvall.measurementdata.api.model;
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "A single measurement data point")
 public class MeasurementPoint {

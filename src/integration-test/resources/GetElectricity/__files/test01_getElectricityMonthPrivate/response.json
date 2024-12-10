@@ -4,54 +4,62 @@
 	"aggregateOn": "MONTH",
 	"toDate": "2019-06-30T14:39:22.817Z",
 	"category": "ELECTRICITY",
-	"measurementSeries": [{
-		"unit": "kWh",
-		"measurementType": "Energy",
-		"measurementPoints": [
-			{
-				"value": 42.307,
-				"timestamp": "2019-05-28T00:00:00+02:00"
-			},
-			{
-				"metaData": [{
-					"value": "5",
-					"key": "interpolation"
-				}],
-				"value": 410.968,
-				"timestamp": "2019-06-01T00:00:00+02:00"
-			},
-			{
-				"value": 411.708,
-				"timestamp": "2019-06-01T00:00:00+02:00"
-			},
-			{
-				"value": 382.316,
-				"timestamp": "2019-07-01T00:00:00+02:00"
-			},
-			{
-				"metaData": [{
-					"value": "4",
-					"key": "interpolation"
-				}],
-				"value": 401.489,
-				"timestamp": "2019-08-01T00:00:00+02:00"
-			},
-			{
-				"value": 519.59,
-				"timestamp": "2019-09-01T00:00:00+02:00"
-			},
-			{
-				"value": 552.845,
-				"timestamp": "2019-10-01T00:00:00+02:00"
-			},
-			{
-				"metaData": [{
-					"value": "2",
-					"key": "interpolation"
-				}],
-				"value": 435.763,
-				"timestamp": "2019-11-01T00:00:00+02:00"
-			}
-		]
-	}]
+	"measurementSeries": [
+		{
+			"unit": "kWh",
+			"measurementType": "Energy",
+			"measurementPoints": [
+				{
+					"value": 42.307,
+					"timestamp": "2019-05-28T00:00:00+02:00"
+				},
+				{
+					"metaData": [
+						{
+							"value": "5",
+							"key": "interpolation"
+						}
+					],
+					"value": 410.968,
+					"timestamp": "2019-06-01T00:00:00+02:00"
+				},
+				{
+					"value": 411.708,
+					"timestamp": "2019-06-01T00:00:00+02:00"
+				},
+				{
+					"value": 382.316,
+					"timestamp": "2019-07-01T00:00:00+02:00"
+				},
+				{
+					"metaData": [
+						{
+							"value": "4",
+							"key": "interpolation"
+						}
+					],
+					"value": 401.489,
+					"timestamp": "2019-08-01T00:00:00+02:00"
+				},
+				{
+					"value": 519.59,
+					"timestamp": "2019-09-01T00:00:00+02:00"
+				},
+				{
+					"value": 552.845,
+					"timestamp": "2019-10-01T00:00:00+02:00"
+				},
+				{
+					"metaData": [
+						{
+							"value": "2",
+							"key": "interpolation"
+						}
+					],
+					"value": 435.763,
+					"timestamp": "2019-11-01T00:00:00+02:00"
+				}
+			]
+		}
+	]
 }

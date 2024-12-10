@@ -13,24 +13,30 @@
 					"value": 2
 				},
 				{
-					"metaData": [{
-						"value": "2",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "2",
+							"key": "interpolation"
+						}
+					],
 					"value": 4
 				},
 				{
-					"metaData": [{
-						"value": "4",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "4",
+							"key": "interpolation"
+						}
+					],
 					"value": 6
 				},
 				{
-					"metaData": [{
-						"value": "6",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "6",
+							"key": "interpolation"
+						}
+					],
 					"value": 8
 				}
 			]
@@ -45,24 +51,30 @@
 					"value": 1
 				},
 				{
-					"metaData": [{
-						"value": "1",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "1",
+							"key": "interpolation"
+						}
+					],
 					"value": 2
 				},
 				{
-					"metaData": [{
-						"value": "2",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "2",
+							"key": "interpolation"
+						}
+					],
 					"value": 3
 				},
 				{
-					"metaData": [{
-						"value": "3",
-						"key": "interpolation"
-					}],
+					"metaData": [
+						{
+							"value": "3",
+							"key": "interpolation"
+						}
+					],
 					"value": 4
 				}
 			]
