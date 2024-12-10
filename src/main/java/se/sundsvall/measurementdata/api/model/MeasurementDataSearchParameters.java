@@ -2,15 +2,12 @@ package se.sundsvall.measurementdata.api.model;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-import java.time.OffsetDateTime;
-import java.util.Objects;
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
+import java.time.OffsetDateTime;
+import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 import se.sundsvall.dept44.common.validators.annotation.ValidUuid;
 
 @Schema(description = "Measurement date request parameters")

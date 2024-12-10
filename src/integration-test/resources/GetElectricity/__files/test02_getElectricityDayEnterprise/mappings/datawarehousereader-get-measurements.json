@@ -1,18 +1,34 @@
 {
 	"request": {
-		"headers": {"Authorization": {"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"}},
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
 		"method": "GET",
 		"queryParameters": {
-			"facilityId": {"equalTo": "735999109250135015"},
-			"fromDateTime": {"equalTo": "2022-05-01T11:55:00.558Z"},
-			"limit": {"equalTo": "1000"},
-			"partyId": {"equalTo": "BF7967EC-261A-4FF8-934A-8BF31B299169"},
-			"toDateTime": {"equalTo": "2022-06-30T11:55:00.558Z"}
+			"facilityId": {
+				"equalTo": "735999109250135015"
+			},
+			"fromDateTime": {
+				"equalTo": "2022-05-01T11:55:00.558Z"
+			},
+			"limit": {
+				"equalTo": "1000"
+			},
+			"partyId": {
+				"equalTo": "BF7967EC-261A-4FF8-934A-8BF31B299169"
+			},
+			"toDateTime": {
+				"equalTo": "2022-06-30T11:55:00.558Z"
+			}
 		},
 		"urlPath": "/api-datawarehousereader/2281/measurements/ELECTRICITY/DAY"
 	},
 	"response": {
-		"headers": {"Content-type": "application/json"},
+		"headers": {
+			"Content-type": "application/json"
+		},
 		"bodyFileName": "test02_getElectricityDayEnterprise/responses/datawarehousereader-day-response.json",
 		"status": 200
 	},

@@ -9,10 +9,12 @@
 			"measurementType": "measurementType_2",
 			"measurementPoints": [
 				{
-					"metaData": [{
-						"value": "value_2",
-						"key": "key"
-					}],
+					"metaData": [
+						{
+							"value": "value_2",
+							"key": "key"
+						}
+					],
 					"value": 2
 				},
 				{
@@ -75,10 +77,12 @@
 			"measurementType": "measurementType_1",
 			"measurementPoints": [
 				{
-					"metaData": [{
-						"value": "value_1",
-						"key": "key"
-					}],
+					"metaData": [
+						{
+							"value": "value_1",
+							"key": "key"
+						}
+					],
 					"value": 1
 				},
 				{

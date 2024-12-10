@@ -1,18 +1,34 @@
 {
 	"request": {
-		"headers": {"Authorization": {"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"}},
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
 		"method": "GET",
 		"queryParameters": {
-			"facilityId": {"equalTo": "735999109128517141"},
-			"fromDateTime": {"equalTo": "2019-01-01T14:39:22.817Z"},
-			"limit": {"equalTo": "1000"},
-			"partyId": {"equalTo": "98BF599D-8A4D-4040-9A3C-128834D845F6"},
-			"toDateTime": {"equalTo": "2019-06-30T14:39:22.817Z"}
+			"facilityId": {
+				"equalTo": "735999109128517141"
+			},
+			"fromDateTime": {
+				"equalTo": "2019-01-01T14:39:22.817Z"
+			},
+			"limit": {
+				"equalTo": "1000"
+			},
+			"partyId": {
+				"equalTo": "98BF599D-8A4D-4040-9A3C-128834D845F6"
+			},
+			"toDateTime": {
+				"equalTo": "2019-06-30T14:39:22.817Z"
+			}
 		},
 		"urlPath": "/api-datawarehousereader/2281/measurements/ELECTRICITY/MONTH"
 	},
 	"response": {
-		"headers": {"Content-type": "application/json"},
+		"headers": {
+			"Content-type": "application/json"
+		},
 		"bodyFileName": "test01_getElectricityMonthPrivate/responses/datawarehousereader-month-response.json",
 		"status": 200
 	},

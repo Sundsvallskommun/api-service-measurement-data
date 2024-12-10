@@ -8,21 +8,19 @@ import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMap
 import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toCategory;
 import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
 
+import generated.se.sundsvall.datawarehousereader.Measurement;
+import generated.se.sundsvall.datawarehousereader.MeasurementMetaData;
+import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
+import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import generated.se.sundsvall.datawarehousereader.Measurement;
-import generated.se.sundsvall.datawarehousereader.MeasurementMetaData;
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
-import generated.se.sundsvall.datawarehousereader.PagingAndSortingMetaData;
 import se.sundsvall.dept44.test.annotation.resource.Load;
 import se.sundsvall.dept44.test.extension.ResourceLoaderExtension;
 import se.sundsvall.measurementdata.api.model.Aggregation;

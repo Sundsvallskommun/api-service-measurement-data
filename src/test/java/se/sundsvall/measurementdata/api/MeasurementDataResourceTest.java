@@ -10,7 +10,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -21,7 +20,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
 import se.sundsvall.measurementdata.Application;
 import se.sundsvall.measurementdata.api.model.Aggregation;
 import se.sundsvall.measurementdata.api.model.Category;
