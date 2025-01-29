@@ -37,13 +37,13 @@ cd api-service-measurement-data
    - Using Maven:
 
    ```bash
-     mvn spring-boot:run
+   mvn spring-boot:run
    ```
 
    - Using Gradle:
 
    ```bash
-     gradle bootRun
+   gradle bootRun
    ```
 
 ## Dependencies
@@ -97,15 +97,15 @@ server:
 - **External Service URLs**
 
 ```yaml
-  config:
-    integration:
-      token-uri: <token-url>
-      datawarehousereader:
-        url: <service-url>
-        client-id: <client-id>
-        client-secret: <client-secret>
-        connectTimeout: <connect timeout in seconds>
-        readTimeout: <read timeout in seconds>
+config:
+  integration:
+    token-uri: <token-url>
+    datawarehousereader:
+      url: <service-url>
+      client-id: <client-id>
+      client-secret: <client-secret>
+      connectTimeout: <connect timeout in seconds>
+      readTimeout: <read timeout in seconds>
 ```
 
 ### Additional Notes
