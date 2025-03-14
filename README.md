@@ -34,16 +34,8 @@ cd api-service-measurement-data
 
 4. **Build and run the application:**
 
-   - Using Maven:
-
    ```bash
    mvn spring-boot:run
-   ```
-
-   - Using Gradle:
-
-   ```bash
-   gradle bootRun
    ```
 
 ## Dependencies
