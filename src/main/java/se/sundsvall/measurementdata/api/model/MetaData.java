@@ -8,10 +8,10 @@ import java.util.Objects;
 @Schema(description = "Measurement meta data")
 public class MetaData {
 
-	@Schema(description = "key", accessMode = READ_ONLY, example = "id")
+	@Schema(description = "key", accessMode = READ_ONLY, examples = "id")
 	private String key;
 
-	@Schema(description = "value", accessMode = READ_ONLY, example = "123")
+	@Schema(description = "value", accessMode = READ_ONLY, examples = "123")
 	private String value;
 
 	public static MetaData create() {

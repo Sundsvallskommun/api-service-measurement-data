@@ -15,7 +15,7 @@ public class Data {
 	@Schema(accessMode = READ_ONLY, enumAsRef = true)
 	private Category category;
 
-	@Schema(accessMode = READ_ONLY, example = "1234567")
+	@Schema(accessMode = READ_ONLY, examples = "1234567")
 	private String facilityId;
 
 	@Schema(accessMode = READ_ONLY, enumAsRef = true)

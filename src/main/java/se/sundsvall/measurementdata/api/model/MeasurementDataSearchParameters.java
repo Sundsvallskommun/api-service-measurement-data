@@ -14,23 +14,23 @@ import se.sundsvall.dept44.common.validators.annotation.ValidUuid;
 public class MeasurementDataSearchParameters {
 
 	@ValidUuid
-	@Schema(description = "Party ID, either private or enterprise uuid", example = "81471222-5798-11e9-ae24-57fa13b361e1", requiredMode = REQUIRED)
+	@Schema(description = "Party ID, either private or enterprise uuid", examples = "81471222-5798-11e9-ae24-57fa13b361e1", requiredMode = REQUIRED)
 	private String partyId;
 
 	@Schema(requiredMode = REQUIRED)
 	@NotNull
 	private Category category;
 
-	@Schema(description = "Facility ID", example = "112233", requiredMode = REQUIRED)
+	@Schema(description = "Facility ID", examples = "112233", requiredMode = REQUIRED)
 	@NotBlank
 	private String facilityId;
 
-	@Schema(description = "From date", example = "2021-01-31", requiredMode = REQUIRED)
+	@Schema(description = "From date", examples = "2021-01-31", requiredMode = REQUIRED)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@NotNull
 	private OffsetDateTime fromDate;
 
-	@Schema(description = "To date", example = "2022-02-28", requiredMode = REQUIRED)
+	@Schema(description = "To date", examples = "2022-02-28", requiredMode = REQUIRED)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	@NotNull
 	private OffsetDateTime toDate;
