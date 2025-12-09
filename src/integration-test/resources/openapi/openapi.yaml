@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: api-measurement-data
-  contact: { }
+  contact: {}
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "2.0"
 servers:
-  - url: http://localhost:50844
+  - url: http://localhost:60915
     description: Generated server url
 tags:
   - name: Measurement
@@ -51,32 +51,32 @@ paths:
                     measurementSeries:
                       - unit: MWh
                         measurementType: energy
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 99.33
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                       - unit: m3
                         measurementType: volume
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 22.312
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                       - unit: C
                         measurementType: flowTemperature
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 63.33
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                       - unit: C
                         measurementType: returnTemperature
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 57.13
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                 BROADBAND:
                   description: BROADBAND
                   value:
@@ -88,18 +88,18 @@ paths:
                     measurementSeries:
                       - unit: GB
                         measurementType: broadBandReceived
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 139.76
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                       - unit: GB
                         measurementType: broadBandSent
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 20.43
                             timestamp: 2022-05-17T08:55:07.184Z
-                            metaData: [ ]
+                            metaData: []
                 ELECTRICITY:
                   description: ELECTRICITY
                   value:
@@ -111,7 +111,7 @@ paths:
                     measurementSeries:
                       - unit: kWh
                         measurementType: usage
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 340.76
                             timestamp: 2022-05-17T08:55:07.184Z
@@ -129,7 +129,7 @@ paths:
                     measurementSeries:
                       - unit: ton
                         measurementType: weight
-                        metaData: [ ]
+                        metaData: []
                         measurementPoints:
                           - value: 6.1
                             timestamp: 2022-05-17T08:55:07.184Z
@@ -181,6 +181,52 @@ paths:
 components:
   schemas:
     MeasurementDataSearchParameters:
+      type: object
+      description: Measurement date request parameters
+      properties:
+        partyId:
+          type: string
+          description: "Party ID, either private or enterprise uuid"
+          examples:
+            - 81471222-5798-11e9-ae24-57fa13b361e1
+        category:
+          type: string
+          description: Category
+          enum:
+            - DISTRICT_HEATING
+            - ELECTRICITY
+            - COMMUNICATION
+            - WASTE_MANAGEMENT
+          examples:
+            - DISTRICT_HEATING
+        facilityId:
+          type: string
+          description: Facility ID
+          examples:
+            - "112233"
+          minLength: 1
+        fromDate:
+          type: string
+          format: date-time
+          description: From date
+          examples:
+            - 2021-01-31
+        toDate:
+          type: string
+          format: date-time
+          description: To date
+          examples:
+            - 2022-02-28
+        aggregateOn:
+          type: string
+          description: Data point aggregation granularity
+          enum:
+            - HOUR
+            - DAY
+            - MONTH
+            - YEAR
+          examples:
+            - HOUR
       required:
         - aggregateOn
         - category
@@ -188,152 +234,129 @@ components:
         - fromDate
         - partyId
         - toDate
+    MetaData:
       type: object
+      description: Measurement meta data
       properties:
-        partyId:
+        key:
           type: string
-          description: "Party ID, either private or enterprise uuid"
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
-        category:
+          description: key
+          examples:
+            - id
+          readOnly: true
+        value:
           type: string
-          description: Category
-          example: DISTRICT_HEATING
-          enum:
-            - DISTRICT_HEATING
-            - ELECTRICITY
-            - COMMUNICATION
-            - WASTE_MANAGEMENT
-        facilityId:
-          minLength: 1
+          description: value
+          examples:
+            - "123"
+          readOnly: true
+    MeasurementPoint:
+      type: object
+      description: A single measurement data point
+      properties:
+        value:
+          type: number
+          description: Value of the point
+          examples:
+            - "22.321"
+          readOnly: true
+        timestamp:
           type: string
-          description: Facility ID
-          example: "112233"
-        fromDate:
-          type: string
-          description: From date
           format: date-time
-        toDate:
+          description: Timestamp of the datapoint
+          readOnly: true
+        metaData:
+          type: array
+          items:
+            $ref: "#/components/schemas/MetaData"
+            readOnly: true
+          readOnly: true
+    MeasurementSerie:
+      type: object
+      description: Measurement from a single source
+      properties:
+        unit:
           type: string
-          description: To date
-          format: date-time
-        aggregateOn:
+          description: Unit of all measurement points
+          examples:
+            - m3
+          readOnly: true
+        measurementType:
           type: string
-          description: Aggregation granularity
-          example: HOUR
-          enum:
-            - HOUR
-            - DAY
-            - MONTH
-            - YEAR
-      description: Measurement date request parameters
+          description: Type of measurement
+          examples:
+            - volume
+          readOnly: true
+        metaData:
+          type: array
+          items:
+            $ref: "#/components/schemas/MetaData"
+            readOnly: true
+          readOnly: true
+        measurementPoints:
+          type: array
+          items:
+            $ref: "#/components/schemas/MeasurementPoint"
+            readOnly: true
+          readOnly: true
     Aggregation:
       type: string
       description: Aggregation granularity
-      readOnly: true
-      example: HOUR
       enum:
         - HOUR
         - DAY
         - MONTH
         - YEAR
+      examples:
+        - HOUR
     Category:
       type: string
       description: Category
-      readOnly: true
-      example: DISTRICT_HEATING
       enum:
         - DISTRICT_HEATING
         - ELECTRICITY
         - COMMUNICATION
         - WASTE_MANAGEMENT
+      examples:
+        - DISTRICT_HEATING
     Data:
       type: object
+      description: Measurement data for a category
       properties:
         category:
           $ref: "#/components/schemas/Category"
+          readOnly: true
         facilityId:
           type: string
+          examples:
+            - "1234567"
           readOnly: true
-          example: "1234567"
         aggregateOn:
           $ref: "#/components/schemas/Aggregation"
+          readOnly: true
         fromDate:
           type: string
-          description: From date
           format: date-time
+          description: From date
         toDate:
           type: string
-          description: To date
           format: date-time
+          description: To date
         measurementSeries:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/MeasurementSerie"
-      description: Measurement data for a category
-    MeasurementSerie:
-      type: object
-      properties:
-        unit:
-          type: string
-          description: Unit of all measurement points
+            readOnly: true
           readOnly: true
-          example: m3
-        measurementType:
-          type: string
-          description: Type of measurement
-          readOnly: true
-          example: volume
-        metaData:
-          type: array
-          readOnly: true
-          items:
-            $ref: "#/components/schemas/metaData"
-        measurementPoints:
-          type: array
-          readOnly: true
-          items:
-            $ref: "#/components/schemas/measurementPoints"
-      description: Measurement from a single source
-      readOnly: true
-    measurementPoints:
-      type: object
-      properties:
-        value:
-          type: number
-          description: Value of the point
-          readOnly: true
-          example: 22.321
-        timestamp:
-          type: string
-          description: Timestamp of the datapoint
-          format: date-time
-          readOnly: true
-        metaData:
-          type: array
-          readOnly: true
-          items:
-            $ref: "#/components/schemas/metaData"
-      description: A single measurement data point
-      readOnly: true
-    metaData:
-      type: object
-      properties:
-        key:
-          type: string
-          description: key
-          readOnly: true
-          example: id
-        value:
-          type: string
-          description: value
-          readOnly: true
-          example: "123"
-      description: Measurement meta data
-      readOnly: true
     Problem:
       type: object
       properties:
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -342,22 +365,15 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
-        detail:
-          type: string
+          additionalProperties: {}
     StatusType:
       type: object
       properties:
+        reasonPhrase:
+          type: string
         statusCode:
           type: integer
           format: int32
-        reasonPhrase:
-          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -398,15 +414,14 @@ components:
           type: string
         message:
           type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        detail:
-          type: string
+          additionalProperties: {}
         suppressed:
           type: array
           items:
@@ -443,8 +458,7 @@ components:
     ThrowableProblem:
       type: object
       properties:
-        cause:
-          $ref: "#/components/schemas/ThrowableProblem"
+        cause: {}
         stackTrace:
           type: array
           items:
@@ -469,6 +483,12 @@ components:
                 type: boolean
         message:
           type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -477,14 +497,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
-        detail:
-          type: string
+          additionalProperties: {}
         suppressed:
           type: array
           items:
@@ -525,4 +538,4 @@ components:
           type: string
         message:
           type: string
-  securitySchemes: { }
+  securitySchemes: {}

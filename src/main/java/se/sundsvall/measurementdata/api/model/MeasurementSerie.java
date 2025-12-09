@@ -10,10 +10,10 @@ import java.util.Objects;
 @Schema(description = "Measurement from a single source")
 public class MeasurementSerie {
 
-	@Schema(description = "Unit of all measurement points", accessMode = READ_ONLY, example = "m3")
+	@Schema(description = "Unit of all measurement points", accessMode = READ_ONLY, examples = "m3")
 	private String unit;
 
-	@Schema(description = "Type of measurement", accessMode = READ_ONLY, example = "volume")
+	@Schema(description = "Type of measurement", accessMode = READ_ONLY, examples = "volume")
 	private String measurementType;
 
 	@ArraySchema(schema = @Schema(name = "metaData", implementation = MetaData.class, accessMode = READ_ONLY))

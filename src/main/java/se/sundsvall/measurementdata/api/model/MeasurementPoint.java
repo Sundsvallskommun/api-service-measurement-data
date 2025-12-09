@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "A single measurement data point")
 public class MeasurementPoint {
 
-	@Schema(description = "Value of the point", accessMode = READ_ONLY, example = "22.321")
+	@Schema(description = "Value of the point", accessMode = READ_ONLY, examples = "22.321")
 	private BigDecimal value;
 
 	@Schema(description = "Timestamp of the datapoint", accessMode = READ_ONLY)
