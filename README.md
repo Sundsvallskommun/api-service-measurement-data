@@ -6,7 +6,7 @@ _The service provides resources for retrieving measurement data matching supplie
 
 ### Prerequisites
 
-- **Java 21 or higher**
+- **Java 25 or higher**
 - **Maven**
 - **MariaDB**
 - **Git**
