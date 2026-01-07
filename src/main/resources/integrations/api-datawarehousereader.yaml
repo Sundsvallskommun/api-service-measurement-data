@@ -1,71 +1,130 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
-  title: datawarehousereader
-  contact: {}
+  title: api-datawarehousereader
+  contact: { }
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "4.0"
+  version: "5.0"
 servers:
-- url: https://datawarehousereader-af-datawarehousereader.apps.ocp101.sundsvall.se
-  description: Generated server url
+  - url: http://localhost:51972
+    description: Generated server url
 tags:
-- name: Measurement
-  description: Measurement operations
-- name: Installed base
-  description: Installed base operations
-- name: Agreement
-  description: Agreement operations
-- name: Customer
-  description: Customer operations
-- name: Invoice
-  description: Invoice operations
+  - name: Measurement
+    description: Measurement operations
+  - name: Installed base
+    description: Installed base operations
+  - name: Agreement
+    description: Agreement operations
+  - name: Customer
+    description: Customer operations
+  - name: Invoice
+    description: Invoice operations
 paths:
   /{municipalityId}/measurements/{category}/{aggregateOn}:
     get:
       tags:
-      - Measurement
+        - Measurement
       summary: Get measurement information
       description: Resource returns measurement data matching provided search parameters
       operationId: getMeasurements
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: category
-        in: path
-        required: true
-        schema:
-          $ref: "#/components/schemas/Category"
-      - name: aggregateOn
-        in: path
-        required: true
-        schema:
-          $ref: "#/components/schemas/Aggregation"
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/MeasurementParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: category
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Category"
+        - name: aggregateOn
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/Aggregation"
+        - name: partyId
+          in: query
+          description: PartyId (e.g. a personId or an organizationId)
+          required: false
+          schema:
+            type: string
+            description: PartyId (e.g. a personId or an organizationId)
+            examples:
+              - 81471222-5798-11e9-ae24-57fa13b361e1
+        - name: facilityId
+          in: query
+          description: Facility id
+          required: false
+          schema:
+            type: string
+            description: Facility id
+            examples:
+              - "735999109151401011"
+        - name: fromDateTime
+          in: query
+          description: "Date and time for oldest measurement point to return. Format\
+          \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+          required: false
+          schema:
+            type: string
+            format: date-time
+            description: "Date and time for oldest measurement point to return. Format\
+            \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+        - name: toDateTime
+          in: query
+          description: "Date and time for youngest measurement point to return. Format\
+          \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+          required: false
+          schema:
+            type: string
+            format: date-time
+            description: "Date and time for youngest measurement point to return. Format\
+            \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
@@ -75,96 +134,96 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/MeasurementResponse"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/invoices:
     get:
       tags:
-      - Invoice
+        - Invoice
       summary: Get basic invoice information
       description: Resource returns all invoices matching provided search parameters
       operationId: getInvoices
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/InvoiceParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: searchParams
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/InvoiceParameters"
       responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceResponse"
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server error
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InvoiceResponse"
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/InvoiceResponse"
   /{municipalityId}/invoices/{organizationNumber}/{invoiceNumber}/details:
     get:
       tags:
-      - Invoice
+        - Invoice
       summary: Get invoice details for invoice matching issuer of provided organization
         number and having invoice number matching provided invoice number
       operationId: getInvoiceDetails
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: organizationNumber
-        in: path
-        description: Organization number of invoice issuer
-        required: true
-        schema:
-          type: string
-        example: 5565027223
-      - name: invoiceNumber
-        in: path
-        description: Invoice number
-        required: true
-        schema:
-          type: integer
-          format: int64
-        example: 805137494
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: organizationNumber
+          in: path
+          description: Organization number of invoice issuer
+          required: true
+          schema:
+            type: string
+          example: 5565027223
+        - name: invoiceNumber
+          in: path
+          description: Invoice number
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 805137494
       responses:
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/InvoiceDetail"
-            application/problem+json:
               schema:
                 type: array
                 items:
@@ -181,232 +240,769 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/installedbase:
     get:
       tags:
-      - Installed base
+        - Installed base
       summary: Get installed base information
       description: Resource returns all installed bases matching provided search parameters
       operationId: getInstalledBase
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/InstalledBaseParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: company
+          in: query
+          description: Company
+          required: false
+          schema:
+            type: string
+            description: Company
+            examples:
+              - Sundsvall Energi AB
+        - name: customerNumber
+          in: query
+          description: Customer number
+          required: false
+          schema:
+            type: string
+            description: Customer number
+            examples:
+              - "104327"
+        - name: type
+          in: query
+          description: Type
+          required: false
+          schema:
+            type: string
+            description: Type
+            examples:
+              - Fjärrvärme
+        - name: facilityId
+          in: query
+          description: Facility id
+          required: false
+          schema:
+            type: string
+            description: Facility id
+            examples:
+              - "735999109270751042"
+        - name: careOf
+          in: query
+          description: Care of address
+          required: false
+          schema:
+            type: string
+            description: Care of address
+            examples:
+              - Agatha Malm
+        - name: street
+          in: query
+          description: Street
+          required: false
+          schema:
+            type: string
+            description: Street
+            examples:
+              - Storgatan 9
+        - name: postCode
+          in: query
+          description: Postal code
+          required: false
+          schema:
+            type: string
+            description: Postal code
+            examples:
+              - "85230"
+        - name: city
+          in: query
+          description: City
+          required: false
+          schema:
+            type: string
+            description: City
+            examples:
+              - Sundsvall
+        - name: propertyDesignation
+          in: query
+          description: Property designation
+          required: false
+          schema:
+            type: string
+            description: Property designation
+            examples:
+              - Södermalm 1:27
+        - name: lastModifiedDateFrom
+          in: query
+          description: Earliest date when item was last modified
+          required: false
+          schema:
+            type: string
+            format: date
+            description: Earliest date when item was last modified
+            examples:
+              - 2022-12-31
+        - name: lastModifiedDateTom
+          in: query
+          description: Latest date when item was last modified
+          required: false
+          schema:
+            type: string
+            format: date
+            description: Latest date when item was last modified
+            examples:
+              - 2022-12-31
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InstalledBaseResponse"
+        "400":
+          description: Bad request
+          content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/InstalledBaseResponse"
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/installations:
     get:
       tags:
-      - Installations
+        - Installations
       summary: Get installation details
       description: Resource returns all installations matching provided search parameters
       operationId: getInstallationDetails
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/InstallationParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: installed
+          in: query
+          description: Is the installation installed
+          required: false
+          schema:
+            type: boolean
+            description: Is the installation installed
+            examples:
+              - "true"
+        - name: lastModifiedDateFrom
+          in: query
+          description: Earliest date when item was last modified
+          required: false
+          schema:
+            type: string
+            format: date
+            description: Earliest date when item was last modified
+            examples:
+              - 2022-12-31
+        - name: lastModifiedDateTo
+          in: query
+          description: Latest date when item was last modified
+          required: false
+          schema:
+            type: string
+            format: date
+            description: Latest date when item was last modified
+            examples:
+              - 2022-12-31
+        - name: category
+          in: query
+          description: Category
+          required: false
+          schema:
+            $ref: "#/components/schemas/Category"
+            description: Category
+            examples:
+              - ELECTRICITY
+        - name: facilityId
+          in: query
+          description: Facility id
+          required: false
+          schema:
+            type: string
+            description: Facility id
+            examples:
+              - "735999109151401011"
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/InstallationDetailsResponse"
+        "400":
+          description: Bad request
+          content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/InstallationDetailsResponse"
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/customer/engagements:
     get:
       tags:
-      - Customer
+        - Customer
       summary: Get basic customer information
       description: Resource returns all customer engagements matching provided search
         parameters
       operationId: getCustomerEngagements
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/CustomerEngagementParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: partyId
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: PartyId (e.g. a personId or an organizationId)
+              examples:
+                - 81471222-5798-11e9-ae24-57fa13b361e1
+        - name: customerNumber
+          in: query
+          description: Customer number
+          required: false
+          schema:
+            type: string
+            description: Customer number
+            examples:
+              - "10007"
+        - name: organizationNumber
+          in: query
+          description: Organization number for counterpart of engagement
+          required: false
+          schema:
+            type: string
+            description: Organization number for counterpart of engagement
+            examples:
+              - "5565027223"
+        - name: organizationName
+          in: query
+          description: Organization name for counterpart of engagement
+          required: false
+          schema:
+            type: string
+            description: Organization name for counterpart of engagement
+            examples:
+              - Sundsvall Elnät
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/CustomerEngagementResponse"
+        "400":
+          description: Bad request
+          content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/CustomerEngagementResponse"
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/customer/details:
     get:
       tags:
-      - Customer
+        - Customer
       summary: Get detailed customer information
       description: Resource returns all customer details matching provided search
         parameters
       operationId: getCustomerDetails
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/CustomerDetailsParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: partyId
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: PartyId (e.g. a personId or an organizationId)
+              examples:
+                - 81471222-5798-11e9-ae24-57fa13b361e1
+        - name: customerEngagementOrgId
+          in: query
+          description: Organization id for customer engagements
+          required: true
+          schema:
+            type: string
+            description: Organization id for customer engagements
+            examples:
+              - "5565027225"
+        - name: fromDateTime
+          in: query
+          description: Date and time for when to search for changes from. Format is
+            yyyy-MM-dd'T'HH:mm:ss.SSSXXX. If omitted changes within the last year will
+            be returned.
+          required: false
+          schema:
+            type: string
+            format: date-time
+            description: Date and time for when to search for changes from. Format is
+              yyyy-MM-dd'T'HH:mm:ss.SSSXXX. If omitted changes within the last year
+              will be returned.
+            examples:
+              - 2000-10-31T01:30:00.000-05:00
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/CustomerDetailsResponse"
+        "400":
+          description: Bad request
+          content:
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/CustomerDetailsResponse"
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
   /{municipalityId}/agreements:
     get:
       tags:
-      - Agreement
+        - Agreement
       summary: Get agreements
       description: Resource returns all agreements matching provided search parameters
       operationId: getAgreements
       parameters:
-      - name: municipalityId
-        in: path
-        description: Municipality id
-        required: true
-        schema:
-          type: string
-        example: 2281
-      - name: searchParams
-        in: query
-        required: true
-        schema:
-          $ref: "#/components/schemas/AgreementParameters"
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: partyId
+          in: query
+          description: PartyId (e.g. a personId or an organizationId)
+          required: false
+          schema:
+            type: string
+            description: PartyId (e.g. a personId or an organizationId)
+            examples:
+              - 81471222-5798-11e9-ae24-57fa13b361e1
+        - name: customerNumber
+          in: query
+          description: Customer number
+          required: false
+          schema:
+            type: string
+            description: Customer number
+            examples:
+              - "10007"
+        - name: facilityId
+          in: query
+          description: Facility Id
+          required: false
+          schema:
+            type: string
+            description: Facility Id
+            examples:
+              - "1223334"
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Category"
+        - name: billingId
+          in: query
+          description: Billing Id
+          required: false
+          schema:
+            type: string
+            description: Billing Id
+            examples:
+              - "222333"
+        - name: agreementId
+          in: query
+          description: Agreement Id
+          required: false
+          schema:
+            type: string
+            description: Agreement Id
+            examples:
+              - "333444"
+        - name: description
+          in: query
+          description: Description
+          required: false
+          schema:
+            type: string
+            description: Description
+            examples:
+              - Avtalet avser fjärrvärme
+        - name: mainAgreement
+          in: query
+          description: Shows if agreement is a main-agreement or not
+          required: false
+          schema:
+            type: boolean
+            description: Shows if agreement is a main-agreement or not
+            examples:
+              - "true"
+        - name: binding
+          in: query
+          description: Shows if agreement include binding or not
+          required: false
+          schema:
+            type: boolean
+            description: Shows if agreement include binding or not
+            examples:
+              - "false"
+        - name: bindingRule
+          in: query
+          description: Rule of binding if exists
+          required: false
+          schema:
+            type: string
+            description: Rule of binding if exists
+            examples:
+              - 10 mån binding
+        - name: placementStatus
+          in: query
+          description: Placement status for agreement
+          required: false
+          schema:
+            type: string
+            description: Placement status for agreement
+            examples:
+              - Tillkopplad
+        - name: netAreaId
+          in: query
+          description: Net area id for agreement
+          required: false
+          schema:
+            type: string
+            description: Net area id for agreement
+            examples:
+              - SUV
+        - name: siteAddress
+          in: query
+          description: Site address connected to the agreement
+          required: false
+          schema:
+            type: string
+            description: Site address connected to the agreement
+            examples:
+              - Första gatan 2
+        - name: production
+          in: query
+          description: Signal if the agreement is a production agreement or not (can
+            be null if not applicable)
+          required: false
+          schema:
+            type: boolean
+            description: Signal if the agreement is a production agreement or not (can
+              be null if not applicable)
+            examples:
+              - "true"
+        - name: fromDate
+          in: query
+          description: From-date in validity of agreement
+          required: false
+          schema:
+            type: string
+            format: date
+            description: From-date in validity of agreement
+        - name: toDate
+          in: query
+          description: To-date in validity of agreement
+          required: false
+          schema:
+            type: string
+            format: date
+            description: To-date in validity of agreement
+        - name: active
+          in: query
+          description: Shows if agreement is active ('fromDate' <= today and 'toDate'
+            => today). Null shows both active and inactive
+          required: false
+          schema:
+            type: boolean
+            description: Shows if agreement is active ('fromDate' <= today and 'toDate'
+              => today). Null shows both active and inactive
+            examples:
+              - "true"
+        - name: sortBy
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              description: The properties to sort on
+              example: propertyName
+        - name: sortDirection
+          in: query
+          description: The sort order direction
+          required: false
+          schema:
+            $ref: "#/components/schemas/Direction"
+          example: ASC
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+            description: Page number
+            example: 1
+            minimum: 1
+          example: 1
+        - name: limit
+          in: query
+          description: Result size per page. Maximum allowed value is dynamically configured
+          required: false
+          schema:
+            type: integer
+            format: int32
+            description: Result size per page. Maximum allowed value is dynamically
+              configured
+            example: 15
+            minimum: 1
+          example: 15
       responses:
+        "200":
+          description: OK - Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgreementResponse"
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                - $ref: "#/components/schemas/Problem"
-                - $ref: "#/components/schemas/ConstraintViolationProblem"
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server error
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AgreementResponse"
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/AgreementResponse"
   /api-docs:
     get:
       tags:
-      - API
+        - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -421,76 +1017,6 @@ paths:
       x-wso2-mutual-ssl: Optional
 components:
   schemas:
-    Category:
-      type: string
-      description: Category
-      enum:
-      - COMMUNICATION
-      - DISTRICT_COOLING
-      - DISTRICT_HEATING
-      - ELECTRICITY
-      - ELECTRICITY_TRADE
-      - WASTE_MANAGEMENT
-      - WATER
-    Aggregation:
-      type: string
-      description: Data point aggregation granularity
-      enum:
-      - HOUR
-      - DAY
-      - MONTH
-      - YEAR
-    Direction:
-      type: string
-      description: The sort order direction
-      example: ASC
-      enum:
-      - ASC
-      - DESC
-    MeasurementParameters:
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        partyId:
-          type: string
-          description: PartyId (e.g. a personId or an organizationId)
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
-        facilityId:
-          type: string
-          description: Facility id
-          example: "735999109151401011"
-        fromDateTime:
-          type: string
-          description: "Date and time for oldest measurement point to return. Format\
-            \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
-          format: date-time
-        toDateTime:
-          type: string
-          description: "Date and time for youngest measurement point to return. Format\
-            \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
-          format: date-time
-      description: Measurement request parameters model
     Problem:
       type: object
       properties:
@@ -502,8 +1028,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: { }
         status:
           $ref: "#/components/schemas/StatusType"
         title:
@@ -513,11 +1038,11 @@ components:
     StatusType:
       type: object
       properties:
+        reasonPhrase:
+          type: string
         statusCode:
           type: integer
           format: int32
-        reasonPhrase:
-          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -563,8 +1088,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: { }
         detail:
           type: string
         suppressed:
@@ -603,8 +1127,7 @@ components:
     ThrowableProblem:
       type: object
       properties:
-        cause:
-          $ref: "#/components/schemas/ThrowableProblem"
+        cause: { }
         stackTrace:
           type: array
           items:
@@ -637,8 +1160,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: { }
         status:
           $ref: "#/components/schemas/StatusType"
         title:
@@ -685,154 +1207,194 @@ components:
           type: string
         message:
           type: string
+    Category:
+      type: string
+      description: Category
+      enum:
+        - COMMUNICATION
+        - DISTRICT_COOLING
+        - DISTRICT_HEATING
+        - ELECTRICITY
+        - ELECTRICITY_TRADE
+        - WASTE_MANAGEMENT
+        - WATER
+    Aggregation:
+      type: string
+      description: Data point aggregation granularity
+      enum:
+        - QUARTER
+        - HOUR
+        - DAY
+        - MONTH
+    Direction:
+      type: string
+      description: The sort order direction
+      enum:
+        - ASC
+        - DESC
+      example: ASC
     Measurement:
       type: object
+      description: Measurement model
       properties:
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
+          examples:
+            - 81471222-5798-11e9-ae24-57fa13b361e1
           readOnly: true
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
         facilityId:
           type: string
           description: Facility id
+          examples:
+            - "735999109151401011"
           readOnly: true
-          example: "735999109151401011"
         category:
           $ref: "#/components/schemas/Category"
+          readOnly: true
         aggregatedOn:
           $ref: "#/components/schemas/Aggregation"
+          readOnly: true
         measurementType:
           type: string
           description: Measurement type
+          examples:
+            - Energy
           readOnly: true
-          example: Energy
         unit:
           type: string
           description: Measurement unit
+          examples:
+            - kWh
           readOnly: true
-          example: kWh
         value:
           type: number
           description: Measurement value
+          examples:
+            - "1292.7500000000"
           readOnly: true
-          example: 1292.75
         timestamp:
           type: string
+          format: date-time
           description: "Date and time for measurement point. Format is yyyy-MM-dd'T'HH:mm:ss.SSSXXX,\
             \ for example '2000-10-31T01:30:00.000-05:00'"
-          format: date-time
           readOnly: true
         metaData:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/MeasurementMetaData"
+            readOnly: true
+          readOnly: true
         interpolation:
           type: integer
+          format: int32
           description: Interpolation information. Zero means that no interpolations
             has been done. Value greater than zero tells how many values in the serie
             that has been interpolated/calculated.
-          format: int32
+          examples:
+            - "13"
           readOnly: true
-          example: 13
-      description: Measurement model
-      readOnly: true
     MeasurementMetaData:
       type: object
+      description: Measurement meta data model
       properties:
         key:
           type: string
           description: Key connected to the meta data
+          examples:
+            - READING_SEQ
           readOnly: true
-          example: READING_SEQ
         value:
           type: string
           description: Value for the meta data
+          examples:
+            - "5733010"
           readOnly: true
-          example: "5733010"
-      description: Measurement meta data model
-      readOnly: true
     MeasurementResponse:
       type: object
+      description: Measurement response model
       properties:
         measurements:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/Measurement"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Measurement response model
+          readOnly: true
     PagingAndSortingMetaData:
       type: object
+      description: PagingAndSortingMetaData model
       properties:
         page:
           type: integer
-          description: Current page
           format: int32
-          readOnly: true
+          description: Current page
           example: 5
+          readOnly: true
         limit:
           type: integer
-          description: Displayed objects per page
           format: int32
-          readOnly: true
+          description: Displayed objects per page
           example: 20
+          readOnly: true
         count:
           type: integer
-          description: Displayed objects on current page
           format: int32
-          readOnly: true
+          description: Displayed objects on current page
           example: 13
+          readOnly: true
         totalRecords:
           type: integer
-          description: Total amount of hits based on provided search parameters
           format: int64
-          readOnly: true
+          description: Total amount of hits based on provided search parameters
           example: 98
+          readOnly: true
         totalPages:
           type: integer
-          description: Total amount of pages based on provided search parameters
           format: int32
-          readOnly: true
+          description: Total amount of pages based on provided search parameters
           example: 23
+          readOnly: true
         sortBy:
           type: array
-          readOnly: true
           items:
             type: string
             description: The properties to sort by
-            readOnly: true
             example: property
+            readOnly: true
+          readOnly: true
         sortDirection:
           $ref: "#/components/schemas/Direction"
-      description: PagingAndSortingMetaData model
-      readOnly: true
+          description: The sort order direction
+          example: ASC
     CustomerType:
       type: string
       description: Customer type
-      example: Enterprise
       enum:
-      - Enterprise
-      - Private
+        - Enterprise
+        - Private
+      examples:
+        - Enterprise
     InvoiceParameters:
       type: object
+      description: Invoice request parameters model
       properties:
         page:
-          minimum: 1
           type: integer
-          description: Page number
           format: int32
-          example: 1
           default: 1
-        limit:
+          description: Page number
+          example: 1
           minimum: 1
+        limit:
           type: integer
+          format: int32
           description: Result size per page. Maximum allowed value is dynamically
             configured
-          format: int32
           example: 15
+          minimum: 1
         sortBy:
           type: array
           items:
@@ -841,1044 +1403,932 @@ components:
             example: propertyName
         sortDirection:
           $ref: "#/components/schemas/Direction"
+          description: The sort order direction
+          example: ASC
         customerNumber:
           type: array
           items:
             type: string
             description: Customer numbers
-            example: "39195"
+            examples:
+              - "39195"
         customerType:
           $ref: "#/components/schemas/CustomerType"
-        facilityId:
+        facilityIds:
           type: array
           items:
             type: string
             description: Facility ids
-            example: "735999109151401011"
+            examples:
+              - "735999109151401011"
         invoiceNumber:
           type: integer
-          description: Invoice number
           format: int64
-          example: 767915994
+          description: Invoice number
+          examples:
+            - "767915994"
         invoiceDateFrom:
           type: string
-          description: Earliest invoice date. Format is YYYY-MM-DD.
           format: date
-          example: 2022-01-01
+          description: Earliest invoice date. Format is YYYY-MM-DD.
+          examples:
+            - 2022-01-01
         invoiceDateTo:
           type: string
-          description: Latest invoice date. Format is YYYY-MM-DD.
           format: date
-          example: 2022-01-31
+          description: Latest invoice date. Format is YYYY-MM-DD.
+          examples:
+            - 2022-01-31
         invoiceName:
           type: string
           description: Invoice name
-          example: 765801493.pdf
+          examples:
+            - 765801493.pdf
         invoiceType:
           type: string
           description: Invoice type
-          example: Faktura
+          examples:
+            - Faktura
         invoiceStatus:
           type: string
           description: Invoice status
-          example: Skickad
+          examples:
+            - Skickad
         ocrNumber:
           type: integer
-          description: Ocr number
           format: int64
-          example: 767915994
+          description: OCR number
+          examples:
+            - "767915994"
         dueDateFrom:
           type: string
-          description: Earliest due date. Format is YYYY-MM-DD.
           format: date
-          example: 2022-01-01
+          description: Earliest due date. Format is YYYY-MM-DD.
+          examples:
+            - 2022-01-01
         dueDateTo:
           type: string
-          description: Latest due date. Format is YYYY-MM-DD.
           format: date
-          example: 2022-01-31
+          description: Latest due date. Format is YYYY-MM-DD.
+          examples:
+            - 2022-01-31
         organizationGroup:
           type: string
           description: Organization group
-          example: stadsbacken
+          examples:
+            - stadsbacken
         organizationNumber:
           type: string
           description: Organization number of invoice issuer
-          example: "5565027223"
+          examples:
+            - "5565027223"
         administration:
           type: string
-          description: Adminstration
-          example: Sundsvall Elnät
-      description: Invoice request parameters model
+          description: Administration
+          examples:
+            - Sundsvall Elnät
     Invoice:
       type: object
+      description: Invoice model
       properties:
         customerNumber:
           type: string
           description: Customer number
+          examples:
+            - "39195"
           readOnly: true
-          example: "39195"
         customerType:
           $ref: "#/components/schemas/CustomerType"
-        facilityId:
-          type: string
-          description: Facility id
           readOnly: true
-          example: "735999109151401011"
+        facilityIds:
+          type: array
+          description: List of facility ids
+          examples:
+            - "735999109151404321"
+            - "735999109151401234"
+          items:
+            type: string
+          readOnly: true
+          uniqueItems: true
+        invoiceDescriptions:
+          type: array
+          description: List of descriptions
+          examples:
+            - Fjärrvärme
+            - Elnät
+          items:
+            type: string
+          readOnly: true
+          uniqueItems: true
         invoiceNumber:
           type: integer
-          description: Invoice number
           format: int64
+          description: Invoice number
+          examples:
+            - "767915994"
           readOnly: true
-          example: 767915994
         invoiceDate:
           type: string
-          description: Invoice date
           format: date
+          description: Invoice date
+          examples:
+            - 2022-01-15
           readOnly: true
-          example: 2022-01-15
         invoiceName:
           type: string
           description: invoice name
+          examples:
+            - 765801493.pdf
           readOnly: true
-          example: 765801493.pdf
         invoiceType:
           type: string
           description: Invoice type
+          examples:
+            - Faktura
           readOnly: true
-          example: Faktura
-        invoiceDescription:
-          type: string
-          description: Invoice description
-          readOnly: true
-          example: Fjärrvärme
         invoiceStatus:
           type: string
           description: Invoice status
+          examples:
+            - Skickad
           readOnly: true
-          example: Skickad
         ocrNumber:
           type: integer
-          description: Ocr number
           format: int64
+          description: Ocr number
+          examples:
+            - "767915994"
           readOnly: true
-          example: 767915994
         dueDate:
           type: string
-          description: Due date
           format: date
+          description: Due date
+          examples:
+            - 2022-01-31
           readOnly: true
-          example: 2022-01-31
         totalAmount:
           type: number
           description: Total amount
+          examples:
+            - "1116.00"
           readOnly: true
-          example: 1116.0
         amountVatIncluded:
           type: number
           description: Amount included VAT
+          examples:
+            - "1115.62"
           readOnly: true
-          example: 1115.62
         amountVatExcluded:
           type: number
           description: Amount excluded VAT
+          examples:
+            - "892.50"
           readOnly: true
-          example: 892.5
         vatEligibleAmount:
           type: number
           description: Amount eligible for VAT
+          examples:
+            - "892.50"
           readOnly: true
-          example: 892.5
         rounding:
           type: number
           description: Rounding
+          examples:
+            - "0.38"
           readOnly: true
-          example: 0.38
         vat:
           type: number
           description: VAT
+          examples:
+            - "892.50"
           readOnly: true
-          example: 892.5
         reversedVat:
           type: boolean
           description: Reversed VAT
+          examples:
+            - "false"
           readOnly: true
-          example: false
         currency:
           type: string
           description: Currency
+          examples:
+            - sek
           readOnly: true
-          example: sek
         organizationGroup:
           type: string
           description: Organization group
+          examples:
+            - stadsbacken
           readOnly: true
-          example: stadsbacken
         organizationNumber:
           type: string
           description: Organization number of invoice issuer
+          examples:
+            - "5565027223"
           readOnly: true
-          example: "5565027223"
         administration:
           type: string
           description: Adminstration
+          examples:
+            - Sundsvall Elnät
           readOnly: true
-          example: Sundsvall Elnät
         street:
           type: string
           description: Street
+          examples:
+            - Storgatan 44
           readOnly: true
-          example: Storgatan 44
         postCode:
           type: string
           description: Postal code
+          examples:
+            - "85230"
           readOnly: true
-          example: "85230"
         city:
           type: string
           description: City
+          examples:
+            - Sundsvall
           readOnly: true
-          example: Sundsvall
         careOf:
           type: string
           description: Care of address
+          examples:
+            - Agatha Malm
           readOnly: true
-          example: Agatha Malm
         pdfAvailable:
           type: boolean
           description: Is pdf-version of invoice available
+          examples:
+            - "false"
           readOnly: true
-          example: false
-      description: Invoice model
-      readOnly: true
     InvoiceResponse:
       type: object
+      description: Invoice response model
       properties:
         invoices:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/Invoice"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Invoice response model
+          readOnly: true
     InvoiceDetail:
       type: object
+      description: Invoice detail model
       properties:
         invoiceNumber:
           type: integer
-          description: Invoice number
           format: int64
+          description: Invoice number
+          examples:
+            - "767915994"
           readOnly: true
-          example: 767915994
         amount:
           type: number
           description: Amount
+          examples:
+            - "66.97"
           readOnly: true
-          example: 66.97
         amountVatExcluded:
           type: number
           description: Amount excluded VAT
+          examples:
+            - "53.57"
           readOnly: true
-          example: 53.57
         vat:
           type: number
           description: VAT
+          examples:
+            - "13.40"
           readOnly: true
-          example: 13.4
         vatRate:
           type: number
-          description: VAT rate
           format: double
+          description: VAT rate
+          examples:
+            - "25.0"
           readOnly: true
-          example: 25.0
         quantity:
           type: number
-          description: Quantity
           format: double
+          description: Quantity
+          examples:
+            - "154.39"
           readOnly: true
-          example: 154.39
         unit:
           type: string
           description: Unit
+          examples:
+            - kWh
           readOnly: true
-          example: kWh
         unitPrice:
           type: number
           description: Price per unit
+          examples:
+            - "0.347"
           readOnly: true
-          example: 0.347
         periodFrom:
           type: string
           description: Period from
+          examples:
+            - 2022-01-01
           readOnly: true
-          example: 2022-01-01
         periodTo:
           type: string
           description: Period to
+          examples:
+            - 2022-01-31
           readOnly: true
-          example: 2022-01-31
         description:
           type: string
           description: Description
+          examples:
+            - This is a description
           readOnly: true
         productCode:
           type: integer
-          description: Product code
           format: int32
+          description: Product code
+          examples:
+            - "1404"
           readOnly: true
-          example: 1404
         productName:
           type: string
           description: Product name
+          examples:
+            - Elöverföring
           readOnly: true
-          example: Elöverföring
         organizationNumber:
           type: string
           description: Organization number of invoice issuer
+          examples:
+            - "5565027223"
           readOnly: true
-          example: "5565027223"
-      description: Invoice detail model
-    InstalledBaseParameters:
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        company:
-          type: string
-          description: Company
-          example: Sundsvall Energi AB
-        customerNumber:
-          type: string
-          description: Customer number
-          example: "104327"
-        type:
-          type: string
-          description: Type
-          example: Fjärrvärme
-        facilityId:
-          type: string
-          description: Facility id
-          example: "735999109270751042"
-        careOf:
-          type: string
-          description: Care of address
-          example: Agatha Malm
-        street:
-          type: string
-          description: Street
-          example: Storgatan 9
-        postCode:
-          type: string
-          description: Postal code
-          example: "85230"
-        city:
-          type: string
-          description: City
-          example: Sundsvall
-        propertyDesignation:
-          type: string
-          description: Property designation
-          example: Södermalm 1:27
-        lastModifiedDateFrom:
-          type: string
-          description: Earliest date when item was last modified
-          format: date
-          example: 2022-12-31
-        lastModifiedDateTom:
-          type: string
-          description: Latest date when item was last modified
-          format: date
-          example: 2022-12-31
-      description: Installed base request parameters model
     InstalledBaseItem:
       type: object
+      description: Installed base item model
       properties:
         company:
           type: string
           description: Company
+          examples:
+            - Sundsvall Energi AB
           readOnly: true
-          example: Sundsvall Energi AB
         customerNumber:
           type: string
           description: Customer number
+          examples:
+            - "104327"
           readOnly: true
-          example: "104327"
         type:
           type: string
           description: Type
+          examples:
+            - Fjärrvärme
           readOnly: true
-          example: Fjärrvärme
         facilityId:
           type: string
           description: Facility id
+          examples:
+            - "735999109270751042"
           readOnly: true
-          example: "735999109270751042"
         placementId:
           type: integer
-          description: Placement id
           format: int32
+          description: Placement id
+          examples:
+            - "5263"
           readOnly: true
-          example: 5263
         careOf:
           type: string
           description: Care of address
+          examples:
+            - Agatha Malm
           readOnly: true
-          example: Agatha Malm
         street:
           type: string
           description: Street
+          examples:
+            - Storgatan 9
           readOnly: true
-          example: Storgatan 9
         postCode:
           type: string
           description: Postal code
+          examples:
+            - "85230"
           readOnly: true
-          example: "85230"
         city:
           type: string
           description: City
+          examples:
+            - Sundsvall
           readOnly: true
-          example: Sundsvall
         propertyDesignation:
           type: string
           description: Property designation
+          examples:
+            - Södermalm 1:27
           readOnly: true
-          example: Södermalm 1:27
         dateFrom:
           type: string
-          description: From date
           format: date
+          description: From date
+          examples:
+            - 2019-01-01
           readOnly: true
-          example: 2019-01-01
         dateTo:
           type: string
-          description: To date
           format: date
+          description: To date
+          examples:
+            - 2022-12-31
           readOnly: true
-          example: 2022-12-31
         dateLastModified:
           type: string
-          description: Date when object was last modified (or null if never modified)
           format: date
+          description: Date when object was last modified (or null if never modified)
+          examples:
+            - 2022-12-31
           readOnly: true
-          example: 2022-12-31
         metaData:
-          maxItems: 1000
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/InstalledBaseItemMetaData"
-      description: Installed base item model
-      readOnly: true
+            maxItems: 1000
+            readOnly: true
+          maxItems: 1000
+          readOnly: true
     InstalledBaseItemMetaData:
       type: object
+      description: Installed base item metadata model
       properties:
         key:
           type: string
           description: Key
+          examples:
+            - netarea
           readOnly: true
-          example: netarea
         value:
           type: string
           description: Value
+          examples:
+            - Sundsvall tätort
           readOnly: true
-          example: Sundsvall tätort
         type:
           type: string
           description: Type
+          examples:
+            - location
           readOnly: true
-          example: location
         displayName:
           type: string
           description: Displayname
+          examples:
+            - Nätområde
           readOnly: true
-          example: Nätområde
-      description: Installed base item metadata model
-      readOnly: true
     InstalledBaseResponse:
       type: object
+      description: Installed base response model
       properties:
         installedBase:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/InstalledBaseItem"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Installed base response model
-    InstallationParameters:
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        installed:
-          type: boolean
-          description: Is the installation installed
-          example: true
-        lastModifiedDateFrom:
-          type: string
-          description: Earliest date when item was last modified
-          format: date
-          example: 2022-12-31
-        lastModifiedDateTo:
-          type: string
-          description: Latest date when item was last modified
-          format: date
-          example: 2022-12-31
-        category:
-          $ref: "#/components/schemas/Category"
-        facilityId:
-          type: string
-          description: Facility id
-          example: "735999109151401011"
-      description: Installations request parameters model
+          readOnly: true
     InstallationDetails:
       type: object
+      description: Installation details model
       properties:
         company:
           type: string
           description: Company
+          examples:
+            - Sundsvall Energi AB
           readOnly: true
-          example: Sundsvall Energi AB
         type:
           type: string
           description: Type
+          examples:
+            - Fjärrvärme
           readOnly: true
-          example: Fjärrvärme
         facilityId:
           type: string
           description: Facility id
+          examples:
+            - "735999109270751042"
           readOnly: true
-          example: "735999109270751042"
         placementId:
           type: integer
-          description: Placement id
           format: int32
+          description: Placement id
+          examples:
+            - "5263"
           readOnly: true
-          example: 5263
         careOf:
           type: string
           description: Care of address
+          examples:
+            - Agatha Malm
           readOnly: true
-          example: Agatha Malm
         street:
           type: string
           description: Street
+          examples:
+            - Storgatan 9
           readOnly: true
-          example: Storgatan 9
         postCode:
           type: string
           description: Post code
+          examples:
+            - "85230"
           readOnly: true
-          example: "85230"
         city:
           type: string
           description: City
+          examples:
+            - Sundsvall
           readOnly: true
-          example: Sundsvall
         propertyDesignation:
           type: string
           description: Property designation
+          examples:
+            - Södermalm 1:27
           readOnly: true
-          example: Södermalm 1:27
         dateFrom:
           type: string
-          description: From date
           format: date
+          description: From date
+          examples:
+            - 2019-01-01
           readOnly: true
-          example: 2019-01-01
         dateTo:
           type: string
-          description: To date
           format: date
+          description: To date
+          examples:
+            - 2022-12-31
           readOnly: true
-          example: 2022-12-31
         dateLastModified:
           type: string
-          description: Date when object was last modified (or null if never modified)
           format: date
+          description: Date when object was last modified (or null if never modified)
+          examples:
+            - 2022-12-31
           readOnly: true
-          example: 2022-12-31
         metaData:
-          maxItems: 1000
           type: array
-          readOnly: true
           items:
-            $ref: "#/components/schemas/InstallationMetaDataEmbeddable"
-      description: Installation details model
-      readOnly: true
+            $ref: "#/components/schemas/InstallationMetaData"
+            maxItems: 1000
+            readOnly: true
+          maxItems: 1000
+          readOnly: true
     InstallationDetailsResponse:
       type: object
       properties:
         installationDetails:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/InstallationDetails"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-    InstallationMetaDataEmbeddable:
+          readOnly: true
+    InstallationMetaData:
       type: object
+      description: Installation metadata model
       properties:
-        company:
-          type: string
         key:
           type: string
+          description: Key
+          examples:
+            - netarea
+          readOnly: true
         value:
           type: string
+          description: Value
+          examples:
+            - Sundsvall tätort
+          readOnly: true
         type:
           type: string
+          description: Type
+          examples:
+            - location
+          readOnly: true
         displayName:
           type: string
-      readOnly: true
-    CustomerEngagementParameters:
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        partyId:
-          type: array
-          items:
-            type: string
-            description: PartyId (e.g. a personId or an organizationId)
-            example: 81471222-5798-11e9-ae24-57fa13b361e1
-        customerNumber:
-          type: string
-          description: Customer number
-          example: "10007"
-        organizationNumber:
-          type: string
-          description: Organization number for counterpart of engagement
-          example: "5565027223"
-        organizationName:
-          type: string
-          description: Organization name for counterpart of engagement
-          example: Sundsvall Elnät
-      description: Customer engagement request parameters model
+          description: Displayname
+          examples:
+            - Nätområde
+          readOnly: true
     CustomerEngagement:
       type: object
+      description: Customer engagement model
       properties:
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
+          examples:
+            - 81471222-5798-11e9-ae24-57fa13b361e1
           readOnly: true
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
         customerType:
           $ref: "#/components/schemas/CustomerType"
+          readOnly: true
         customerNumber:
           type: string
           description: Customer number
+          examples:
+            - "10007"
           readOnly: true
-          example: "10007"
         organizationNumber:
           type: string
           description: Organization number for counterpart of engagement
+          examples:
+            - "5565027223"
           readOnly: true
-          example: "5565027223"
         organizationName:
           type: string
           description: Organization name for counterpart of engagement
+          examples:
+            - Sundsvall Elnät
           readOnly: true
-          example: Sundsvall Elnät
         active:
           type: boolean
           description: "Indicates customer status, if not active then the moveInDate\
             \ holds information on when the customer will be activated"
+          examples:
+            - "true"
           readOnly: true
-          example: true
         moveInDate:
           type: string
-          description: The prospective customer's move-in date
           format: date
+          description: The prospective customer's move-in date
           readOnly: true
-      description: Customer engagement model
-      readOnly: true
     CustomerEngagementResponse:
       type: object
+      description: Customer engagement response model
       properties:
         customerEngagements:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/CustomerEngagement"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Customer engagement response model
-    CustomerDetailsParameters:
-      required:
-      - customerEngagementOrgId
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        partyId:
-          type: array
-          items:
-            type: string
-            description: PartyId (e.g. a personId or an organizationId)
-            example: 81471222-5798-11e9-ae24-57fa13b361e1
-        customerEngagementOrgId:
-          type: string
-          description: Organization id for customer engagements
-          example: "5565027225"
-        fromDateTime:
-          type: string
-          description: Date and time for when to search for changes from. Format is
-            yyyy-MM-dd'T'HH:mm:ss.SSSXXX. If omitted changes within the last year
-            will be returned.
-          format: date-time
-          example: 2000-10-31T01:30:00-05:00
-      description: Customer details request parameters model
+          readOnly: true
     CustomerDetails:
       type: object
+      description: Customer details model
       properties:
         customerEngagementOrgId:
           type: string
           description: Company with which the customer has an engagement (organization
             number)
+          examples:
+            - "5591962591"
           readOnly: true
-          example: "5591962591"
         customerEngagementOrgName:
           type: string
           description: Name of the company the customer has an engagement with
+          examples:
+            - Sundsvall Elnät
           readOnly: true
-          example: Sundsvall Elnät
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
+          examples:
+            - 81471222-5798-11e9-ae24-57fa13b361e1
           readOnly: true
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
         customerNumber:
           type: string
           description: Customer number
+          examples:
+            - "39195"
           readOnly: true
-          example: "39195"
         customerName:
           type: string
           description: Customer name
+          examples:
+            - Sven Svensson
           readOnly: true
-          example: Sven Svensson
         street:
           type: string
           description: Street
+          examples:
+            - Storgatan 44
           readOnly: true
-          example: Storgatan 44
         postalCode:
           type: string
           description: Postal code
+          examples:
+            - "85230"
           readOnly: true
-          example: "85230"
         city:
           type: string
           description: City
+          examples:
+            - Sundsvall
           readOnly: true
-          example: Sundsvall
         careOf:
           type: string
           description: Care of address
+          examples:
+            - Agatha Malm
           readOnly: true
-          example: Agatha Malm
         phoneNumbers:
           type: array
-          readOnly: true
           items:
             type: string
             description: List of phoneNumbers
+            examples:
+              - 076-1234567
             readOnly: true
-            example: 076-1234567
+          readOnly: true
         emails:
           type: array
-          readOnly: true
           items:
             type: string
             description: List of emailAddresses
+            examples:
+              - test@test.se
             readOnly: true
-            example: test@test.se
+          readOnly: true
         customerCategoryID:
           type: integer
-          description: Customer category ID
           format: int32
+          description: Customer category ID
+          examples:
+            - "1"
           readOnly: true
-          example: 1
         customerCategoryDescription:
           type: string
           description: Customer category description
+          examples:
+            - Privat
           readOnly: true
-          example: Privat
         customerChangedFlg:
           type: boolean
           description: Indicates if customer details have changed since the search
             date
+          examples:
+            - PRIVATE
           readOnly: true
-          example: false
         installedChangedFlg:
           type: boolean
           description: Indicates if placement and/or equipment details have changed
             since the search date
+          examples:
+            - "true"
           readOnly: true
-          example: true
         active:
           type: boolean
           description: "Indicates customer status, if not active then the moveInDate\
             \ holds information on when the customer will be activated"
+          examples:
+            - "true"
           readOnly: true
-          example: true
         moveInDate:
           type: string
-          description: The prospective customer's move-in date
           format: date
+          description: The prospective customer's move-in date
           readOnly: true
-      description: Customer details model
-      readOnly: true
     CustomerDetailsResponse:
       type: object
+      description: Customer details response model
       properties:
         customerDetails:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/CustomerDetails"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Customer details response model
-    AgreementParameters:
-      type: object
-      properties:
-        page:
-          minimum: 1
-          type: integer
-          description: Page number
-          format: int32
-          example: 1
-          default: 1
-        limit:
-          minimum: 1
-          type: integer
-          description: Result size per page. Maximum allowed value is dynamically
-            configured
-          format: int32
-          example: 15
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort on
-            example: propertyName
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-        partyId:
-          type: string
-          description: PartyId (e.g. a personId or an organizationId)
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
-        customerNumber:
-          type: string
-          description: Customer number
-          example: "10007"
-        facilityId:
-          type: string
-          description: Facility Id
-          example: "1223334"
-        category:
-          type: array
-          items:
-            $ref: "#/components/schemas/Category"
-        billingId:
-          type: string
-          description: Billing Id
-          example: "222333"
-        agreementId:
-          type: string
-          description: Agreement Id
-          example: "333444"
-        description:
-          type: string
-          description: Description
-          example: Avtalet avser fjärrvärme
-        mainAgreement:
-          type: boolean
-          description: Shows if agreement is a main-agreement or not
-          example: true
-        binding:
-          type: boolean
-          description: Shows if agreement include binding or not
-          example: false
-        bindingRule:
-          type: string
-          description: Rule of binding if exists
-          example: 10 mån binding
-        fromDate:
-          type: string
-          description: From-date in validity of agreement
-          format: date
-        toDate:
-          type: string
-          description: To-date in validity of agreement
-          format: date
-        active:
-          type: boolean
-          description: Shows if agreement is active ('fromDate' <= today and 'toDate'
-            => today). Null shows both active and inactive
-          nullable: true
-          example: true
-      description: Agreement request parameters model
+          readOnly: true
     Agreement:
       type: object
+      description: Agreement model
       properties:
         partyId:
           type: string
           description: PartyId (e.g. a personId or an organizationId)
+          examples:
+            - 81471222-5798-11e9-ae24-57fa13b361e1
           readOnly: true
-          example: 81471222-5798-11e9-ae24-57fa13b361e1
         customerNumber:
           type: string
           description: Customer number
+          examples:
+            - "10007"
           readOnly: true
-          example: "10007"
         facilityId:
           type: string
           description: Facility Id
+          examples:
+            - "1223334"
           readOnly: true
-          example: "1223334"
         category:
           $ref: "#/components/schemas/Category"
+          readOnly: true
         billingId:
           type: string
           description: Billing Id
+          examples:
+            - "222333"
           readOnly: true
-          example: "222333"
         agreementId:
           type: string
           description: Agreement Id
+          examples:
+            - "333444"
           readOnly: true
-          example: "333444"
         description:
           type: string
           description: Description
+          examples:
+            - Avtalet avser fjärrvärme
           readOnly: true
-          example: Avtalet avser fjärrvärme
         mainAgreement:
           type: boolean
           description: Shows if agreement is a main-agreement or not
+          examples:
+            - "true"
           readOnly: true
-          example: true
         binding:
           type: boolean
           description: Shows if agreement include binding or not
+          examples:
+            - "false"
           readOnly: true
-          example: false
         bindingRule:
           type: string
           description: Rule of binding if exists
+          examples:
+            - 10 mån binding
           readOnly: true
-          example: 10 mån binding
+        placementStatus:
+          type: string
+          description: Placement status for agreement
+          examples:
+            - Tillkopplad
+          readOnly: true
+        netAreaId:
+          type: string
+          description: Net area id for agreement
+          examples:
+            - SUV
+          readOnly: true
+        siteAddress:
+          type: string
+          description: Site address connected to the agreement
+          examples:
+            - Första gatan 2
+          readOnly: true
+        production:
+          type: boolean
+          description: Signal if the agreement is a production agreement or not (can
+            be null if not applicable)
+          examples:
+            - "true"
+          readOnly: true
         fromDate:
           type: string
-          description: From-date in validity of agreement
           format: date
+          description: From-date in validity of agreement
           readOnly: true
         toDate:
           type: string
-          description: To-date in validity of agreement
           format: date
+          description: To-date in validity of agreement
           readOnly: true
         active:
           type: boolean
           description: Shows if agreement is active ('fromDate' <= today and 'toDate'
             => today)
+          examples:
+            - "true"
           readOnly: true
-          example: true
-      description: Agreement model
-      readOnly: true
     AgreementResponse:
       type: object
+      description: Agreement response model
       properties:
         agreements:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/Agreement"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
-      description: Agreement response model
-  securitySchemes: {}
+          readOnly: true
+  securitySchemes: { }

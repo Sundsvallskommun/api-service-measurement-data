@@ -31,11 +31,11 @@ import se.sundsvall.measurementdata.service.MeasurementDataService;
 @RestController
 @Validated
 @Tag(name = "Measurement", description = "Measurement operations")
-public class MeasurementDataResource {
+class MeasurementDataResource {
 
 	private final MeasurementDataService measurementDataService;
 
-	public MeasurementDataResource(MeasurementDataService measurementDataService) {
+	MeasurementDataResource(final MeasurementDataService measurementDataService) {
 		this.measurementDataService = measurementDataService;
 	}
 
@@ -58,7 +58,7 @@ public class MeasurementDataResource {
 	})))
 	@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "502", description = "Bad Gateway", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
-	public ResponseEntity<Data> getMeasurementData(
+	ResponseEntity<Data> getMeasurementData(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Valid final MeasurementDataSearchParameters parameters) {
 

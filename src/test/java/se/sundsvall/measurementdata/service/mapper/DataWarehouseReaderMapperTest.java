@@ -33,7 +33,7 @@ import se.sundsvall.measurementdata.api.model.MeasurementSerie;
 @ExtendWith(ResourceLoaderExtension.class)
 class DataWarehouseReaderMapperTest {
 
-	private static final Aggregation AGGREGATION = Aggregation.YEAR;
+	private static final Aggregation AGGREGATION = Aggregation.QUARTER;
 	private static final Category CATEGORY = Category.DISTRICT_HEATING;
 	private static final String FACILITY_ID = "facilityId";
 	private static final OffsetDateTime FROM_DATE = now().with(firstDayOfYear());
@@ -101,7 +101,7 @@ class DataWarehouseReaderMapperTest {
 			Arguments.of(Aggregation.DAY, generated.se.sundsvall.datawarehousereader.Aggregation.DAY),
 			Arguments.of(Aggregation.HOUR, generated.se.sundsvall.datawarehousereader.Aggregation.HOUR),
 			Arguments.of(Aggregation.MONTH, generated.se.sundsvall.datawarehousereader.Aggregation.MONTH),
-			Arguments.of(Aggregation.YEAR, generated.se.sundsvall.datawarehousereader.Aggregation.YEAR));
+			Arguments.of(Aggregation.QUARTER, generated.se.sundsvall.datawarehousereader.Aggregation.QUARTER));
 	}
 
 	private static Stream<Arguments> toCategoriesStreamArguments() {
@@ -140,6 +140,6 @@ class DataWarehouseReaderMapperTest {
 			.metaData(hasMetadata ? List.of(new MeasurementMetaData().key(METADATA_KEY).value(METADATA_VALUE + "_" + ((serie + 1) * (serieMember + 1)))) : null)
 			.unit(UNIT)
 			.timestamp(NOW)
-			.value(BigDecimal.valueOf((serie + 1) * (serieMember + 1)));
+			.value(BigDecimal.valueOf((long) (serie + 1) * (serieMember + 1)));
 	}
 }
