@@ -32,10 +32,10 @@ public class DataWarehouseReaderMapper {
 		}
 
 		return switch (aggregation) {
+			case QUARTER -> Aggregation.QUARTER;
 			case HOUR -> Aggregation.HOUR;
 			case DAY -> Aggregation.DAY;
 			case MONTH -> Aggregation.MONTH;
-			case YEAR -> Aggregation.YEAR;
 		};
 	}
 
@@ -68,7 +68,7 @@ public class DataWarehouseReaderMapper {
 		}
 
 		final var series = new HashMap<String, MeasurementSerie>();
-		Optional.ofNullable(response.getMeasurements()).orElse(emptyList()).stream().forEach(measurement -> handleMeasurement(series, measurement));
+		Optional.ofNullable(response.getMeasurements()).orElse(emptyList()).forEach(measurement -> handleMeasurement(series, measurement));
 
 		return List.copyOf(series.values());
 	}
@@ -94,15 +94,14 @@ public class DataWarehouseReaderMapper {
 	}
 
 	private static List<MetaData> toMetaDataList(Measurement measurement) {
-		List<MetaData> metaData = new ArrayList<>();
 
-		metaData.addAll(Optional.ofNullable(measurement.getMetaData()).orElse(emptyList()).stream()
+		List<MetaData> metaData = new ArrayList<>(Optional.ofNullable(measurement.getMetaData()).orElse(emptyList()).stream()
 			.map(DataWarehouseReaderMapper::toMetaData)
 			.toList());
 
-		Optional.of(measurement.getInterpolation())
-			.filter(value -> value > 0)
-			.ifPresent(value -> metaData.add(toMetaData(KEY_INTERPOLATION, String.valueOf(value))));
+		Optional.ofNullable(measurement.getInterpolation())
+			.filter(interpolation -> interpolation > 0)
+			.ifPresent(interpolation -> metaData.add(toMetaData(KEY_INTERPOLATION, String.valueOf(interpolation))));
 
 		return metaData.isEmpty() ? null : metaData;
 	}

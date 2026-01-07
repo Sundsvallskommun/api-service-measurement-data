@@ -5,9 +5,9 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "2.0"
+  version: "3.0"
 servers:
-  - url: http://localhost:60915
+  - url: http://localhost:60044
     description: Generated server url
 tags:
   - name: Measurement
@@ -221,10 +221,10 @@ components:
           type: string
           description: Data point aggregation granularity
           enum:
+            - QUARTER
             - HOUR
             - DAY
             - MONTH
-            - YEAR
           examples:
             - HOUR
       required:
@@ -303,10 +303,10 @@ components:
       type: string
       description: Aggregation granularity
       enum:
+        - QUARTER
         - HOUR
         - DAY
         - MONTH
-        - YEAR
       examples:
         - HOUR
     Category:
@@ -351,12 +351,6 @@ components:
     Problem:
       type: object
       properties:
-        status:
-          $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
-        detail:
-          type: string
         instance:
           type: string
           format: uri
@@ -366,14 +360,20 @@ components:
         parameters:
           type: object
           additionalProperties: {}
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
     StatusType:
       type: object
       properties:
-        reasonPhrase:
-          type: string
         statusCode:
           type: integer
           format: int32
+        reasonPhrase:
+          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -414,14 +414,14 @@ components:
           type: string
         message:
           type: string
-        detail:
-          type: string
         instance:
           type: string
           format: uri
         parameters:
           type: object
           additionalProperties: {}
+        detail:
+          type: string
         suppressed:
           type: array
           items:
@@ -483,12 +483,6 @@ components:
                 type: boolean
         message:
           type: string
-        status:
-          $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
-        detail:
-          type: string
         instance:
           type: string
           format: uri
@@ -498,6 +492,12 @@ components:
         parameters:
           type: object
           additionalProperties: {}
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
         suppressed:
           type: array
           items:
