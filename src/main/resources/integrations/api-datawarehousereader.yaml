@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "5.0"
 servers:
-  - url: http://localhost:51972
+  - url: http://localhost:59422
     description: Generated server url
 tags:
   - name: Measurement
@@ -84,56 +84,20 @@ paths:
             format: date-time
             description: "Date and time for youngest measurement point to return. Format\
             \ is yyyy-MM-dd'T'HH:mm:ss.SSSXXX, for example '2000-10-31T01:30:00.000-05:00'"
-        - name: sortBy
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-              description: The properties to sort on
-              example: propertyName
-        - name: sortDirection
-          in: query
-          description: The sort order direction
-          required: false
-          schema:
-            $ref: "#/components/schemas/Direction"
-          example: ASC
-        - name: page
-          in: query
-          description: Page number
-          required: false
-          schema:
-            type: integer
-            format: int32
-            default: 1
-            description: Page number
-            example: 1
-            minimum: 1
-          example: 1
-        - name: limit
-          in: query
-          description: Result size per page. Maximum allowed value is dynamically configured
-          required: false
-          schema:
-            type: integer
-            format: int32
-            description: Result size per page. Maximum allowed value is dynamically
-              configured
-            example: 15
-            minimum: 1
-          example: 15
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MeasurementResponse"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Measurement"
             application/problem+json:
               schema:
-                $ref: "#/components/schemas/MeasurementResponse"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Measurement"
         "400":
           description: Bad request
           content:
@@ -1031,18 +995,18 @@ components:
           additionalProperties: { }
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
     StatusType:
       type: object
       properties:
-        reasonPhrase:
-          type: string
         statusCode:
           type: integer
           format: int32
+        reasonPhrase:
+          type: string
     ConstraintViolationProblem:
       type: object
       properties:
@@ -1163,9 +1127,9 @@ components:
           additionalProperties: { }
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
         suppressed:
           type: array
@@ -1226,38 +1190,31 @@ components:
         - HOUR
         - DAY
         - MONTH
-    Direction:
-      type: string
-      description: The sort order direction
-      enum:
-        - ASC
-        - DESC
-      example: ASC
     Measurement:
       type: object
       description: Measurement model
       properties:
-        partyId:
+        uuid:
           type: string
-          description: PartyId (e.g. a personId or an organizationId)
+          description: Unique identifier for the measurement
           examples:
-            - 81471222-5798-11e9-ae24-57fa13b361e1
+            - 550e8400-e29b-41d4-a716-446655440000
+          readOnly: true
+        customerOrgId:
+          type: string
+          description: Customer organization identifier
+          examples:
+            - "5534567890"
           readOnly: true
         facilityId:
           type: string
-          description: Facility id
+          description: Facility identifier
           examples:
             - "735999109151401011"
           readOnly: true
-        category:
-          $ref: "#/components/schemas/Category"
-          readOnly: true
-        aggregatedOn:
-          $ref: "#/components/schemas/Aggregation"
-          readOnly: true
-        measurementType:
+        feedType:
           type: string
-          description: Measurement type
+          description: Type of feed
           examples:
             - Energy
           readOnly: true
@@ -1267,108 +1224,26 @@ components:
           examples:
             - kWh
           readOnly: true
-        value:
+        usage:
           type: number
-          description: Measurement value
+          description: Usage value
           examples:
-            - "1292.7500000000"
-          readOnly: true
-        timestamp:
-          type: string
-          format: date-time
-          description: "Date and time for measurement point. Format is yyyy-MM-dd'T'HH:mm:ss.SSSXXX,\
-            \ for example '2000-10-31T01:30:00.000-05:00'"
-          readOnly: true
-        metaData:
-          type: array
-          items:
-            $ref: "#/components/schemas/MeasurementMetaData"
-            readOnly: true
+            - "1500"
           readOnly: true
         interpolation:
           type: integer
           format: int32
-          description: Interpolation information. Zero means that no interpolations
-            has been done. Value greater than zero tells how many values in the serie
-            that has been interpolated/calculated.
+          description: Interpolation value indicating data quality
           examples:
-            - "13"
+            - "0"
           readOnly: true
-    MeasurementMetaData:
-      type: object
-      description: Measurement meta data model
-      properties:
-        key:
+        dateAndTime:
           type: string
-          description: Key connected to the meta data
+          format: date-time
+          description: Date and time of the measurement
           examples:
-            - READING_SEQ
+            - 2024-01-15T10:30:00
           readOnly: true
-        value:
-          type: string
-          description: Value for the meta data
-          examples:
-            - "5733010"
-          readOnly: true
-    MeasurementResponse:
-      type: object
-      description: Measurement response model
-      properties:
-        measurements:
-          type: array
-          items:
-            $ref: "#/components/schemas/Measurement"
-            readOnly: true
-          readOnly: true
-        _meta:
-          $ref: "#/components/schemas/PagingAndSortingMetaData"
-          readOnly: true
-    PagingAndSortingMetaData:
-      type: object
-      description: PagingAndSortingMetaData model
-      properties:
-        page:
-          type: integer
-          format: int32
-          description: Current page
-          example: 5
-          readOnly: true
-        limit:
-          type: integer
-          format: int32
-          description: Displayed objects per page
-          example: 20
-          readOnly: true
-        count:
-          type: integer
-          format: int32
-          description: Displayed objects on current page
-          example: 13
-          readOnly: true
-        totalRecords:
-          type: integer
-          format: int64
-          description: Total amount of hits based on provided search parameters
-          example: 98
-          readOnly: true
-        totalPages:
-          type: integer
-          format: int32
-          description: Total amount of pages based on provided search parameters
-          example: 23
-          readOnly: true
-        sortBy:
-          type: array
-          items:
-            type: string
-            description: The properties to sort by
-            example: property
-            readOnly: true
-          readOnly: true
-        sortDirection:
-          $ref: "#/components/schemas/Direction"
-          description: The sort order direction
-          example: ASC
     CustomerType:
       type: string
       description: Customer type
@@ -1377,6 +1252,11 @@ components:
         - Private
       examples:
         - Enterprise
+    Direction:
+      type: string
+      enum:
+        - ASC
+        - DESC
     InvoiceParameters:
       type: object
       description: Invoice request parameters model
@@ -1675,6 +1555,52 @@ components:
         _meta:
           $ref: "#/components/schemas/PagingAndSortingMetaData"
           readOnly: true
+    PagingAndSortingMetaData:
+      type: object
+      description: PagingAndSortingMetaData model
+      properties:
+        page:
+          type: integer
+          format: int32
+          description: Current page
+          example: 5
+          readOnly: true
+        limit:
+          type: integer
+          format: int32
+          description: Displayed objects per page
+          example: 20
+          readOnly: true
+        count:
+          type: integer
+          format: int32
+          description: Displayed objects on current page
+          example: 13
+          readOnly: true
+        totalRecords:
+          type: integer
+          format: int64
+          description: Total amount of hits based on provided search parameters
+          example: 98
+          readOnly: true
+        totalPages:
+          type: integer
+          format: int32
+          description: Total amount of pages based on provided search parameters
+          example: 23
+          readOnly: true
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort by
+            example: property
+            readOnly: true
+          readOnly: true
+        sortDirection:
+          $ref: "#/components/schemas/Direction"
+          description: The sort order direction
+          example: ASC
     InvoiceDetail:
       type: object
       description: Invoice detail model
@@ -1766,6 +1692,18 @@ components:
           description: Organization number of invoice issuer
           examples:
             - "5565027223"
+          readOnly: true
+        administration:
+          type: string
+          description: Administration
+          examples:
+            - Name of the administration
+          readOnly: true
+        facilityId:
+          type: string
+          description: Facility id
+          examples:
+            - "735999109151401011"
           readOnly: true
     InstalledBaseItem:
       type: object
