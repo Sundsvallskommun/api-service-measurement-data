@@ -2,11 +2,8 @@ package se.sundsvall.measurementdata.service;
 
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.Charset.defaultCharset;
-import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toAggregation;
-import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toCategory;
 import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
 
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -17,32 +14,29 @@ import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehous
 @Service
 public class MeasurementDataService {
 
-	private static final int MEASUREMENT_DATA_RESPONSE_LIMIT = 1000;
-
 	private final DataWarehouseReaderClient dataWarehouseReaderClient;
 
-	public MeasurementDataService(DataWarehouseReaderClient dataWarehouseReaderClient) {
+	public MeasurementDataService(final DataWarehouseReaderClient dataWarehouseReaderClient) {
 		this.dataWarehouseReaderClient = dataWarehouseReaderClient;
 	}
 
 	public Data fetchMeasurementData(final String municipalityId, final MeasurementDataSearchParameters parameters) {
 
-		final MeasurementResponse response = dataWarehouseReaderClient.getMeasurementData(
+		final var measurements = dataWarehouseReaderClient.getMeasurements(
 			municipalityId,
-			toCategory(parameters.getCategory()),
-			toAggregation(parameters.getAggregateOn()),
+			parameters.getCategory().name(),
+			parameters.getAggregateOn().name(),
 			parameters.getPartyId(),
 			parameters.getFacilityId(),
 			asEncodedString(parameters.getFromDate()),
-			asEncodedString(parameters.getToDate()),
-			MEASUREMENT_DATA_RESPONSE_LIMIT);
+			asEncodedString(parameters.getToDate()));
 
-		return toData(parameters, response);
+		return toData(parameters, measurements);
 	}
 
-	private static String asEncodedString(final OffsetDateTime date) {
-		return Optional.ofNullable(date)
-			.map(d -> encode(d.toString(), defaultCharset()))
+	private static String asEncodedString(final OffsetDateTime offsetDateTime) {
+		return Optional.ofNullable(offsetDateTime)
+			.map(dateTime -> encode(dateTime.toString(), defaultCharset()))
 			.orElse(null);
 	}
 }

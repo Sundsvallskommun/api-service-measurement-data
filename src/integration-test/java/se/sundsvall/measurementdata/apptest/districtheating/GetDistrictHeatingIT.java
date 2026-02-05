@@ -6,7 +6,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 import se.sundsvall.measurementdata.Application;
@@ -21,9 +20,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 	void test01_getDistrictHeatingMonthPrivate() {
 		setupCall()
 			.withServicePath(PATH +
-				"?page=1" +
-				"&limit=100" +
-				"&partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
+				"?partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
 				"&category=DISTRICT_HEATING" +
 				"&facilityId=735999109113202014" +
 				"&fromDate=2018-01-01T14:39:22.817Z" +
@@ -39,9 +36,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 	void test02_getDistrictHeatingNotImplementedAggregationLevel() {
 		setupCall()
 			.withServicePath(PATH +
-				"?page=1" +
-				"&limit=100" +
-				"&partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
+				"?partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
 				"&category=DISTRICT_HEATING" +
 				"&facilityId=735999109113202014" +
 				"&fromDate=2018-01-01T14:39:22.817Z" +

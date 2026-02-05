@@ -1,99 +1,162 @@
-{
-	"_meta": {
-		"totalRecords": 8,
-		"limit": 100,
-		"count": 8,
-		"totalPages": 1,
-		"page": 1
+[
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440101",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 42.307,
+		"interpolation": 0,
+		"dateAndTime": "2019-05-28T00:00:00+02:00"
 	},
-	"measurements": [
-		{
-			"unit": "kWh",
-			"interpolation": 0,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 42.307,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-05-28T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 5,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 410.968,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-06-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 0,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 411.708,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-06-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 0,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 382.316,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-07-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 4,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 401.489,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-08-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 0,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 519.59,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-09-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 0,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 552.845,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-10-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 2,
-			"facilityId": "735999109128517141",
-			"measurementType": "Energy",
-			"partyId": "98BF599D-8A4D-4040-9A3C-128834D845F6",
-			"category": "ELECTRICITY",
-			"value": 435.763,
-			"aggregatedOn": "MONTH",
-			"timestamp": "2019-11-01T00:00:00+02:00"
-		}
-	]
-}
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440101",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 14.2,
+		"interpolation": 0,
+		"dateAndTime": "2019-05-28T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440102",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 410.968,
+		"interpolation": 5,
+		"dateAndTime": "2019-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440102",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 16.5,
+		"interpolation": 0,
+		"dateAndTime": "2019-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440103",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 411.708,
+		"interpolation": 0,
+		"dateAndTime": "2019-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440103",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 16.5,
+		"interpolation": 0,
+		"dateAndTime": "2019-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440104",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 382.316,
+		"interpolation": 0,
+		"dateAndTime": "2019-07-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440104",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 18.9,
+		"interpolation": 0,
+		"dateAndTime": "2019-07-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440105",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 401.489,
+		"interpolation": 4,
+		"dateAndTime": "2019-08-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440105",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 17.4,
+		"interpolation": 4,
+		"dateAndTime": "2019-08-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440106",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 519.59,
+		"interpolation": 0,
+		"dateAndTime": "2019-09-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440106",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 13.2,
+		"interpolation": 0,
+		"dateAndTime": "2019-09-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440107",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 552.845,
+		"interpolation": 0,
+		"dateAndTime": "2019-10-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440107",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 8.6,
+		"interpolation": 0,
+		"dateAndTime": "2019-10-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440108",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 435.763,
+		"interpolation": 2,
+		"dateAndTime": "2019-11-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440108",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109128517141",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 4.1,
+		"interpolation": 2,
+		"dateAndTime": "2019-11-01T00:00:00+02:00"
+	}
+]

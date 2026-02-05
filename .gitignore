@@ -47,3 +47,7 @@ hs_err_pid*
 # Local environment
 **/application-default.*
 .env
+
+# Claude Code
+.claude/
+CLAUDE.md

@@ -4,10 +4,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import static se.sundsvall.measurementdata.integration.datawarehousereader.configuration.DataWarehouseReaderConfiguration.CLIENT_ID;
 
-import generated.se.sundsvall.datawarehousereader.Aggregation;
-import generated.se.sundsvall.datawarehousereader.Category;
-import generated.se.sundsvall.datawarehousereader.MeasurementResponse;
+import generated.se.sundsvall.datawarehousereader.Measurement;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +20,12 @@ public interface DataWarehouseReaderClient {
 	@GetMapping(path = "/{municipalityId}/measurements/{category}/{aggregateOn}", produces = {
 		APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 	})
-	MeasurementResponse getMeasurementData(
-		@PathVariable("municipalityId") String municipalityId,
-		@PathVariable("category") Category category,
-		@PathVariable("aggregateOn") Aggregation aggregateOn,
-		@RequestParam("partyId") String partyId,
-		@RequestParam("facilityId") String facilityId,
-		@RequestParam("fromDateTime") String fromDateTime,
-		@RequestParam("toDateTime") String toDateTime,
-		@RequestParam("limit") int limit);
+	List<Measurement> getMeasurements(
+		@PathVariable final String municipalityId,
+		@PathVariable final String category,
+		@PathVariable final String aggregateOn,
+		@RequestParam final String partyId,
+		@RequestParam final String facilityId,
+		@RequestParam final String fromDateTime,
+		@RequestParam final String toDateTime);
 }

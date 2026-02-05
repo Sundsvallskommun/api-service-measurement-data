@@ -1,176 +1,302 @@
-{
-	"_meta": {
-		"totalRecords": 15,
-		"limit": 100,
-		"count": 15,
-		"totalPages": 1,
-		"page": 1
+[
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440201",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 35.63,
+		"interpolation": 23,
+		"dateAndTime": "2022-05-31T00:00:00+02:00"
 	},
-	"measurements": [
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 35.63,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-05-31T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 45.47,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-01T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 46.32,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-02T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 27.02,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-03T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 18.67,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-04T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 24.76,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-05T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 37.75,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-06T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 42.82,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-07T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 35.09,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-08T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 37.46,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-09T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 44.77,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-10T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 23.51,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-11T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 28.5,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-12T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 23,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 37.87,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-13T00:00:00+02:00"
-		},
-		{
-			"unit": "kWh",
-			"interpolation": 24,
-			"facilityId": "735999109250135015",
-			"measurementType": "Energy",
-			"partyId": "BF7967EC-261A-4FF8-934A-8BF31B299169",
-			"category": "ELECTRICITY",
-			"value": 34.63,
-			"aggregatedOn": "DAY",
-			"timestamp": "2022-06-14T00:00:00+02:00"
-		}
-	]
-}
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440201",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 15.8,
+		"interpolation": 0,
+		"dateAndTime": "2022-05-31T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440202",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 45.47,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440202",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 17.2,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440203",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 46.32,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-02T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440203",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 18.5,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-02T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440204",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 27.02,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-03T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440204",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 16.9,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-03T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440205",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 18.67,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-04T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440205",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 14.3,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-04T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440206",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 24.76,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-05T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440206",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 15.1,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-05T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440207",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 37.75,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-06T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440207",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 16.7,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-06T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440208",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 42.82,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-07T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440208",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 19.4,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-07T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440209",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 35.09,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-08T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440209",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 20.1,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-08T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440210",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 37.46,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-09T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440210",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 18.8,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-09T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440211",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 44.77,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-10T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440211",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 17.6,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-10T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440212",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 23.51,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-11T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440212",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 16.2,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-11T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440213",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 28.5,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-12T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440213",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 15.4,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-12T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440214",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 37.87,
+		"interpolation": 23,
+		"dateAndTime": "2022-06-13T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440214",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 17.9,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-13T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440215",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 34.63,
+		"interpolation": 24,
+		"dateAndTime": "2022-06-14T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440215",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109250135015",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 19.2,
+		"interpolation": 0,
+		"dateAndTime": "2022-06-14T00:00:00+02:00"
+	}
+]

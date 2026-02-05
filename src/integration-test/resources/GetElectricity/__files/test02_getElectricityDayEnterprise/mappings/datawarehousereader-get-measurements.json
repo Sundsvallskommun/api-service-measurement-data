@@ -13,9 +13,6 @@
 			"fromDateTime": {
 				"equalTo": "2022-05-01T11:55:00.558Z"
 			},
-			"limit": {
-				"equalTo": "1000"
-			},
 			"partyId": {
 				"equalTo": "BF7967EC-261A-4FF8-934A-8BF31B299169"
 			},
