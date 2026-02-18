@@ -1,5 +1,11 @@
 package se.sundsvall.measurementdata.api.model;
 
+import java.time.OffsetDateTime;
+import java.util.Arrays;
+import java.util.Random;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCode;
@@ -12,12 +18,6 @@ import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static se.sundsvall.measurementdata.api.model.Aggregation.HOUR;
 import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
-
-import java.time.OffsetDateTime;
-import java.util.Arrays;
-import java.util.Random;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 class DataTest {
 
