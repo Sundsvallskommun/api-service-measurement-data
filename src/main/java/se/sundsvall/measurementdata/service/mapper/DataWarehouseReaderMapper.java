@@ -1,7 +1,5 @@
 package se.sundsvall.measurementdata.service.mapper;
 
-import static java.util.Collections.emptyList;
-
 import generated.se.sundsvall.datawarehousereader.Measurement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +11,8 @@ import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.api.model.MeasurementPoint;
 import se.sundsvall.measurementdata.api.model.MeasurementSerie;
 import se.sundsvall.measurementdata.api.model.MetaData;
+
+import static java.util.Collections.emptyList;
 
 public class DataWarehouseReaderMapper {
 	private static final String KEY_INTERPOLATION = "interpolation";

@@ -1,15 +1,15 @@
 package se.sundsvall.measurementdata.service;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.Charset.defaultCharset;
-import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
-
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import se.sundsvall.measurementdata.api.model.Data;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.Charset.defaultCharset;
+import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
 
 @Service
 public class MeasurementDataService {

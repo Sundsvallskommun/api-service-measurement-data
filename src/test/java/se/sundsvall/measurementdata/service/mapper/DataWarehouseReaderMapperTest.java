@@ -1,11 +1,5 @@
 package se.sundsvall.measurementdata.service.mapper;
 
-import static java.time.OffsetDateTime.now;
-import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.groups.Tuple.tuple;
-import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
-
 import generated.se.sundsvall.datawarehousereader.Measurement;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -15,6 +9,12 @@ import org.junit.jupiter.api.Test;
 import se.sundsvall.measurementdata.api.model.Aggregation;
 import se.sundsvall.measurementdata.api.model.Category;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
+
+import static java.time.OffsetDateTime.now;
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.groups.Tuple.tuple;
+import static se.sundsvall.measurementdata.service.mapper.DataWarehouseReaderMapper.toData;
 
 class DataWarehouseReaderMapperTest {
 

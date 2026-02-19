@@ -1,17 +1,5 @@
 package se.sundsvall.measurementdata.service;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static se.sundsvall.measurementdata.api.model.Aggregation.DAY;
-import static se.sundsvall.measurementdata.api.model.Aggregation.MONTH;
-import static se.sundsvall.measurementdata.api.model.Aggregation.QUARTER;
-import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
-import static se.sundsvall.measurementdata.api.model.Category.ELECTRICITY;
-import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
-
 import generated.se.sundsvall.datawarehousereader.Aggregation;
 import generated.se.sundsvall.datawarehousereader.Category;
 import java.time.OffsetDateTime;
@@ -24,6 +12,18 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static se.sundsvall.measurementdata.api.model.Aggregation.DAY;
+import static se.sundsvall.measurementdata.api.model.Aggregation.MONTH;
+import static se.sundsvall.measurementdata.api.model.Aggregation.QUARTER;
+import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
+import static se.sundsvall.measurementdata.api.model.Category.ELECTRICITY;
+import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
 
 @ExtendWith(MockitoExtension.class)
 class MeasurementDataServiceTest {
