@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-- url: http://localhost:52186
+- url: http://localhost:53763
   description: Generated server url
 tags:
 - name: Measurement
@@ -204,6 +204,7 @@ components:
           description: Facility ID
           examples:
           - "112233"
+          minLength: 1
         fromDate:
           type: string
           format: date-time
