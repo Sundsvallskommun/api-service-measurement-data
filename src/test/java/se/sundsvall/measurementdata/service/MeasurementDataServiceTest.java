@@ -24,6 +24,7 @@ import static se.sundsvall.measurementdata.api.model.Aggregation.QUARTER;
 import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
 import static se.sundsvall.measurementdata.api.model.Category.ELECTRICITY;
 import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
+import static se.sundsvall.measurementdata.api.model.Display.AGGREGATE;
 
 @ExtendWith(MockitoExtension.class)
 class MeasurementDataServiceTest {
@@ -61,7 +62,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -72,7 +74,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate);
+			encodedToDate,
+			null);
 		assertThat(response.getAggregateOn()).isEqualTo(aggregation);
 		assertThat(response.getCategory()).isEqualTo(category);
 		assertThat(response.getFacilityIds()).isEqualTo(facilityId);
@@ -104,7 +107,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			null,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		service.fetchMeasurementData(municipalityId, parameters);
 
@@ -115,7 +119,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			null,
-			encodedToDate);
+			encodedToDate,
+			null);
 	}
 
 	@Test
@@ -141,6 +146,7 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
+			null,
 			null)).thenReturn(List.of());
 
 		service.fetchMeasurementData(municipalityId, parameters);
@@ -152,6 +158,7 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
+			null,
 			null);
 	}
 
@@ -180,7 +187,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -191,7 +199,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate);
+			encodedToDate,
+			null);
 		assertThat(response.getCategory()).isEqualTo(DISTRICT_HEATING);
 	}
 
@@ -220,7 +229,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -231,7 +241,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate);
+			encodedToDate,
+			null);
 		assertThat(response.getCategory()).isEqualTo(ELECTRICITY);
 	}
 
@@ -260,7 +271,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -271,7 +283,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate);
+			encodedToDate,
+			null);
 		assertThat(response.getAggregateOn()).isEqualTo(QUARTER);
 	}
 
@@ -300,7 +313,8 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate)).thenReturn(List.of());
+			encodedToDate,
+			null)).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -311,7 +325,50 @@ class MeasurementDataServiceTest {
 			partyId,
 			facilityId,
 			encodedFromDate,
-			encodedToDate);
+			encodedToDate,
+			null);
 		assertThat(response.getAggregateOn()).isEqualTo(DAY);
+	}
+
+	@Test
+	void fetchMeasurementData_withDisplay_shouldPassDisplayToClient() {
+		final var municipalityId = "municipalityId";
+		final var facilityId = List.of("facilityId");
+		final var partyId = "partyId";
+		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
+		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
+		final var encodedFromDate = encode(fromDate.toString(), UTF_8);
+		final var encodedToDate = encode(toDate.toString(), UTF_8);
+
+		final var parameters = MeasurementDataSearchParameters.create()
+			.withAggregateOn(MONTH)
+			.withCategory(WASTE_MANAGEMENT)
+			.withFacilityIds(facilityId)
+			.withFromDate(fromDate)
+			.withPartyId(partyId)
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
+
+		when(dataWarehouseReaderClientMock.getMeasurements(
+			municipalityId,
+			Category.WASTE_MANAGEMENT.name(),
+			Aggregation.MONTH.name(),
+			partyId,
+			facilityId,
+			encodedFromDate,
+			encodedToDate,
+			"AGGREGATE")).thenReturn(List.of());
+
+		service.fetchMeasurementData(municipalityId, parameters);
+
+		verify(dataWarehouseReaderClientMock).getMeasurements(
+			municipalityId,
+			Category.WASTE_MANAGEMENT.name(),
+			Aggregation.MONTH.name(),
+			partyId,
+			facilityId,
+			encodedFromDate,
+			encodedToDate,
+			"AGGREGATE");
 	}
 }

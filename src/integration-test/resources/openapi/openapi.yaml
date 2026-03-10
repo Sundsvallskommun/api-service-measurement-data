@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.1"
 servers:
-  - url: http://localhost:51971
+  - url: http://localhost:61099
     description: Generated server url
 tags:
   - name: Measurement
@@ -303,9 +303,9 @@ components:
         type:
           type: string
           format: uri
-        detail:
-          type: string
         title:
+          type: string
+        detail:
           type: string
         status:
           type: integer
@@ -328,10 +328,10 @@ components:
         instance:
           type: string
           format: uri
-        detail:
-          type: string
         causeAsProblem:
           $ref: "#/components/schemas/ThrowableProblem"
+        detail:
+          type: string
     ThrowableProblem:
       type: object
       properties:

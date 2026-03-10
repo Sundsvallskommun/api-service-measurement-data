@@ -1,0 +1,36 @@
+{
+	"request": {
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
+		"method": "GET",
+		"queryParameters": {
+			"facilityId": {
+				"equalTo": "735999109113202014"
+			},
+			"fromDateTime": {
+				"equalTo": "2018-01-01T14:39:22.817Z"
+			},
+			"partyId": {
+				"equalTo": "B1EDEA3C-1083-4E1A-81FB-7D95E505E102"
+			},
+			"toDateTime": {
+				"equalTo": "2018-12-31T14:39:22.817Z"
+			},
+			"display": {
+				"equalTo": "AGGREGATE"
+			}
+		},
+		"urlPath": "/api-datawarehousereader/2281/measurements/DISTRICT_HEATING/MONTH"
+	},
+	"response": {
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"bodyFileName": "test04_getDistrictHeatingWithDisplay/responses/datawarehousereader-response.json",
+		"status": 200
+	},
+	"name": "datawarehousereader-get-measurements"
+}

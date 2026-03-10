@@ -20,6 +20,7 @@ import se.sundsvall.measurementdata.Application;
 import se.sundsvall.measurementdata.api.model.Aggregation;
 import se.sundsvall.measurementdata.api.model.Category;
 import se.sundsvall.measurementdata.api.model.Data;
+import se.sundsvall.measurementdata.api.model.Display;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.service.MeasurementDataService;
 
@@ -55,6 +56,7 @@ class MeasurementDataResourceTest {
 		final var municipalityId = "2281";
 		final var aggregation = Aggregation.HOUR;
 		final var category = Category.DISTRICT_HEATING;
+		final var display = Display.AGGREGATE;
 		final var facilityId = "112233";
 		final var fromDate = "2022-05-17T08:00:00.000Z";
 		final var toDate = "2022-06-18T09:00:00.000Z";
@@ -67,6 +69,7 @@ class MeasurementDataResourceTest {
 		parameters.add("category", category.name());
 		parameters.add("facilityId", facilityId);
 		parameters.add("aggregateOn", aggregation.name());
+		parameters.add("display", display.name());
 		parameters.add("fromDate", fromDate);
 		parameters.add("toDate", toDate);
 
@@ -88,6 +91,7 @@ class MeasurementDataResourceTest {
 		assertThat(response).isNotNull().isEqualTo(Data.create());
 		assertThat(parameterValues.getAggregateOn()).isEqualTo(aggregation);
 		assertThat(parameterValues.getCategory()).isEqualTo(category);
+		assertThat(parameterValues.getDisplay()).isEqualTo(display);
 		assertThat(parameterValues.getFacilityIds()).isEqualTo(List.of(facilityId));
 		assertThat(parameterValues.getFromDate()).isEqualTo(OffsetDateTime.parse(fromDate));
 		assertThat(parameterValues.getPartyId()).isEqualTo(partyId);

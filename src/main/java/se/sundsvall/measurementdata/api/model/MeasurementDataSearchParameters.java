@@ -45,6 +45,9 @@ public class MeasurementDataSearchParameters {
 	@NotNull
 	private Aggregation aggregateOn;
 
+	@Schema(description = "Display mode for aggregated series")
+	private Display display;
+
 	public static MeasurementDataSearchParameters create() {
 		return new MeasurementDataSearchParameters();
 	}
@@ -83,16 +86,6 @@ public class MeasurementDataSearchParameters {
 		this.facilityIds = facilityIds;
 	}
 
-	/**
-	 * Alias getter for backwards compatibility (external name is "facilityId").
-	 */
-	public List<String> getFacilityId() {
-		return facilityIds;
-	}
-
-	/**
-	 * Alias setter for Spring query parameter binding (query param name is "facilityId").
-	 */
 	public void setFacilityId(final List<String> facilityIds) {
 		this.facilityIds = facilityIds;
 	}
@@ -141,9 +134,22 @@ public class MeasurementDataSearchParameters {
 		return this;
 	}
 
+	public Display getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(final Display display) {
+		this.display = display;
+	}
+
+	public MeasurementDataSearchParameters withDisplay(final Display display) {
+		this.display = display;
+		return this;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(aggregateOn, category, facilityIds, fromDate, partyId, toDate);
+		return Objects.hash(aggregateOn, category, display, facilityIds, fromDate, partyId, toDate);
 	}
 
 	@Override
@@ -158,15 +164,16 @@ public class MeasurementDataSearchParameters {
 			return false;
 		}
 		final MeasurementDataSearchParameters other = (MeasurementDataSearchParameters) obj;
-		return aggregateOn == other.aggregateOn && category == other.category && Objects.equals(facilityIds, other.facilityIds) && Objects.equals(fromDate, other.fromDate) && Objects.equals(partyId, other.partyId) && Objects.equals(toDate,
-			other.toDate);
+		return aggregateOn == other.aggregateOn && category == other.category && display == other.display && Objects.equals(facilityIds, other.facilityIds) && Objects.equals(fromDate, other.fromDate) && Objects.equals(partyId, other.partyId) && Objects
+			.equals(toDate,
+				other.toDate);
 	}
 
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("MeasurementDataSearchParameters [partyId=").append(partyId).append(", category=").append(category).append(", facilityIds=").append(facilityIds).append(", fromDate=").append(fromDate).append(", toDate=").append(toDate).append(
-			", aggregateOn=").append(aggregateOn).append("]");
+			", aggregateOn=").append(aggregateOn).append(", display=").append(display).append("]");
 		return builder.toString();
 	}
 }
