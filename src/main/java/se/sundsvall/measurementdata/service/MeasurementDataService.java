@@ -27,7 +27,7 @@ public class MeasurementDataService {
 			parameters.getCategory().name(),
 			parameters.getAggregateOn().name(),
 			parameters.getPartyId(),
-			parameters.getFacilityId(),
+			parameters.getFacilityIds(),
 			asEncodedString(parameters.getFromDate()),
 			asEncodedString(parameters.getToDate()));
 

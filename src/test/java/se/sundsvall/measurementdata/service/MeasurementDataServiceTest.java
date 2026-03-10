@@ -39,7 +39,7 @@ class MeasurementDataServiceTest {
 		final var municipalityId = "municipalityId";
 		final var aggregation = MONTH;
 		final var category = WASTE_MANAGEMENT;
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var partyId = "partyId";
 		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -49,7 +49,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(aggregation)
 			.withCategory(category)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(toDate);
@@ -75,7 +75,7 @@ class MeasurementDataServiceTest {
 			encodedToDate);
 		assertThat(response.getAggregateOn()).isEqualTo(aggregation);
 		assertThat(response.getCategory()).isEqualTo(category);
-		assertThat(response.getFacilityId()).isEqualTo(facilityId);
+		assertThat(response.getFacilityIds()).isEqualTo(facilityId);
 		assertThat(response.getFromDate()).isEqualTo(fromDate);
 		assertThat(response.getMeasurementSeries()).isEmpty();
 		assertThat(response.getToDate()).isEqualTo(toDate);
@@ -84,7 +84,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withNullFromDate_shouldPassNullToClient() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var encodedToDate = encode(toDate.toString(), UTF_8);
@@ -92,7 +92,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(MONTH)
 			.withCategory(WASTE_MANAGEMENT)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(null)
 			.withPartyId(partyId)
 			.withToDate(toDate);
@@ -121,7 +121,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withNullToDate_shouldPassNullToClient() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var encodedFromDate = encode(fromDate.toString(), UTF_8);
@@ -129,7 +129,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(MONTH)
 			.withCategory(WASTE_MANAGEMENT)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(null);
@@ -158,7 +158,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withDistrictHeating_shouldMapCorrectly() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -168,7 +168,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(MONTH)
 			.withCategory(DISTRICT_HEATING)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(toDate);
@@ -198,7 +198,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withElectricity_shouldMapCorrectly() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -208,7 +208,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(MONTH)
 			.withCategory(ELECTRICITY)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(toDate);
@@ -238,7 +238,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withQuarterAggregation_shouldMapCorrectly() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var toDate = OffsetDateTime.of(2024, 4, 1, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -248,7 +248,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(QUARTER)
 			.withCategory(WASTE_MANAGEMENT)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(toDate);
@@ -278,7 +278,7 @@ class MeasurementDataServiceTest {
 	@Test
 	void fetchMeasurementData_withDayAggregation_shouldMapCorrectly() {
 		final var municipalityId = "municipalityId";
-		final var facilityId = "facilityId";
+		final var facilityId = List.of("facilityId");
 		final var partyId = "partyId";
 		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 		final var toDate = OffsetDateTime.of(2024, 1, 2, 0, 0, 0, 0, ZoneOffset.UTC);
@@ -288,7 +288,7 @@ class MeasurementDataServiceTest {
 		final var parameters = MeasurementDataSearchParameters.create()
 			.withAggregateOn(DAY)
 			.withCategory(WASTE_MANAGEMENT)
-			.withFacilityId(facilityId)
+			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
 			.withToDate(toDate);

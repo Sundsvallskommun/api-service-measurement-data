@@ -7,7 +7,7 @@ public class ResponseExamples {
 	public static final String DISTRICT_HEATING_RESPONSE_EXAMPLE = """
 		{
 		"category": "DISTRICT_HEATING",
-		"facilityId": "1112233",
+		"facilityId": ["1112233"],
 		"aggregateOn": "HOUR",
 		"fromDate": "2022-05-17T08:00:00.000Z",
 		"toDate": "2022-05-17T09:00:00.000Z",
@@ -65,7 +65,7 @@ public class ResponseExamples {
 	public static final String COMMUNICATION_RESPONSE_EXAMPLE = """
 		{
 		"category": "COMMUNICATION",
-		"facilityId": "1112233",
+		"facilityId": ["1112233"],
 		"aggregateOn": "HOUR",
 		"fromDate": "2022-05-17T08:00:00.000Z",
 		"toDate": "2022-05-17T09:00:00.000Z",
@@ -100,7 +100,7 @@ public class ResponseExamples {
 	public static final String ELECTRICITY_RESPONSE_EXAMPLE = """
 		{
 		"category": "ELECTRICITY",
-		"facilityId": "1112233",
+		"facilityId": ["1112233"],
 		"aggregateOn": "HOUR",
 		"fromDate": "2022-05-17T08:00:00.000Z",
 		"toDate": "2022-05-17T09:00:00.000Z",
@@ -128,7 +128,7 @@ public class ResponseExamples {
 	public static final String WASTE_MANAGEMENT_RESPONSE_EXAMPLE = """
 		{
 		"category": "WASTE_MANAGEMENT",
-		"facilityId": "1112233",
+		"facilityId": ["1112233"],
 		"aggregateOn": "HOUR",
 		"fromDate": "2022-05-17T08:00:00.000Z",
 		"toDate": "2022-05-17T09:00:00.000Z",

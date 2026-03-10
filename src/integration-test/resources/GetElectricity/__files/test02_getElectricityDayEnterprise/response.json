@@ -1,6 +1,8 @@
 {
 	"fromDate": "2022-05-01T11:55:00.558Z",
-	"facilityId": "735999109250135015",
+	"facilityId": [
+		"735999109250135015"
+	],
 	"aggregateOn": "DAY",
 	"toDate": "2022-06-30T11:55:00.558Z",
 	"category": "ELECTRICITY",

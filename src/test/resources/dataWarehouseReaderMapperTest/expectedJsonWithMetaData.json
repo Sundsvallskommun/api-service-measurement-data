@@ -1,5 +1,7 @@
 {
-	"facilityId": "facilityId",
+	"facilityId": [
+		"facilityId"
+	],
 	"aggregateOn": "QUARTER",
 	"category": "DISTRICT_HEATING",
 	"measurementSeries": [

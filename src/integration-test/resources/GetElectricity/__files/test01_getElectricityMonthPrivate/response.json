@@ -1,6 +1,9 @@
 {
 	"category": "ELECTRICITY",
-	"facilityId": "735999109128517141",
+	"facilityId": [
+		"735999109128517141",
+		"735999109128517142"
+	],
 	"aggregateOn": "MONTH",
 	"fromDate": "2019-01-01T14:39:22.817Z",
 	"toDate": "2019-06-30T14:39:22.817Z",

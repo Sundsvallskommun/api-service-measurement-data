@@ -21,6 +21,7 @@ class GetElectricityIT extends AbstractAppTest {
 				"?partyId=98BF599D-8A4D-4040-9A3C-128834D845F6" +
 				"&category=ELECTRICITY" +
 				"&facilityId=735999109128517141" +
+				"&facilityId=735999109128517142" +
 				"&fromDate=2019-01-01T14:39:22.817Z" +
 				"&toDate=2019-06-30T14:39:22.817Z" +
 				"&aggregateOn=MONTH")

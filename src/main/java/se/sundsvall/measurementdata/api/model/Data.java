@@ -1,5 +1,6 @@
 package se.sundsvall.measurementdata.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.OffsetDateTime;
@@ -16,7 +17,8 @@ public class Data {
 	private Category category;
 
 	@Schema(accessMode = READ_ONLY, examples = "1234567")
-	private String facilityId;
+	@JsonProperty("facilityId")
+	private List<String> facilityIds;
 
 	@Schema(accessMode = READ_ONLY, enumAsRef = true)
 	private Aggregation aggregateOn;
@@ -49,16 +51,16 @@ public class Data {
 		return this;
 	}
 
-	public String getFacilityId() {
-		return facilityId;
+	public List<String> getFacilityIds() {
+		return facilityIds;
 	}
 
-	public void setFacilityId(String facilityId) {
-		this.facilityId = facilityId;
+	public void setFacilityIds(List<String> facilityIds) {
+		this.facilityIds = facilityIds;
 	}
 
-	public Data withFacilityId(String facilityId) {
-		this.facilityId = facilityId;
+	public Data withFacilityIds(List<String> facilityIds) {
+		this.facilityIds = facilityIds;
 		return this;
 	}
 
@@ -116,7 +118,7 @@ public class Data {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(aggregateOn, category, facilityId, fromDate, measurementSeries, toDate);
+		return Objects.hash(aggregateOn, category, facilityIds, fromDate, measurementSeries, toDate);
 	}
 
 	@Override
@@ -131,14 +133,14 @@ public class Data {
 			return false;
 		}
 		Data other = (Data) obj;
-		return aggregateOn == other.aggregateOn && category == other.category && Objects.equals(facilityId, other.facilityId) && Objects.equals(fromDate, other.fromDate) && Objects.equals(measurementSeries, other.measurementSeries) && Objects.equals(
+		return aggregateOn == other.aggregateOn && category == other.category && Objects.equals(facilityIds, other.facilityIds) && Objects.equals(fromDate, other.fromDate) && Objects.equals(measurementSeries, other.measurementSeries) && Objects.equals(
 			toDate, other.toDate);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Data [category=").append(category).append(", facilityId=").append(facilityId).append(", aggregateOn=").append(aggregateOn).append(", fromDate=").append(fromDate).append(", toDate=").append(toDate).append(
+		builder.append("Data [category=").append(category).append(", facilityIds=").append(facilityIds).append(", aggregateOn=").append(aggregateOn).append(", fromDate=").append(fromDate).append(", toDate=").append(toDate).append(
 			", measurementSeries=").append(measurementSeries).append("]");
 		return builder.toString();
 	}

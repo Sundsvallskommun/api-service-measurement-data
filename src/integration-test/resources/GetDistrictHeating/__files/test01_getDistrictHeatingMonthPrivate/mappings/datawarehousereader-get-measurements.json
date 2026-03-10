@@ -8,7 +8,14 @@
 		"method": "GET",
 		"queryParameters": {
 			"facilityId": {
-				"equalTo": "735999109113202014"
+				"hasExactly": [
+					{
+						"equalTo": "735999109113202014"
+					},
+					{
+						"equalTo": "735999109113202015"
+					}
+				]
 			},
 			"fromDateTime": {
 				"equalTo": "2018-01-01T14:39:22.817Z"

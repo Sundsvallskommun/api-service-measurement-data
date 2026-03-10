@@ -1,6 +1,7 @@
 package se.sundsvall.measurementdata.api;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -87,7 +88,7 @@ class MeasurementDataResourceTest {
 		assertThat(response).isNotNull().isEqualTo(Data.create());
 		assertThat(parameterValues.getAggregateOn()).isEqualTo(aggregation);
 		assertThat(parameterValues.getCategory()).isEqualTo(category);
-		assertThat(parameterValues.getFacilityId()).isEqualTo(facilityId);
+		assertThat(parameterValues.getFacilityIds()).isEqualTo(List.of(facilityId));
 		assertThat(parameterValues.getFromDate()).isEqualTo(OffsetDateTime.parse(fromDate));
 		assertThat(parameterValues.getPartyId()).isEqualTo(partyId);
 		assertThat(parameterValues.getToDate()).isEqualTo(OffsetDateTime.parse(toDate));

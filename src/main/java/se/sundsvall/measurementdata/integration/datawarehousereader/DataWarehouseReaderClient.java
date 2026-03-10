@@ -25,7 +25,7 @@ public interface DataWarehouseReaderClient {
 		@PathVariable final String category,
 		@PathVariable final String aggregateOn,
 		@RequestParam final String partyId,
-		@RequestParam final String facilityId,
+		@RequestParam final List<String> facilityId,
 		@RequestParam final String fromDateTime,
 		@RequestParam final String toDateTime);
 }

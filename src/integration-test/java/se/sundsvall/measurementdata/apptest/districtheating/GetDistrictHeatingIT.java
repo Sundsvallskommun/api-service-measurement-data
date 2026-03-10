@@ -23,6 +23,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 				"?partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
 				"&category=DISTRICT_HEATING" +
 				"&facilityId=735999109113202014" +
+				"&facilityId=735999109113202015" +
 				"&fromDate=2018-01-01T14:39:22.817Z" +
 				"&toDate=2018-12-31T14:39:22.817Z" +
 				"&aggregateOn=MONTH")

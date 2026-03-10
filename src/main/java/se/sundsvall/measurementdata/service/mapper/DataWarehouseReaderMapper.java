@@ -23,7 +23,7 @@ public class DataWarehouseReaderMapper {
 		return Data.create()
 			.withAggregateOn(parameters.getAggregateOn())
 			.withCategory(parameters.getCategory())
-			.withFacilityId(parameters.getFacilityId())
+			.withFacilityIds(parameters.getFacilityIds())
 			.withFromDate(parameters.getFromDate())
 			.withToDate(parameters.getToDate())
 			.withMeasurementSeries(toMeasurementSeries(measurements));

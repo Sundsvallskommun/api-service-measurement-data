@@ -2,6 +2,7 @@ package se.sundsvall.measurementdata.api.model;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class DataTest {
 	@Test
 	void testCreatePattern() {
 		final var category = DISTRICT_HEATING;
-		final var installationId = "installationId";
+		final var installationId = List.of("installationId");
 		final var aggregateOn = HOUR;
 		final var fromDate = OffsetDateTime.of(2000, 1, 2, 3, 4, 5, 6, now().getOffset());
 		final var toDate = OffsetDateTime.of(2002, 6, 5, 4, 3, 2, 1, now().getOffset());
@@ -47,14 +48,14 @@ class DataTest {
 
 		Data data = Data.create()
 			.withCategory(category)
-			.withFacilityId(installationId)
+			.withFacilityIds(installationId)
 			.withAggregateOn(aggregateOn)
 			.withFromDate(fromDate)
 			.withToDate(toDate)
 			.withMeasurementSeries(Arrays.asList(measurementSerie));
 
 		assertThat(data.getCategory()).isSameAs(category);
-		assertThat(data.getFacilityId()).isEqualTo(installationId);
+		assertThat(data.getFacilityIds()).isEqualTo(installationId);
 		assertThat(data.getAggregateOn()).isSameAs(aggregateOn);
 		assertThat(data.getFromDate()).isSameAs(fromDate);
 		assertThat(data.getToDate()).isSameAs(toDate);
