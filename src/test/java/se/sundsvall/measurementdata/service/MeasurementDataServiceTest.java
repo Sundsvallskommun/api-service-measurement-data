@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import se.sundsvall.measurementdata.api.model.Display;
 import se.sundsvall.measurementdata.api.model.MeasurementDataSearchParameters;
 import se.sundsvall.measurementdata.integration.datawarehousereader.DataWarehouseReaderClient;
 
@@ -25,6 +26,7 @@ import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
 import static se.sundsvall.measurementdata.api.model.Category.ELECTRICITY;
 import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
 import static se.sundsvall.measurementdata.api.model.Display.AGGREGATE;
+import static se.sundsvall.measurementdata.api.model.Display.ONLYAGGREGATED;
 
 @ExtendWith(MockitoExtension.class)
 class MeasurementDataServiceTest {
@@ -53,7 +55,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -63,7 +66,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -75,7 +78,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null);
+			AGGREGATE.name());
 		assertThat(response.getAggregateOn()).isEqualTo(aggregation);
 		assertThat(response.getCategory()).isEqualTo(category);
 		assertThat(response.getFacilityIds()).isEqualTo(facilityId);
@@ -98,7 +101,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(null)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -108,7 +112,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			null,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		service.fetchMeasurementData(municipalityId, parameters);
 
@@ -120,7 +124,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			null,
 			encodedToDate,
-			null);
+			AGGREGATE.name());
 	}
 
 	@Test
@@ -137,7 +141,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(null);
+			.withToDate(null)
+			.withDisplay(Display.ONLYAGGREGATED);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -147,7 +152,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			null,
-			null)).thenReturn(List.of());
+			ONLYAGGREGATED.name())).thenReturn(List.of());
 
 		service.fetchMeasurementData(municipalityId, parameters);
 
@@ -159,7 +164,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			null,
-			null);
+			ONLYAGGREGATED.name());
 	}
 
 	@Test
@@ -178,7 +183,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(ONLYAGGREGATED);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -188,7 +194,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			ONLYAGGREGATED.name())).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -200,7 +206,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null);
+			ONLYAGGREGATED.name());
 		assertThat(response.getCategory()).isEqualTo(DISTRICT_HEATING);
 	}
 
@@ -220,7 +226,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -230,7 +237,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -242,7 +249,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null);
+			AGGREGATE.name());
 		assertThat(response.getCategory()).isEqualTo(ELECTRICITY);
 	}
 
@@ -262,7 +269,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -272,7 +280,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -284,7 +292,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null);
+			AGGREGATE.name());
 		assertThat(response.getAggregateOn()).isEqualTo(QUARTER);
 	}
 
@@ -304,7 +312,8 @@ class MeasurementDataServiceTest {
 			.withFacilityIds(facilityId)
 			.withFromDate(fromDate)
 			.withPartyId(partyId)
-			.withToDate(toDate);
+			.withToDate(toDate)
+			.withDisplay(AGGREGATE);
 
 		when(dataWarehouseReaderClientMock.getMeasurements(
 			municipalityId,
@@ -314,7 +323,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null)).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		final var response = service.fetchMeasurementData(municipalityId, parameters);
 
@@ -326,7 +335,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			null);
+			AGGREGATE.name());
 		assertThat(response.getAggregateOn()).isEqualTo(DAY);
 	}
 
@@ -357,7 +366,7 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			"AGGREGATE")).thenReturn(List.of());
+			AGGREGATE.name())).thenReturn(List.of());
 
 		service.fetchMeasurementData(municipalityId, parameters);
 
@@ -369,6 +378,6 @@ class MeasurementDataServiceTest {
 			facilityId,
 			encodedFromDate,
 			encodedToDate,
-			"AGGREGATE");
+			AGGREGATE.name());
 	}
 }
