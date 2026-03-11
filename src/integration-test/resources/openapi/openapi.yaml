@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.1"
 servers:
-  - url: http://localhost:61099
+  - url: http://localhost:50745
     description: Generated server url
 tags:
   - name: Measurement
@@ -27,9 +27,90 @@ paths:
           schema:
             type: string
           example: 2281
-        - name: parameters
+        - name: partyId
+          in: query
+          description: "Party ID, either private or enterprise uuid"
+          required: true
+          schema:
+            type: string
+            description: "Party ID, either private or enterprise uuid"
+            examples:
+              - 81471222-5798-11e9-ae24-57fa13b361e1
+        - name: category
           in: query
           required: true
+          schema:
+            type: string
+            description: Category
+            enum:
+              - DISTRICT_HEATING
+              - ELECTRICITY
+              - COMMUNICATION
+              - WASTE_MANAGEMENT
+            examples:
+              - DISTRICT_HEATING
+        - name: facilityIds
+          in: query
+          description: Facility ID (one or more)
+          required: true
+          schema:
+            type: array
+            description: Facility ID (one or more)
+            examples:
+              - "112233"
+              - "445566"
+            items:
+              type: string
+              description: Facility ID (one or more)
+              examples:
+                - "112233"
+                - "445566"
+        - name: fromDate
+          in: query
+          description: From date
+          required: true
+          schema:
+            type: string
+            format: date-time
+            description: From date
+            examples:
+              - 2021-01-31
+        - name: toDate
+          in: query
+          description: To date
+          required: true
+          schema:
+            type: string
+            format: date-time
+            description: To date
+            examples:
+              - 2022-02-28
+        - name: aggregateOn
+          in: query
+          description: Data point aggregation granularity
+          required: true
+          schema:
+            type: string
+            description: Aggregation granularity
+            enum:
+              - QUARTER
+              - HOUR
+              - DAY
+              - MONTH
+            examples:
+              - HOUR
+        - name: display
+          in: query
+          description: Display mode for aggregated series
+          required: false
+          schema:
+            type: string
+            description: Display mode for aggregated series
+            enum:
+              - AGGREGATE
+              - ONLYAGGREGATED
+            examples:
+              - AGGREGATE
       responses:
         "200":
           description: Successful Operation
@@ -303,9 +384,9 @@ components:
         type:
           type: string
           format: uri
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
         status:
           type: integer
@@ -328,10 +409,10 @@ components:
         instance:
           type: string
           format: uri
-        causeAsProblem:
-          $ref: "#/components/schemas/ThrowableProblem"
         detail:
           type: string
+        causeAsProblem:
+          $ref: "#/components/schemas/ThrowableProblem"
     ThrowableProblem:
       type: object
       properties:
