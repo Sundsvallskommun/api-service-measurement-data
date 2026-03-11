@@ -23,6 +23,7 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 				"?partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
 				"&category=DISTRICT_HEATING" +
 				"&facilityId=735999109113202014" +
+				"&facilityId=735999109113202015" +
 				"&fromDate=2018-01-01T14:39:22.817Z" +
 				"&toDate=2018-12-31T14:39:22.817Z" +
 				"&aggregateOn=MONTH")
@@ -62,6 +63,23 @@ class GetDistrictHeatingIT extends AbstractAppTest {
 				"&aggregateOn=MONTH")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(NOT_FOUND)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test04_getDistrictHeatingWithDisplay() {
+		setupCall()
+			.withServicePath(PATH +
+				"?partyId=B1EDEA3C-1083-4E1A-81FB-7D95E505E102" +
+				"&category=DISTRICT_HEATING" +
+				"&facilityId=735999109113202014" +
+				"&fromDate=2018-01-01T14:39:22.817Z" +
+				"&toDate=2018-12-31T14:39:22.817Z" +
+				"&aggregateOn=MONTH" +
+				"&display=AGGREGATE")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
 			.sendRequestAndVerifyResponse();
 	}

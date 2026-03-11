@@ -8,14 +8,7 @@
 		"method": "GET",
 		"queryParameters": {
 			"facilityId": {
-				"hasExactly": [
-					{
-						"equalTo": "735999109113202014"
-					},
-					{
-						"equalTo": "735999109113202015"
-					}
-				]
+				"equalTo": "735999109113202014"
 			},
 			"fromDateTime": {
 				"equalTo": "2018-01-01T14:39:22.817Z"
@@ -25,6 +18,9 @@
 			},
 			"toDateTime": {
 				"equalTo": "2018-12-31T14:39:22.817Z"
+			},
+			"display": {
+				"equalTo": "AGGREGATE"
 			}
 		},
 		"urlPath": "/api-datawarehousereader/2281/measurements/DISTRICT_HEATING/MONTH"
@@ -33,7 +29,7 @@
 		"headers": {
 			"Content-type": "application/json"
 		},
-		"bodyFileName": "test01_getDistrictHeatingMonthPrivate/responses/datawarehousereader-response.json",
+		"bodyFileName": "test04_getDistrictHeatingWithDisplay/responses/datawarehousereader-response.json",
 		"status": 200
 	},
 	"name": "datawarehousereader-get-measurements"

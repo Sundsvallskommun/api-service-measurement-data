@@ -27,9 +27,10 @@ public class MeasurementDataService {
 			parameters.getCategory().name(),
 			parameters.getAggregateOn().name(),
 			parameters.getPartyId(),
-			parameters.getFacilityId(),
+			parameters.getFacilityIds(),
 			asEncodedString(parameters.getFromDate()),
-			asEncodedString(parameters.getToDate()));
+			asEncodedString(parameters.getToDate()),
+			asEnumName(parameters.getDisplay()));
 
 		return toData(parameters, measurements);
 	}
@@ -37,6 +38,12 @@ public class MeasurementDataService {
 	private static String asEncodedString(final OffsetDateTime offsetDateTime) {
 		return Optional.ofNullable(offsetDateTime)
 			.map(dateTime -> encode(dateTime.toString(), defaultCharset()))
+			.orElse(null);
+	}
+
+	private static String asEnumName(final Enum<?> value) {
+		return Optional.ofNullable(value)
+			.map(Enum::name)
 			.orElse(null);
 	}
 }

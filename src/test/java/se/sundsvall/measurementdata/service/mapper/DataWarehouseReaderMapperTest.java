@@ -20,7 +20,7 @@ class DataWarehouseReaderMapperTest {
 
 	private static final Aggregation AGGREGATION = Aggregation.QUARTER;
 	private static final Category CATEGORY = Category.DISTRICT_HEATING;
-	private static final String FACILITY_ID = "facilityId";
+	private static final List<String> FACILITY_ID = List.of("facilityId");
 	private static final OffsetDateTime FROM_DATE = now().with(firstDayOfYear());
 	private static final String PARTY_ID = "partyId";
 	private static final OffsetDateTime TO_DATE = now().with(firstDayOfYear()).plusMonths(1);
@@ -29,7 +29,7 @@ class DataWarehouseReaderMapperTest {
 		return MeasurementDataSearchParameters.create()
 			.withAggregateOn(AGGREGATION)
 			.withCategory(CATEGORY)
-			.withFacilityId(FACILITY_ID)
+			.withFacilityIds(FACILITY_ID)
 			.withFromDate(FROM_DATE)
 			.withPartyId(PARTY_ID)
 			.withToDate(TO_DATE);
@@ -44,7 +44,7 @@ class DataWarehouseReaderMapperTest {
 
 		assertThat(result.getAggregateOn()).isEqualTo(AGGREGATION);
 		assertThat(result.getCategory()).isEqualTo(CATEGORY);
-		assertThat(result.getFacilityId()).isEqualTo(FACILITY_ID);
+		assertThat(result.getFacilityIds()).isEqualTo(FACILITY_ID);
 		assertThat(result.getFromDate()).isEqualTo(FROM_DATE);
 		assertThat(result.getToDate()).isEqualTo(TO_DATE);
 	}

@@ -61,10 +61,48 @@ class MeasurementDataResourceFailuresTest {
 			.containsExactlyInAnyOrder(
 				tuple("aggregateOn", "must not be null"),
 				tuple("category", "must not be null"),
-				tuple("facilityId", "must not be blank"),
+				tuple("facilityIds", "must not be empty"),
 				tuple("fromDate", "must not be null"),
 				tuple("partyId", "not a valid UUID"),
 				tuple("toDate", "must not be null"));
+
+		verifyNoInteractions(serviceMock);
+	}
+
+	@Test
+	void getMeasurementDataBlankFacilityId() {
+
+		// Arrange
+		final var municipalityId = "2281";
+		final var partyId = UUID.randomUUID().toString();
+
+		final MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		parameters.add("partyId", partyId);
+		parameters.add("category", Category.DISTRICT_HEATING.name());
+		parameters.add("facilityId", " ");
+		parameters.add("aggregateOn", Aggregation.HOUR.name());
+		parameters.add("fromDate", "2022-05-17T08:00:00.000Z");
+		parameters.add("toDate", "2022-06-18T09:00:00.000Z");
+
+		// Act
+		final var response = webTestClient.get().uri(uriBuilder -> uriBuilder.path(PATH)
+			.queryParams(parameters)
+			.build(municipalityId))
+			.exchange()
+			.expectStatus().isBadRequest()
+			.expectHeader().contentType(APPLICATION_PROBLEM_JSON_VALUE)
+			.expectBody(ConstraintViolationProblem.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response.getTitle()).isEqualTo("Constraint Violation");
+		assertThat(response.getStatus()).isEqualTo(BAD_REQUEST);
+		assertThat(response.getViolations())
+			.extracting(Violation::field, Violation::message)
+			.anySatisfy(tuple -> {
+				assertThat(tuple.toList()).contains("must not be blank");
+			});
 
 		verifyNoInteractions(serviceMock);
 	}

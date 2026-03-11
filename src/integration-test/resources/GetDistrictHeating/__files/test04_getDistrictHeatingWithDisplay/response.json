@@ -1,0 +1,21 @@
+{
+	"category": "DISTRICT_HEATING",
+	"facilityId": [
+		"735999109113202014"
+	],
+	"aggregateOn": "MONTH",
+	"fromDate": "2018-01-01T14:39:22.817Z",
+	"toDate": "2018-12-31T14:39:22.817Z",
+	"measurementSeries": [
+		{
+			"unit": "kWh",
+			"measurementType": "Aktiv",
+			"measurementPoints": [
+				{
+					"value": 1772.1,
+					"timestamp": "2018-02-01T00:00:00+02:00"
+				}
+			]
+		}
+	]
+}

@@ -1,6 +1,9 @@
 {
 	"category": "DISTRICT_HEATING",
-	"facilityId": "735999109113202014",
+	"facilityId": [
+		"735999109113202014",
+		"735999109113202015"
+	],
 	"aggregateOn": "MONTH",
 	"fromDate": "2018-01-01T14:39:22.817Z",
 	"toDate": "2018-12-31T14:39:22.817Z",

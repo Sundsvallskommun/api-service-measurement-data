@@ -1,0 +1,12 @@
+[
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440001",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "Aktiv",
+		"unit": "kWh",
+		"usage": 1772.1,
+		"interpolation": 0,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	}
+]

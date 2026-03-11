@@ -1,9 +1,12 @@
 package se.sundsvall.measurementdata.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.format.annotation.DateTimeFormat;
 import se.sundsvall.dept44.common.validators.annotation.ValidUuid;
@@ -21,9 +24,12 @@ public class MeasurementDataSearchParameters {
 	@NotNull
 	private Category category;
 
-	@Schema(description = "Facility ID", examples = "112233", requiredMode = REQUIRED)
-	@NotBlank
-	private String facilityId;
+	@Schema(description = "Facility ID (one or more)", examples = {
+		"112233", "445566"
+	}, requiredMode = REQUIRED)
+	@NotEmpty
+	@JsonProperty("facilityId")
+	private List<@NotBlank String> facilityIds;
 
 	@Schema(description = "From date", examples = "2021-01-31", requiredMode = REQUIRED)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -38,6 +44,9 @@ public class MeasurementDataSearchParameters {
 	@Schema(description = "Data point aggregation granularity", requiredMode = REQUIRED)
 	@NotNull
 	private Aggregation aggregateOn;
+
+	@Schema(description = "Display mode for aggregated series")
+	private Display display;
 
 	public static MeasurementDataSearchParameters create() {
 		return new MeasurementDataSearchParameters();
@@ -69,16 +78,20 @@ public class MeasurementDataSearchParameters {
 		return this;
 	}
 
-	public String getFacilityId() {
-		return facilityId;
+	public List<String> getFacilityIds() {
+		return facilityIds;
 	}
 
-	public void setFacilityId(final String facilityId) {
-		this.facilityId = facilityId;
+	public void setFacilityIds(final List<String> facilityIds) {
+		this.facilityIds = facilityIds;
 	}
 
-	public MeasurementDataSearchParameters withFacilityId(final String facilityId) {
-		this.facilityId = facilityId;
+	public void setFacilityId(final List<String> facilityIds) {
+		this.facilityIds = facilityIds;
+	}
+
+	public MeasurementDataSearchParameters withFacilityIds(final List<String> facilityIds) {
+		this.facilityIds = facilityIds;
 		return this;
 	}
 
@@ -121,9 +134,22 @@ public class MeasurementDataSearchParameters {
 		return this;
 	}
 
+	public Display getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(final Display display) {
+		this.display = display;
+	}
+
+	public MeasurementDataSearchParameters withDisplay(final Display display) {
+		this.display = display;
+		return this;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(aggregateOn, category, facilityId, fromDate, partyId, toDate);
+		return Objects.hash(aggregateOn, category, display, facilityIds, fromDate, partyId, toDate);
 	}
 
 	@Override
@@ -138,15 +164,16 @@ public class MeasurementDataSearchParameters {
 			return false;
 		}
 		final MeasurementDataSearchParameters other = (MeasurementDataSearchParameters) obj;
-		return aggregateOn == other.aggregateOn && category == other.category && Objects.equals(facilityId, other.facilityId) && Objects.equals(fromDate, other.fromDate) && Objects.equals(partyId, other.partyId) && Objects.equals(toDate,
-			other.toDate);
+		return aggregateOn == other.aggregateOn && category == other.category && display == other.display && Objects.equals(facilityIds, other.facilityIds) && Objects.equals(fromDate, other.fromDate) && Objects.equals(partyId, other.partyId) && Objects
+			.equals(toDate,
+				other.toDate);
 	}
 
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("MeasurementDataSearchParameters [partyId=").append(partyId).append(", category=").append(category).append(", facilityId=").append(facilityId).append(", fromDate=").append(fromDate).append(", toDate=").append(toDate).append(
-			", aggregateOn=").append(aggregateOn).append("]");
+		builder.append("MeasurementDataSearchParameters [partyId=").append(partyId).append(", category=").append(category).append(", facilityIds=").append(facilityIds).append(", fromDate=").append(fromDate).append(", toDate=").append(toDate).append(
+			", aggregateOn=").append(aggregateOn).append(", display=").append(display).append("]");
 		return builder.toString();
 	}
 }
