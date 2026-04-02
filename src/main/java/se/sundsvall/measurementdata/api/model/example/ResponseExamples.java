@@ -4,6 +4,65 @@ public class ResponseExamples {
 
 	private ResponseExamples() {}
 
+	public static final String DISTRICT_COOLING_RESPONSE_EXAMPLE = """
+		{
+		"category": "DISTRICT_COOLING",
+		"facilityId": ["1112233"],
+		"aggregateOn": "HOUR",
+		"fromDate": "2022-05-17T08:00:00.000Z",
+		"toDate": "2022-05-17T09:00:00.000Z",
+		"measurementSeries": [
+			{
+			"unit": "MWh",
+			"measurementType": "energy",
+			"metaData": [],
+			"measurementPoints": [
+				{
+				"value": 45.12,
+				"timestamp": "2022-05-17T08:55:07.184Z",
+				"metaData": []
+				}
+			]
+			},
+			{
+			"unit": "m3",
+			"measurementType": "volume",
+			"metaData": [],
+			"measurementPoints": [
+				{
+				"value": 15.678,
+				"timestamp": "2022-05-17T08:55:07.184Z",
+				"metaData": []
+				}
+			]
+			},
+			{
+			"unit": "C",
+			"measurementType": "flowTemperature",
+			"metaData": [],
+			"measurementPoints": [
+				{
+				"value": 8.5,
+				"timestamp": "2022-05-17T08:55:07.184Z",
+				"metaData": []
+				}
+			]
+			},
+			{
+			"unit": "C",
+			"measurementType": "returnTemperature",
+			"metaData": [],
+			"measurementPoints": [
+				{
+				"value": 14.2,
+				"timestamp": "2022-05-17T08:55:07.184Z",
+				"metaData": []
+				}
+			]
+			}
+		]
+		}""";
+
 	public static final String DISTRICT_HEATING_RESPONSE_EXAMPLE = """
 		{
 		"category": "DISTRICT_HEATING",

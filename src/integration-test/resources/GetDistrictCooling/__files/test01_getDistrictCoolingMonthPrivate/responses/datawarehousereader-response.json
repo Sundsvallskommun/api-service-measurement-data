@@ -1,0 +1,62 @@
+[
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440001",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "Aktiv",
+		"unit": "kWh",
+		"usage": 1520.3,
+		"interpolation": 1,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440001",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": -2.5,
+		"interpolation": 1,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440002",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "Aktiv",
+		"unit": "kWh",
+		"usage": 1830.7,
+		"interpolation": 0,
+		"dateAndTime": "2018-03-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440002",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 1.2,
+		"interpolation": 0,
+		"dateAndTime": "2018-03-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440003",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "Aktiv",
+		"unit": "kWh",
+		"usage": 1710.5,
+		"interpolation": 2,
+		"dateAndTime": "2018-04-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "660e8400-e29b-41d4-a716-446655440003",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "outdoor_temperature",
+		"unit": "C",
+		"usage": 6.8,
+		"interpolation": 2,
+		"dateAndTime": "2018-04-01T00:00:00+02:00"
+	}
+]
