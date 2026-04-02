@@ -9,6 +9,7 @@ import tools.jackson.databind.json.JsonMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.COMMUNICATION_RESPONSE_EXAMPLE;
+import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.DISTRICT_COOLING_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.DISTRICT_HEATING_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.ELECTRICITY_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.WASTE_MANAGEMENT_RESPONSE_EXAMPLE;
@@ -26,6 +27,7 @@ class ResponseExamplesTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = {
+		DISTRICT_COOLING_RESPONSE_EXAMPLE,
 		DISTRICT_HEATING_RESPONSE_EXAMPLE,
 		COMMUNICATION_RESPONSE_EXAMPLE,
 		ELECTRICITY_RESPONSE_EXAMPLE,

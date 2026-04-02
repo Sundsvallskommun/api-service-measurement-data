@@ -1,0 +1,72 @@
+{
+	"category": "DISTRICT_COOLING",
+	"facilityId": [
+		"735999109113202014",
+		"735999109113202015"
+	],
+	"aggregateOn": "MONTH",
+	"fromDate": "2018-01-01T14:39:22.817Z",
+	"toDate": "2018-12-31T14:39:22.817Z",
+	"measurementSeries": [
+		{
+			"unit": "C",
+			"measurementType": "outdoor_temperature",
+			"measurementPoints": [
+				{
+					"value": -2.5,
+					"timestamp": "2018-02-01T00:00:00+02:00",
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "1"
+						}
+					]
+				},
+				{
+					"value": 1.2,
+					"timestamp": "2018-03-01T00:00:00+02:00"
+				},
+				{
+					"value": 6.8,
+					"timestamp": "2018-04-01T00:00:00+02:00",
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "2"
+						}
+					]
+				}
+			]
+		},
+		{
+			"unit": "kWh",
+			"measurementType": "Aktiv",
+			"measurementPoints": [
+				{
+					"value": 1520.3,
+					"timestamp": "2018-02-01T00:00:00+02:00",
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "1"
+						}
+					]
+				},
+				{
+					"value": 1830.7,
+					"timestamp": "2018-03-01T00:00:00+02:00"
+				},
+				{
+					"value": 1710.5,
+					"timestamp": "2018-04-01T00:00:00+02:00",
+					"metaData": [
+						{
+							"key": "interpolation",
+							"value": "2"
+						}
+					]
+				}
+			]
+		}
+	]
+}

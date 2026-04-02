@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 import static se.sundsvall.measurementdata.api.model.Aggregation.DAY;
 import static se.sundsvall.measurementdata.api.model.Aggregation.MONTH;
 import static se.sundsvall.measurementdata.api.model.Aggregation.QUARTER;
+import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_COOLING;
 import static se.sundsvall.measurementdata.api.model.Category.DISTRICT_HEATING;
 import static se.sundsvall.measurementdata.api.model.Category.ELECTRICITY;
 import static se.sundsvall.measurementdata.api.model.Category.WASTE_MANAGEMENT;
@@ -165,6 +166,49 @@ class MeasurementDataServiceTest {
 			encodedFromDate,
 			null,
 			ONLYAGGREGATED.name());
+	}
+
+	@Test
+	void fetchMeasurementData_withDistrictCooling_shouldMapCorrectly() {
+		final var municipalityId = "municipalityId";
+		final var facilityId = List.of("facilityId");
+		final var partyId = "partyId";
+		final var fromDate = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
+		final var toDate = OffsetDateTime.of(2024, 2, 1, 0, 0, 0, 0, ZoneOffset.UTC);
+		final var encodedFromDate = encode(fromDate.toString(), UTF_8);
+		final var encodedToDate = encode(toDate.toString(), UTF_8);
+
+		final var parameters = MeasurementDataSearchParameters.create()
+			.withAggregateOn(MONTH)
+			.withCategory(DISTRICT_COOLING)
+			.withFacilityIds(facilityId)
+			.withFromDate(fromDate)
+			.withPartyId(partyId)
+			.withToDate(toDate)
+			.withDisplay(ONLYAGGREGATED);
+
+		when(dataWarehouseReaderClientMock.getMeasurements(
+			municipalityId,
+			Category.DISTRICT_COOLING.name(),
+			Aggregation.MONTH.name(),
+			partyId,
+			facilityId,
+			encodedFromDate,
+			encodedToDate,
+			ONLYAGGREGATED.name())).thenReturn(List.of());
+
+		final var response = service.fetchMeasurementData(municipalityId, parameters);
+
+		verify(dataWarehouseReaderClientMock).getMeasurements(
+			municipalityId,
+			Category.DISTRICT_COOLING.name(),
+			Aggregation.MONTH.name(),
+			partyId,
+			facilityId,
+			encodedFromDate,
+			encodedToDate,
+			ONLYAGGREGATED.name());
+		assertThat(response.getCategory()).isEqualTo(DISTRICT_COOLING);
 	}
 
 	@Test

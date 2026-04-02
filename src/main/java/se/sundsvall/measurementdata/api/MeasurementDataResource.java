@@ -24,6 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.COMMUNICATION_RESPONSE_EXAMPLE;
+import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.DISTRICT_COOLING_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.DISTRICT_HEATING_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.ELECTRICITY_RESPONSE_EXAMPLE;
 import static se.sundsvall.measurementdata.api.model.example.ResponseExamples.WASTE_MANAGEMENT_RESPONSE_EXAMPLE;
@@ -48,6 +49,7 @@ class MeasurementDataResource {
 		content = @Content(mediaType = APPLICATION_JSON_VALUE,
 			schema = @Schema(implementation = Data.class),
 			examples = {
+				@ExampleObject(name = "DISTRICT_COOLING", value = DISTRICT_COOLING_RESPONSE_EXAMPLE),
 				@ExampleObject(name = "DISTRICT_HEATING", value = DISTRICT_HEATING_RESPONSE_EXAMPLE),
 				@ExampleObject(name = "BROADBAND", value = COMMUNICATION_RESPONSE_EXAMPLE),
 				@ExampleObject(name = "ELECTRICITY", value = ELECTRICITY_RESPONSE_EXAMPLE),
