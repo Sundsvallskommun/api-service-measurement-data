@@ -9,6 +9,7 @@
 	"toDate": "2018-12-31T14:39:22.817Z",
 	"measurementSeries": [
 		{
+			"facilityId": "735999109113202014",
 			"unit": "C",
 			"measurementType": "outdoor_temperature",
 			"measurementPoints": [
@@ -77,6 +78,7 @@
 			]
 		},
 		{
+			"facilityId": "735999109113202014",
 			"unit": "kWh",
 			"measurementType": "Aktiv",
 			"measurementPoints": [

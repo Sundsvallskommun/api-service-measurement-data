@@ -5,7 +5,7 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "3.2"
+  version: "3.3"
 servers:
   - url: http://localhost:57382
     description: Generated server url
@@ -342,6 +342,12 @@ components:
       type: object
       description: Measurement from a single source
       properties:
+        facilityId:
+          type: string
+          description: "Facility ID for non-aggregated series, null for aggregated"
+          examples:
+            - "735999109151605013"
+          readOnly: true
         unit:
           type: string
           description: Unit of all measurement points

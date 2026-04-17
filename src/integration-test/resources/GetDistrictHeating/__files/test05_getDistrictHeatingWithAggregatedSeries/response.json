@@ -1,0 +1,55 @@
+{
+	"category": "DISTRICT_HEATING",
+	"facilityId": [
+		"735999109113202014"
+	],
+	"aggregateOn": "DAY",
+	"fromDate": "2018-01-01T14:39:22.817Z",
+	"toDate": "2018-12-31T14:39:22.817Z",
+	"measurementSeries": [
+		{
+			"facilityId": "735999109113202014",
+			"unit": "kWh",
+			"measurementType": "energy",
+			"measurementPoints": [
+				{
+					"value": 100.5,
+					"timestamp": "2018-02-01T00:00:00+02:00"
+				},
+				{
+					"value": 110.2,
+					"timestamp": "2018-02-02T00:00:00+02:00"
+				}
+			]
+		},
+		{
+			"facilityId": "735999109113202015",
+			"unit": "kWh",
+			"measurementType": "energy",
+			"measurementPoints": [
+				{
+					"value": 200.3,
+					"timestamp": "2018-02-01T00:00:00+02:00"
+				},
+				{
+					"value": 190.7,
+					"timestamp": "2018-02-02T00:00:00+02:00"
+				}
+			]
+		},
+		{
+			"unit": "kWh",
+			"measurementType": "energy_aggregated",
+			"measurementPoints": [
+				{
+					"value": 300.8,
+					"timestamp": "2018-02-01T00:00:00+02:00"
+				},
+				{
+					"value": 300.9,
+					"timestamp": "2018-02-02T00:00:00+02:00"
+				}
+			]
+		}
+	]
+}

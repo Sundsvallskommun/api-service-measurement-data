@@ -74,25 +74,29 @@ class DataWarehouseReaderMapperTest {
 		final var measurement = new Measurement()
 			.feedType("Energy")
 			.unit("kWh")
+			.facilityId("facility1")
 			.usage(BigDecimal.valueOf(100))
 			.dateAndTime(now());
 
 		final var result = toData(parameters, List.of(measurement));
 
 		assertThat(result.getMeasurementSeries()).hasSize(1);
+		assertThat(result.getMeasurementSeries().getFirst().getFacilityId()).isEqualTo("facility1");
 	}
 
 	@Test
-	void toData_withSameFeedTypeAndUnit_shouldGroupIntoOneSeries() {
+	void toData_withSameFeedTypeAndUnitAndFacilityId_shouldGroupIntoOneSeries() {
 		final var parameters = createParameters();
 		final var measurement1 = new Measurement()
 			.feedType("Energy")
 			.unit("kWh")
+			.facilityId("facility1")
 			.usage(BigDecimal.valueOf(100))
 			.dateAndTime(now());
 		final var measurement2 = new Measurement()
 			.feedType("Energy")
 			.unit("kWh")
+			.facilityId("facility1")
 			.usage(BigDecimal.valueOf(200))
 			.dateAndTime(now().plusHours(1));
 
@@ -100,6 +104,83 @@ class DataWarehouseReaderMapperTest {
 
 		assertThat(result.getMeasurementSeries()).hasSize(1);
 		assertThat(result.getMeasurementSeries().getFirst().getMeasurementPoints()).hasSize(2);
+		assertThat(result.getMeasurementSeries().getFirst().getFacilityId()).isEqualTo("facility1");
+	}
+
+	@Test
+	void toData_withSameFeedTypeAndUnitButDifferentFacilityId_shouldCreateSeparateSeries() {
+		final var parameters = createParameters();
+		final var measurement1 = new Measurement()
+			.feedType("Energy")
+			.unit("kWh")
+			.facilityId("facility1")
+			.usage(BigDecimal.valueOf(100))
+			.dateAndTime(now());
+		final var measurement2 = new Measurement()
+			.feedType("Energy")
+			.unit("kWh")
+			.facilityId("facility2")
+			.usage(BigDecimal.valueOf(200))
+			.dateAndTime(now());
+
+		final var result = toData(parameters, List.of(measurement1, measurement2));
+
+		assertThat(result.getMeasurementSeries()).hasSize(2);
+		assertThat(result.getMeasurementSeries())
+			.extracting("facilityId")
+			.containsExactlyInAnyOrder("facility1", "facility2");
+	}
+
+	@Test
+	void toData_withAggregatedFeedType_shouldNotSetFacilityId() {
+		final var parameters = createParameters();
+		final var measurement = new Measurement()
+			.feedType("energy_aggregated")
+			.unit("kWh")
+			.facilityId("facility1,facility2")
+			.usage(BigDecimal.valueOf(300))
+			.dateAndTime(now());
+
+		final var result = toData(parameters, List.of(measurement));
+
+		assertThat(result.getMeasurementSeries()).hasSize(1);
+		assertThat(result.getMeasurementSeries().getFirst().getFacilityId()).isNull();
+		assertThat(result.getMeasurementSeries().getFirst().getMeasurementType()).isEqualTo("energy_aggregated");
+	}
+
+	@Test
+	void toData_withMixedAggregatedAndNonAggregated_shouldHandleCorrectly() {
+		final var parameters = createParameters();
+		final var nonAggregated1 = new Measurement()
+			.feedType("energy")
+			.unit("kWh")
+			.facilityId("facility1")
+			.usage(BigDecimal.valueOf(100))
+			.dateAndTime(now());
+		final var nonAggregated2 = new Measurement()
+			.feedType("energy")
+			.unit("kWh")
+			.facilityId("facility2")
+			.usage(BigDecimal.valueOf(200))
+			.dateAndTime(now());
+		final var aggregated = new Measurement()
+			.feedType("energy_aggregated")
+			.unit("kWh")
+			.facilityId("facility1,facility2")
+			.usage(BigDecimal.valueOf(300))
+			.dateAndTime(now());
+
+		final var result = toData(parameters, List.of(nonAggregated1, nonAggregated2, aggregated));
+
+		assertThat(result.getMeasurementSeries()).hasSize(3);
+		assertThat(result.getMeasurementSeries())
+			.filteredOn(s -> s.getFacilityId() != null)
+			.extracting("facilityId")
+			.containsExactlyInAnyOrder("facility1", "facility2");
+		assertThat(result.getMeasurementSeries())
+			.filteredOn(s -> s.getFacilityId() == null)
+			.extracting("measurementType")
+			.containsExactly("energy_aggregated");
 	}
 
 	@Test
