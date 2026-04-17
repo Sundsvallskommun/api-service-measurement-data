@@ -10,6 +10,9 @@ import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 @Schema(description = "Measurement from a single source")
 public class MeasurementSerie {
 
+	@Schema(description = "Facility ID for non-aggregated series, null for aggregated", accessMode = READ_ONLY, examples = "735999109151605013")
+	private String facilityId;
+
 	@Schema(description = "Unit of all measurement points", accessMode = READ_ONLY, examples = "m3")
 	private String unit;
 
@@ -24,6 +27,19 @@ public class MeasurementSerie {
 
 	public static MeasurementSerie create() {
 		return new MeasurementSerie();
+	}
+
+	public String getFacilityId() {
+		return facilityId;
+	}
+
+	public void setFacilityId(String facilityId) {
+		this.facilityId = facilityId;
+	}
+
+	public MeasurementSerie withFacilityId(String facilityId) {
+		this.facilityId = facilityId;
+		return this;
 	}
 
 	public String getUnit() {
@@ -80,7 +96,7 @@ public class MeasurementSerie {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(measurementPoints, measurementType, metaData, unit);
+		return Objects.hash(facilityId, measurementPoints, measurementType, metaData, unit);
 	}
 
 	@Override
@@ -95,13 +111,15 @@ public class MeasurementSerie {
 			return false;
 		}
 		MeasurementSerie other = (MeasurementSerie) obj;
-		return Objects.equals(measurementPoints, other.measurementPoints) && Objects.equals(measurementType, other.measurementType) && Objects.equals(metaData, other.metaData) && Objects.equals(unit, other.unit);
+		return Objects.equals(facilityId, other.facilityId) && Objects.equals(measurementPoints, other.measurementPoints) && Objects.equals(measurementType, other.measurementType) && Objects.equals(metaData, other.metaData) && Objects.equals(unit,
+			other.unit);
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("MeasurementSerie [unit=").append(unit).append(", measurementType=").append(measurementType).append(", metaData=").append(metaData).append(", measurementPoints=").append(measurementPoints).append("]");
+		builder.append("MeasurementSerie [facilityId=").append(facilityId).append(", unit=").append(unit).append(", measurementType=").append(measurementType).append(", metaData=").append(metaData).append(", measurementPoints=").append(measurementPoints)
+			.append("]");
 		return builder.toString();
 	}
 }

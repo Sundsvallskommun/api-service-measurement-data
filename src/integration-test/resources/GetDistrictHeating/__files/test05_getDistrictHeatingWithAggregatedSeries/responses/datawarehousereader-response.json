@@ -1,0 +1,62 @@
+[
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440001",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "energy",
+		"unit": "kWh",
+		"usage": 100.5,
+		"interpolation": 0,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440002",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202015",
+		"feedType": "energy",
+		"unit": "kWh",
+		"usage": 200.3,
+		"interpolation": 0,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440003",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014,735999109113202015",
+		"feedType": "energy_aggregated",
+		"unit": "kWh",
+		"usage": 300.8,
+		"interpolation": -1,
+		"dateAndTime": "2018-02-01T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440004",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014",
+		"feedType": "energy",
+		"unit": "kWh",
+		"usage": 110.2,
+		"interpolation": 0,
+		"dateAndTime": "2018-02-02T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440005",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202015",
+		"feedType": "energy",
+		"unit": "kWh",
+		"usage": 190.7,
+		"interpolation": 0,
+		"dateAndTime": "2018-02-02T00:00:00+02:00"
+	},
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440006",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109113202014,735999109113202015",
+		"feedType": "energy_aggregated",
+		"unit": "kWh",
+		"usage": 300.9,
+		"interpolation": -1,
+		"dateAndTime": "2018-02-02T00:00:00+02:00"
+	}
+]

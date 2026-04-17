@@ -8,6 +8,7 @@
 	"category": "ELECTRICITY",
 	"measurementSeries": [
 		{
+			"facilityId": "735999109250135015",
 			"unit": "kWh",
 			"measurementType": "Energy",
 			"measurementPoints": [
@@ -164,6 +165,7 @@
 			]
 		},
 		{
+			"facilityId": "735999109250135015",
 			"unit": "C",
 			"measurementType": "outdoor_temperature",
 			"measurementPoints": [

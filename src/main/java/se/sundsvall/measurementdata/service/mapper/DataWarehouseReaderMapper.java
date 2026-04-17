@@ -41,13 +41,23 @@ public class DataWarehouseReaderMapper {
 	}
 
 	private static void handleMeasurement(final Map<String, MeasurementSerie> series, final Measurement measurement) {
-		var key = measurement.getFeedType() + measurement.getUnit();
+		final var feedType = measurement.getFeedType();
+		final var isAggregated = feedType != null && feedType.endsWith("_aggregated");
+		var key = isAggregated
+			? feedType + measurement.getUnit()
+			: feedType + measurement.getUnit() + measurement.getFacilityId();
 
 		if (!series.containsKey(key)) {
-			series.put(key, MeasurementSerie.create()
-				.withMeasurementType(measurement.getFeedType())
+			final var serie = MeasurementSerie.create()
+				.withMeasurementType(feedType)
 				.withMeasurementPoints(new ArrayList<>())
-				.withUnit(measurement.getUnit()));
+				.withUnit(measurement.getUnit());
+
+			if (!isAggregated) {
+				serie.withFacilityId(measurement.getFacilityId());
+			}
+
+			series.put(key, serie);
 		}
 
 		addMeasurementPoint(series.get(key), measurement);

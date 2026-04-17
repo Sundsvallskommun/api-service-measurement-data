@@ -37,17 +37,20 @@ class MeasurementSerieTest {
 
 	@Test
 	void testCreatePattern() {
+		final var facilityId = "735999109151605013";
 		final var unit = "unit";
 		final var measurementType = "measurementType";
 		final var metaData = new MetaData().withValue("value").withKey("key");
 		final var measurementPoint = new MeasurementPoint();
 
 		MeasurementSerie serie = MeasurementSerie.create()
+			.withFacilityId(facilityId)
 			.withUnit(unit)
 			.withMeasurementType(measurementType)
 			.withMetaData(Arrays.asList(metaData))
 			.withMeasurementPoints(Arrays.asList(measurementPoint));
 
+		assertThat(serie.getFacilityId()).isEqualTo(facilityId);
 		assertThat(serie.getUnit()).isEqualTo(unit);
 		assertThat(serie.getMeasurementType()).isEqualTo(measurementType);
 		assertThat(serie.getMetaData()).containsExactly(metaData);
