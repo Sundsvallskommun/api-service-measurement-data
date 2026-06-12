@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import se.sundsvall.measurementdata.Application;
 
+import static java.time.Month.OCTOBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(classes = Application.class)
@@ -26,6 +27,6 @@ class BfusPropertiesTest {
 		assertThat(properties.unit()).isEqualTo("kWh");
 		assertThat(properties.periodSize()).isEqualTo(15);
 		assertThat(properties.consumptionDataSource()).isEqualTo(2);
-		assertThat(properties.cutoffDate()).isEqualTo(LocalDate.of(2025, 10, 21));
+		assertThat(properties.cutoffDate()).isEqualTo(LocalDate.of(2025, OCTOBER, 21));
 	}
 }

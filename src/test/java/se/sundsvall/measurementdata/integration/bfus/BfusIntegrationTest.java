@@ -14,6 +14,8 @@ import se.sundsvall.measurementdata.integration.bfus.model.ConsumptionResponse.C
 import se.sundsvall.measurementdata.integration.bfus.model.MeterReadingPart;
 import se.sundsvall.measurementdata.integration.bfus.model.PeriodicValue;
 
+import static java.time.Month.JANUARY;
+import static java.time.Month.OCTOBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -52,7 +54,7 @@ class BfusIntegrationTest {
 		when(bfusClientMock.getConsumption("ext", "facility1", 101, "kWh", 15, 2, "2025-01-01", "2025-10-20", true, "serviceidentifier"))
 			.thenReturn(response(BigDecimal.valueOf(0.21)));
 
-		final var result = integration.getElectricityConsumption(List.of("facility1"), LocalDate.of(2025, 1, 1), LocalDate.of(2025, 10, 20));
+		final var result = integration.getElectricityConsumption(List.of("facility1"), LocalDate.of(2025, JANUARY, 1), LocalDate.of(2025, OCTOBER, 20));
 
 		assertThat(result).hasSize(1);
 		assertThat(result.getFirst().getFacilityId()).isEqualTo("facility1");
@@ -72,7 +74,7 @@ class BfusIntegrationTest {
 		when(bfusClientMock.getConsumption("ext", "facility2", 101, "kWh", 15, 2, "2025-01-01", "2025-10-20", true, "serviceidentifier"))
 			.thenReturn(response(BigDecimal.valueOf(2)));
 
-		final var result = integration.getElectricityConsumption(List.of("facility1", "facility2"), LocalDate.of(2025, 1, 1), LocalDate.of(2025, 10, 20));
+		final var result = integration.getElectricityConsumption(List.of("facility1", "facility2"), LocalDate.of(2025, JANUARY, 1), LocalDate.of(2025, OCTOBER, 20));
 
 		assertThat(result).hasSize(2)
 			.extracting("facilityId")
@@ -85,7 +87,7 @@ class BfusIntegrationTest {
 
 	@Test
 	void getElectricityConsumption_withEmptyFacilityList_doesNotCallClient() {
-		final var result = integration.getElectricityConsumption(List.of(), LocalDate.of(2025, 1, 1), LocalDate.of(2025, 10, 20));
+		final var result = integration.getElectricityConsumption(List.of(), LocalDate.of(2025, JANUARY, 1), LocalDate.of(2025, OCTOBER, 20));
 
 		assertThat(result).isEmpty();
 		verifyNoMoreInteractions(bfusClientMock);
