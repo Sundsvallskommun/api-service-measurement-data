@@ -1,0 +1,26 @@
+{
+	"Header": {
+		"Success": true
+	},
+	"Content": {
+		"MeterReadingParts": [
+			{
+				"Unit": "kWh",
+				"PeriodicValues": [
+					{
+						"FromDate": "2025-01-10T00:00:00",
+						"Consumption": 0.21,
+						"MeterStand": 5248.256,
+						"Status": "2"
+					},
+					{
+						"FromDate": "2025-01-10T00:15:00",
+						"Consumption": 0.28,
+						"MeterStand": 5248.536,
+						"Status": "2"
+					}
+				]
+			}
+		]
+	}
+}
