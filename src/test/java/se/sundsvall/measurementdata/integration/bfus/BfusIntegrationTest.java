@@ -1,5 +1,9 @@
 package se.sundsvall.measurementdata.integration.bfus;
 
+import generated.se.sundsvall.bfus.ConsumptionContent;
+import generated.se.sundsvall.bfus.ConsumptionResponse;
+import generated.se.sundsvall.bfus.MeterReadingPart;
+import generated.se.sundsvall.bfus.PeriodicValue;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,10 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import se.sundsvall.measurementdata.integration.bfus.configuration.BfusProperties;
-import se.sundsvall.measurementdata.integration.bfus.model.ConsumptionResponse;
-import se.sundsvall.measurementdata.integration.bfus.model.ConsumptionResponse.Content;
-import se.sundsvall.measurementdata.integration.bfus.model.MeterReadingPart;
-import se.sundsvall.measurementdata.integration.bfus.model.PeriodicValue;
 
 import static java.time.Month.JANUARY;
 import static java.time.Month.OCTOBER;
@@ -43,9 +43,9 @@ class BfusIntegrationTest {
 	}
 
 	private static ConsumptionResponse response(final BigDecimal consumption) {
-		return new ConsumptionResponse(new Content(List.of(
-			new MeterReadingPart("kWh", List.of(
-				new PeriodicValue("2025-09-01T00:00:00", consumption, "2"))))));
+		return new ConsumptionResponse().content(new ConsumptionContent().meterReadingParts(List.of(
+			new MeterReadingPart().unit("kWh").periodicValues(List.of(
+				new PeriodicValue().fromDate("2025-09-01T00:00:00").consumption(consumption).status("2"))))));
 	}
 
 	@Test

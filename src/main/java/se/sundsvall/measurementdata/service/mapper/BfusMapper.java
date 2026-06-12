@@ -1,5 +1,9 @@
 package se.sundsvall.measurementdata.service.mapper;
 
+import generated.se.sundsvall.bfus.ConsumptionContent;
+import generated.se.sundsvall.bfus.ConsumptionResponse;
+import generated.se.sundsvall.bfus.MeterReadingPart;
+import generated.se.sundsvall.bfus.PeriodicValue;
 import generated.se.sundsvall.datawarehousereader.Measurement;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -7,9 +11,6 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import se.sundsvall.measurementdata.integration.bfus.model.ConsumptionResponse;
-import se.sundsvall.measurementdata.integration.bfus.model.MeterReadingPart;
-import se.sundsvall.measurementdata.integration.bfus.model.PeriodicValue;
 
 /**
  * Maps a BFUS {@link ConsumptionResponse} into the same internal {@link Measurement} representation that
@@ -27,8 +28,8 @@ public final class BfusMapper {
 
 	public static List<Measurement> toMeasurements(final String facilityId, final ConsumptionResponse response) {
 		return Optional.ofNullable(response)
-			.map(ConsumptionResponse::content)
-			.map(ConsumptionResponse.Content::meterReadingParts)
+			.map(ConsumptionResponse::getContent)
+			.map(ConsumptionContent::getMeterReadingParts)
 			.orElseGet(List::of)
 			.stream()
 			.filter(Objects::nonNull)
@@ -37,8 +38,8 @@ public final class BfusMapper {
 	}
 
 	private static List<Measurement> toMeasurements(final String facilityId, final MeterReadingPart part) {
-		final var unit = Optional.ofNullable(part.unit()).orElse(DEFAULT_UNIT);
-		return Optional.ofNullable(part.periodicValues())
+		final var unit = Optional.ofNullable(part.getUnit()).orElse(DEFAULT_UNIT);
+		return Optional.ofNullable(part.getPeriodicValues())
 			.orElseGet(List::of)
 			.stream()
 			.filter(Objects::nonNull)
@@ -51,8 +52,8 @@ public final class BfusMapper {
 			.facilityId(facilityId)
 			.feedType(FEED_TYPE_ENERGY)
 			.unit(unit)
-			.usage(value.consumption())
-			.dateAndTime(toOffsetDateTime(value.fromDate()))
+			.usage(value.getConsumption())
+			.dateAndTime(toOffsetDateTime(value.getFromDate()))
 			.interpolation(INTERPOLATION_MEASURED);
 	}
 

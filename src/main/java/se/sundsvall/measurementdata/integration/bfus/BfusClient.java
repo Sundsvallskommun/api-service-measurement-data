@@ -1,11 +1,11 @@
 package se.sundsvall.measurementdata.integration.bfus;
 
+import generated.se.sundsvall.bfus.ConsumptionResponse;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import se.sundsvall.measurementdata.integration.bfus.configuration.BfusConfiguration;
-import se.sundsvall.measurementdata.integration.bfus.model.ConsumptionResponse;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static se.sundsvall.measurementdata.integration.bfus.configuration.BfusConfiguration.CLIENT_ID;
