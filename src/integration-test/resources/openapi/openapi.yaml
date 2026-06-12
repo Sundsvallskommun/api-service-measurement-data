@@ -356,9 +356,13 @@ components:
           readOnly: true
         measurementType:
           type: string
-          description: Type of measurement
+          description: "Type of measurement. Aggregated series (suffixed '_aggregated',\
+            \ e.g. 'energy_aggregated' and 'corrected_aggregated') have no facilityId\
+            \ and represent values summed across the requested facilities; 'corrected_aggregated'\
+            \ is the aggregated normal-year corrected usage and is only present for\
+            \ periods where corrected usage is defined"
           examples:
-          - volume
+          - corrected_aggregated
           readOnly: true
         metaData:
           type: array

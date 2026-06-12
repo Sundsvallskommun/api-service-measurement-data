@@ -16,7 +16,10 @@ public class MeasurementSerie {
 	@Schema(description = "Unit of all measurement points", accessMode = READ_ONLY, examples = "m3")
 	private String unit;
 
-	@Schema(description = "Type of measurement", accessMode = READ_ONLY, examples = "volume")
+	@Schema(
+		description = "Type of measurement. Aggregated series (suffixed '_aggregated', e.g. 'energy_aggregated' and 'corrected_aggregated') have no facilityId and represent values summed across the requested facilities; 'corrected_aggregated' is the aggregated normal-year corrected usage and is only present for periods where corrected usage is defined",
+		accessMode = READ_ONLY,
+		examples = "corrected_aggregated")
 	private String measurementType;
 
 	@ArraySchema(schema = @Schema(name = "metaData", implementation = MetaData.class, accessMode = READ_ONLY))
