@@ -1,0 +1,19 @@
+{
+	"request": {
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
+		"method": "GET",
+		"urlPath": "/api-bfus/EP/Reading/Consumptions/the-external-id/735999109171206079/101/kWh/15/2/2025-01-10/2025-01-21/true/serviceidentifier"
+	},
+	"response": {
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"bodyFileName": "test02_getHistoricalQuarterElectricityAggregated/responses/bfus-facility2-response.json",
+		"status": 200
+	},
+	"name": "bfus-get-consumption-facility2"
+}

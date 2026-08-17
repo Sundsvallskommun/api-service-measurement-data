@@ -1,0 +1,56 @@
+{
+	"category": "ELECTRICITY",
+	"facilityId": [
+		"735999109171206078",
+		"735999109171206079"
+	],
+	"aggregateOn": "QUARTER",
+	"fromDate": "2025-01-10T12:00:00Z",
+	"toDate": "2025-01-20T12:00:00Z",
+	"measurementSeries": [
+		{
+			"facilityId": "735999109171206078",
+			"unit": "kWh",
+			"measurementType": "Energy",
+			"measurementPoints": [
+				{
+					"value": 0.21,
+					"timestamp": "2025-01-10T00:00:00+01:00"
+				},
+				{
+					"value": 0.28,
+					"timestamp": "2025-01-10T00:15:00+01:00"
+				}
+			]
+		},
+		{
+			"facilityId": "735999109171206079",
+			"unit": "kWh",
+			"measurementType": "Energy",
+			"measurementPoints": [
+				{
+					"value": 0.10,
+					"timestamp": "2025-01-10T00:00:00+01:00"
+				},
+				{
+					"value": 0.20,
+					"timestamp": "2025-01-10T00:15:00+01:00"
+				}
+			]
+		},
+		{
+			"unit": "kWh",
+			"measurementType": "Energy_aggregated",
+			"measurementPoints": [
+				{
+					"value": 0.31,
+					"timestamp": "2025-01-10T00:00:00+01:00"
+				},
+				{
+					"value": 0.48,
+					"timestamp": "2025-01-10T00:15:00+01:00"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"request": {
+		"headers": {
+			"Authorization": {
+				"equalTo": "Bearer 0000000000000000AAAAAAAAAAAAAAAA"
+			}
+		},
+		"method": "GET",
+		"queryParameters": {
+			"partyId": {
+				"equalTo": "98BF599D-8A4D-4040-9A3C-128834D845F6"
+			},
+			"facilityId": {
+				"equalTo": "735999109171206078"
+			}
+		},
+		"urlPath": "/api-datawarehousereader/2281/measurements/ELECTRICITY/QUARTER"
+	},
+	"response": {
+		"headers": {
+			"Content-type": "application/json"
+		},
+		"bodyFileName": "test03_getHistoricalQuarterElectricitySpanningCutoff/responses/datawarehousereader-response.json",
+		"status": 200
+	},
+	"name": "datawarehousereader-get-measurements"
+}

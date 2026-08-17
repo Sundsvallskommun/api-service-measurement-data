@@ -10,3 +10,17 @@ config:
       client-secret: the-client-secret
       connectTimeout: 5
       readTimeout: 30
+    bfus:
+      url: http://localhost:${wiremock.server.port}/api-bfus
+      token-uri: http://localhost:${wiremock.server.port:}/api-gateway/token
+      client-id: the-client-id
+      client-secret: the-client-secret
+      connectTimeout: 5
+      readTimeout: 30
+      cutoff-date: 2025-10-21
+      external-id: the-external-id
+      identifier-type: serviceidentifier
+      unit-type: 101
+      unit: kWh
+      period-size: 15
+      consumption-data-source: 2

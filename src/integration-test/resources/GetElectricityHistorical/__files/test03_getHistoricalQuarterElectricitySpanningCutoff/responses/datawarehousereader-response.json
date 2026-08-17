@@ -1,0 +1,12 @@
+[
+	{
+		"uuid": "550e8400-e29b-41d4-a716-446655440201",
+		"customerOrgId": "5534567890",
+		"facilityId": "735999109171206078",
+		"feedType": "Energy",
+		"unit": "kWh",
+		"usage": 2.5,
+		"interpolation": 0,
+		"dateAndTime": "2025-11-01T00:00:00+01:00"
+	}
+]

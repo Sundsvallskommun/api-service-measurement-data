@@ -24,9 +24,16 @@ spring:
             client-id: ${config.integration.datawarehousereader.client-id}
             client-secret: ${config.integration.datawarehousereader.client-secret}
             provider: datawarehousereader
+          bfus:
+            authorization-grant-type: client_credentials
+            client-id: ${config.integration.bfus.client-id}
+            client-secret: ${config.integration.bfus.client-secret}
+            provider: bfus
         provider:
           datawarehousereader:
             token-uri: ${config.integration.token-uri}
+          bfus:
+            token-uri: ${config.integration.bfus.token-uri}
 
 #-------------------------------------------------------------------------------
 # Integration settings
@@ -36,11 +43,33 @@ integration:
     url: ${config.integration.datawarehousereader.url}
     connectTimeout: ${config.integration.datawarehousereader.connectTimeout}
     readTimeout: ${config.integration.datawarehousereader.readTimeout}
+  bfus:
+    # Connection / credentials — environment specific, supplied by config server.
+    url: ${config.integration.bfus.url}
+    connectTimeout: ${config.integration.bfus.connectTimeout}
+    readTimeout: ${config.integration.bfus.readTimeout}
+    # External organisation/context id supplied to BFUS (path variable 'externalId').
+    external-id: ${config.integration.bfus.external-id}
+    # --- Confirmed protocol constants (overridable via config server if ever needed) ---
+    # Date (Europe/Stockholm) from which electricity quarter values live in DataWarehouseReader;
+    # quarter electricity values before this date are fetched from BFUS instead.
+    cutoff-date: ${config.integration.bfus.cutoff-date:2025-10-21}
+    # The 18-digit facility id (GSRN, e.g. 735999109171206078) is queried as a serviceidentifier.
+    identifier-type: ${config.integration.bfus.identifier-type:serviceidentifier}
+    # UnitTypeId 101 + unit kWh corresponds to feedType "Energy".
+    unit-type: ${config.integration.bfus.unit-type:101}
+    unit: ${config.integration.bfus.unit:kWh}
+    # period-size 15 => quarter-hour resolution (verified against api-test).
+    period-size: ${config.integration.bfus.period-size:15}
+    # ConsumptionDataSource: 2 = HourValuesFirst (the BFUS default).
+    consumption-data-source: ${config.integration.bfus.consumption-data-source:2}
 
 resilience4j:
   circuitbreaker:
     instances:
       datawarehousereader:
+        ignoreExceptions: se.sundsvall.dept44.exception.ClientProblem
+      bfus:
         ignoreExceptions: se.sundsvall.dept44.exception.ClientProblem
 
 #-------------------------------------------------------------------------------

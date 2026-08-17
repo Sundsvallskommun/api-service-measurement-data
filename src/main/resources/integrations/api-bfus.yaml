@@ -1,0 +1,406 @@
+openapi: 3.0.3
+info:
+  title: BFUS
+  description: >-
+    BFUS API (via WSO2). Only the response schemas consumed by this service are
+    modelled as typed schemas (Reading/Consumptions); the remaining endpoints are
+    documented for reference. Authentication is OAuth2 client credentials.
+  version: 1.0.0
+servers:
+  - url: https://api-test.sundsvall.se/bfus/1.0.0
+    description: BFUS Server (WSO2 test)
+security:
+  - oauth2: []
+paths:
+  '/EP/EligableParty/EligablePartyPermissions/{externalId}/{customerId}':
+    get:
+      tags:
+        - EPEligableParty
+      summary: GetEligablePartyPermission
+      operationId: EPEligableParty_EligablePartyPermissions
+      parameters:
+        - name: externalId
+          in: path
+          description: External ID
+          required: true
+          schema:
+            type: string
+        - name: customerId
+          in: path
+          description: Customer ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  '/EP/EligableParty/NewPermissions/{externalId}/{customerId}':
+    get:
+      tags:
+        - EPEligableParty
+      summary: NewPermissions
+      operationId: EPEligableParty_NewPermissions
+      parameters:
+        - name: externalId
+          in: path
+          description: External ID
+          required: true
+          schema:
+            type: string
+        - name: customerId
+          in: path
+          description: Customer ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /EP/EligableParty/PermissionRequest:
+    post:
+      tags:
+        - EPEligableParty
+      summary: GrantContracts
+      operationId: EPEligableParty_PermissionRequest
+      requestBody:
+        description: Permission request payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EPPermissionRequest_v1'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerContentOnEPPermissionRequest_v1'
+  '/EP/Customer/GetEPCustomerByCode_v1/{externalId}/{customerCode}':
+    get:
+      tags:
+        - EPCustomer
+      summary: Get a single customer by customer code
+      operationId: EPCustomer_GetEPCustomerByCode_v1
+      parameters:
+        - name: externalId
+          in: path
+          description: External ID
+          required: true
+          schema:
+            type: string
+        - name: customerCode
+          in: path
+          description: Customer code
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  '/EP/AMM/GetHanPortStatus/{externalId}/{serviceIdentifier}/{current}':
+    get:
+      tags:
+        - AMM
+      summary: GetHanPortStatus
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: serviceIdentifier
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: current
+          in: path
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  '/EP/AMM/SetHanPortStatus/{externalId}/{serviceIdentifier}/{hanPortStatus}':
+    post:
+      tags:
+        - AMM
+      summary: SetHanPortStatus
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: serviceIdentifier
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: hanPortStatus
+          in: path
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  '/EP/AMM/HasHanPort/{externalId}/{serviceIdentifier}':
+    get:
+      tags:
+        - AMM
+      summary: HasHanPort
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: serviceIdentifier
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  '/EP/Reading/Consumptions/{externalId}/{identifier}/{unitType}/{dateFrom}/{dateTo}/{isLocalTime}/{identifierType}':
+    get:
+      tags:
+        - Reading
+      summary: Consumptions (PeriodSize=60, Unit=kWh, ConsumptionDataSource=HourValuesFirst)
+      description: >-
+        Get consumptions for an identifier (serviceid, servicecode, serviceidentifier or measureid).
+        Default period size is 60 minutes. unitType 101 + unit kWh corresponds to UtilityName "El".
+      operationId: EPReading_Consumptions
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: unitType
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dateFrom
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dateTo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: isLocalTime
+          in: path
+          required: true
+          schema:
+            type: boolean
+        - name: identifierType
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionResponse'
+  '/EP/Reading/Consumptions/{externalId}/{identifier}/{unitType}/{unit}/{periodSize}/{consumptionDataSource}/{dateFrom}/{dateTo}/{isLocalTime}/{identifierType}':
+    get:
+      tags:
+        - Reading
+      summary: Consumptions with explicit unit, period size and consumption data source
+      description: >-
+        Get consumptions with explicit unit/period size. periodSize 15 yields quarter-hour resolution.
+        ConsumptionDataSource: HourValues=0, Readings=1, HourValuesFirst=2.
+      operationId: EPReading_ConsumptionsWithPeriodSize
+      parameters:
+        - name: externalId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: unitType
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: unit
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: periodSize
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: consumptionDataSource
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: dateFrom
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: dateTo
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: isLocalTime
+          in: path
+          required: true
+          schema:
+            type: boolean
+        - name: identifierType
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumptionResponse'
+components:
+  schemas:
+    EPPermissionRequest_v1:
+      type: object
+      properties:
+        Header:
+          allOf:
+            - $ref: '#/components/schemas/EPPermissionRequestHeader_v1'
+        PermissionRequest:
+          allOf:
+            - $ref: '#/components/schemas/EPPermissionRequestPart_v1'
+    EPPermissionRequestHeader_v1:
+      required:
+        - ExternalId
+      type: object
+      properties:
+        Operation:
+          type: string
+        ExternalId:
+          type: string
+    EPPermissionRequestPart_v1:
+      type: object
+      properties:
+        EligablePartyId:
+          type: string
+        CustomerId:
+          type: integer
+          format: int64
+        EndDate:
+          type: string
+        ContractIdList:
+          type: array
+          items:
+            type: integer
+            format: int64
+    AnswerContentOnEPPermissionRequest_v1:
+      type: object
+      properties:
+        EligablePartyId:
+          type: string
+        Action:
+          type: string
+        PermissionRequestExecuted:
+          type: boolean
+    ConsumptionResponse:
+      type: object
+      additionalProperties: true
+      description: Response from the BFUS /EP/Reading/Consumptions endpoint.
+      properties:
+        Content:
+          $ref: '#/components/schemas/ConsumptionContent'
+    ConsumptionContent:
+      type: object
+      additionalProperties: true
+      properties:
+        MeterReadingParts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeterReadingPart'
+    MeterReadingPart:
+      type: object
+      additionalProperties: true
+      properties:
+        Unit:
+          type: string
+        PeriodicValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/PeriodicValue'
+    PeriodicValue:
+      type: object
+      additionalProperties: true
+      properties:
+        FromDate:
+          type: string
+        Consumption:
+          type: number
+        Status:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth2 Client Credentials
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
